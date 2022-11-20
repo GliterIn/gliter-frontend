@@ -1,27 +1,43 @@
-# Zelon
+# System Design
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.2.
 
-## Development server
+## Data Models
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+```
+UserProfile:
+    - User = OneToOneField(User, on_delete=models.CASCADE)
+	- name = CharField(max_length=50,default="")
+	- profile_picture = URLField(default='https://i.ibb.co/BfG7gZ8/default-profile-picture.jpeg')
+	- cover_picture = URLField(default='https://i.ibb.co/bzHYH9f/default-banner.jpg')
+	- location = CharField(max_length=50,default='')
+	- birthday = DateField()
+	- occupation = CharField(max_length=50,default='')
+	- joined_on = DateField(default=datetime.date.today)
+	- gender = CharField(max_length=50,default='')
+	- relationship = CharField(max_length=50,default='')
+	- bio = CharField(max_length=256,default='')
+	- is_verified = BooleanField(default=False)
+	- is_admin = BooleanField(default=False)
+	- followers = ManyToManyField(User, related_name='followers')
+	- following = ManyToManyField(User, related_name='following')
+```
 
-## Code scaffolding
+```
+Post:
+	- likes = ManyToManyField(User)
+	- user = ForeignKey(UserProfile, on_delete=models.CASCADE)
+	- timestamp = DateTimeField(auto_now_add=False, default=False)
+	- content = CharField(max_length=256,default='')
+	- is_visible = BooleanField(default=True)
+```
+```
+UserPrivacySetting:
+	- User = OneToOneField(User, on_delete=models.CASCADE)
+	- allow_pymk_to_everyone = BooleanField(default=False)
+	- allow_pymk_to_2nd_degree= BooleanField(default=False)
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+### APIs
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+TODO(@s-i-d-d-i-s)
