@@ -10,7 +10,7 @@ import { AuthenticationService } from './authentication.service';
   providedIn: 'root'
 })
 export class DatabaseService {
-  API_ROOT = 'https://s-i-d-d-i-s-ubiquitous-couscous-j97wgj7j76ghpqjv-8080.preview.app.github.dev';
+  API_ROOT = 'https://glitter-backend.herokuapp.com';
 
 
   posts = new BehaviorSubject<Post[]>([]);
@@ -21,7 +21,7 @@ export class DatabaseService {
     this.http.get<Post[]>(this.API_ROOT + "/get-posts").subscribe(
       (data)=>{
         console.log(data);
-        //this.posts.next(data);
+        this.posts.next(data);
       }
     );
   }
