@@ -181,23 +181,23 @@
         <div class="profile-thumb profile-setting-box mt-3">
           <a href="javascript:void(0)" class="profile-triger">
             <figure class="profile-thumb-middle" style="border-radius: 50%;">
-              <img src="https://avatars.githubusercontent.com/u/68241942?v=4" alt="profile picture">
+              <img [src]="user.user_profile.profile_picture" alt="profile picture">
             </figure>
           </a>
           <div class="profile-dropdown text-left">
             <div class="profile-head">
-              <h5 class="name"><a routerLink="/profile/user.username"> user.userprofile.name</a></h5>
-              <a class="mail" routerLink="/profile/user.username">@user.username</a>
+              <h5 class="name"><a routerLink="/profile/{{user.username}}"> {{user.user_profile.name}}</a></h5>
+              <a class="mail" routerLink="/profile/{{user.username}}">@{{user.username}}</a>
             </div>
             <div class="profile-body">
               <ul>
-                <li><a routerLink="/profile"><i class="flaticon-user"></i>Profile</a></li>
+                <li><a routerLink="/profile/{{user.username}}"><i class="flaticon-user"></i>Profile</a></li>
                 <li><a routerLink="/messenger"><i class="flaticon-message"></i>Inbox</a></li>
                 <li><a routerLink="/activity"><i class="flaticon-document"></i>Activity</a></li>
               </ul>
               <ul>
-                <li><a href="/edit"><i class="flaticon-settings"></i>Settings</a></li>
-                <li><a href="/logout"><i class="flaticon-unlock"></i>Sign out</a></li>
+                <li><a routerLink="/edit"><i class="flaticon-settings"></i>Settings</a></li>
+                <li><a routerLink="/logout"><i class="flaticon-unlock"></i>Sign out</a></li>
               </ul>
             </div>
           </div>
