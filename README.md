@@ -2,42 +2,64 @@
 
 
 ## Data Models
-
 ```
-UserProfile:
-    - User = OneToOneField(User, on_delete=models.CASCADE)
-	- name = CharField(max_length=50,default="")
-	- profile_picture = URLField(default='https://i.ibb.co/BfG7gZ8/default-profile-picture.jpeg')
-	- cover_picture = URLField(default='https://i.ibb.co/bzHYH9f/default-banner.jpg')
-	- location = CharField(max_length=50,default='')
-	- birthday = DateField()
-	- occupation = CharField(max_length=50,default='')
-	- joined_on = DateField(default=datetime.date.today)
-	- gender = CharField(max_length=50,default='')
-	- relationship = CharField(max_length=50,default='')
-	- bio = CharField(max_length=256,default='')
-	- is_verified = BooleanField(default=False)
-	- is_admin = BooleanField(default=False)
-	- followers = ManyToManyField(User, related_name='followers')
-	- following = ManyToManyField(User, related_name='following')
+User{
+    username: string;
+    user_profile: UserProfile;
+    user_privacy_settings: UserPrivacySetting;
+}
 ```
 
 ```
-Post:
-	- likes = ManyToManyField(User)
-	- user = ForeignKey(UserProfile, on_delete=models.CASCADE)
-	- timestamp = DateTimeField(auto_now_add=False, default=False)
-	- content = CharField(max_length=256,default='')
-	- is_visible = BooleanField(default=True)
+UserProfile {
+    name: string;
+    profile_picture: string;
+    cover_picture: string;
+    location: string;
+    birthday: Date;
+    occupation: string;
+    joined_on: Date;
+    gender: string;
+    relationship: string;
+    bio: string;
+    is_verified: boolean;
+    is_admin: boolean;
+    followers: User[];
+    following: User[];
+}
+```
+
+```
+UserPrivacySetting{
+    allow_pymk_to_everyone: boolean;
+    allow_pymk_to_2nd_degree: boolean;
+}
 ```
 ```
-UserPrivacySetting:
-	- User = OneToOneField(User, on_delete=models.CASCADE)
-	- allow_pymk_to_everyone = BooleanField(default=False)
-	- allow_pymk_to_2nd_degree= BooleanField(default=False)
+Reaction {
+    ReactionTypes {
+        Like,
+        Comment,
+    }
+    type: ReactionTypes;
+    username: string;
+    content: string;
+    post_id: number;
+}
+```
+
+```
+Post {
+    id: number;
+    likes: Reaction[];
+    comments: Reaction[];
+    timestamp: Date;
+    content: string;
+    is_visible: boolean;
+}
 ```
 
 
 ### APIs
 
-TODO(@s-i-d-d-i-s)
+TODO([@s-i-d-d-i-s](https://github.com/s-i-d-d-i-s))
