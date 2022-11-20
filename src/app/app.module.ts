@@ -12,6 +12,7 @@ import { SharePostComponent } from './components/share-post/share-post.component
 import { MyProfileSidebarComponent } from './components/my-profile-sidebar/my-profile-sidebar.component';
 import { ProfilePageHeaderComponent } from './components/profile-page-header/profile-page-header.component';
 import { ProfilePageDetailsComponent } from './components/profile-page-details/profile-page-details.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,11 +25,12 @@ import { ProfilePageDetailsComponent } from './components/profile-page-details/p
     SharePostComponent,
     MyProfileSidebarComponent,
     ProfilePageHeaderComponent,
-    ProfilePageDetailsComponent
+    ProfilePageDetailsComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

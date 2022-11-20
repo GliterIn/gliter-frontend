@@ -13,12 +13,16 @@ import { UtilsService } from 'src/app/service/utils.service';
 export class UserFeedComponent implements OnInit {
 
   user: User;
-  posts: Post[];
+  posts: Post[] = [];
   constructor(public database: DatabaseService,
               public util: UtilsService, 
               public auth: AuthenticationService) {
     this.user = this.auth.get_current_user();
-    this.posts = this.database.get_posts(this.auth.get_current_user().username);
+    this.database.posts.subscribe(
+      (data) => {
+        this.posts = data;
+      }
+    )
   }
 
   ngOnInit(): void {
