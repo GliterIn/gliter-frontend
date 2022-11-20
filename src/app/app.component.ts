@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  title = 'zelon';
+  title = 'Glitter';
   public loadScript(location: string) {
     let body = <HTMLDivElement>document.body;
     let script = document.createElement('script');
