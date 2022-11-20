@@ -1,32 +1,32 @@
 <aside class="widget-area profile-sidebar">
     <!-- widget single item start -->
     <div class="card widget-item" style="border-radius: 5%;">
-        <h4 class="widget-title">Siddharth Singh <i class="fa fa-check"
+        <h4 class="widget-title">Siddharth Singh <i class="fa fa-check" *ngIf="user.user_profile.is_verified"
                 style="background-color: #2aa8df;border: white;border-radius: 8px;color: white;padding: 2px;"></i>
         </h4>
         <div class="widget-body">
             <div class="about-author">
 
-                <p>Yawn !</p>
+                <p>{{user.user_profile.bio}}</p>
 
                 <ul class="author-into-list">
 
-                    <li><a href="#"><i class="fa fa-briefcase"></i>Founder of Glitter</a></li>
+                    <li><a href="#"><i class="fa fa-briefcase"></i>{{user.user_profile.occupation}}</a></li>
 
 
-                    <li><a href="#"><i class="fa fa-home"></i>Munich, Germany</a></li>
+                    <li><a href="#"><i class="fa fa-home"></i>{{user.user_profile.location}}</a></li>
 
 
-                    <li><a href="#"><i class="fa fa-birthday-cake"></i>April 30, 2000</a></li>
+                    <li><a href="#"><i class="fa fa-birthday-cake"></i>{{util.parseTimestampShort(user.user_profile.birthday)}}</a></li>
 
 
-                    <li><a href="#"><i class="fa fa-clock-o"></i> Nov. 13, 2022</a></li>
+                    <li><a href="#"><i class="fa fa-clock-o"></i> {{util.parseTimestampShort(user.user_profile.joined_on)}}</a></li>
 
 
-                    <li><a href="#"><i class="fa fa-venus-mars"></i>Male</a></li>
+                    <li><a href="#"><i class="fa fa-venus-mars"></i>{{user.user_profile.gender}}</a></li>
 
 
-                    <li><a href="#"><i class="fa fa-heart"></i> Single</a></li>
+                    <li><a href="#"><i class="fa fa-heart"></i>{{user.user_profile.relationship}}</a></li>
 
                 </ul>
             </div>

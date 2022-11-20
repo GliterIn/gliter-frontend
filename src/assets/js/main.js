@@ -51,20 +51,7 @@
 		}
 	});
 
-	//Background Image JS start
-	var bgSelector = $(".bg-img");
-	bgSelector.each(function (index, elem) {
-		var element = $(elem),
-			bgSource = element.data('bg');
-		element.css('background-image', 'url(' + bgSource + ')');
-	});
-
-    // video player active js
-	var plyrVideo = new Plyr('.plyr-video'),
-      	plyrAudio = new Plyr('.plyr-audio'),
-      	plyrYoutube = new Plyr('.plyr-youtube'),
-		plyrVimeo = new Plyr('.plyr-vimeo');
-		  
+ 
     // active profile carousel js
 	$('.active-profile-carousel').slick({
         speed: 800,

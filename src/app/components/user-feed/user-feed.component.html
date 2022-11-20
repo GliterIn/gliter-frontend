@@ -1,22 +1,22 @@
-<div class="card" style="border-radius: 5%;">
+<div class="card" style="border-radius: 5%;" *ngFor="let post of posts">
     <!-- post title start -->
     <div class="post-title d-flex align-items-center">
         <!-- profile picture end -->
         <div class="profile-thumb">
-            <a href="#">
+            <a routerLink="/profile/{{user.username}}">
                 <figure class="profile-thumb-middle">
-                    <img src="https://stanforduni.us/wp-content/uploads/2020/05/default-avatar.png"
-                        alt="profile picture">
+                    <img [src]="user.user_profile.profile_picture" alt="profile picture">
                 </figure>
             </a>
         </div>
         <!-- profile picture end -->
 
         <div class="posted-author">
-            <h6 class="author"><a href="#">Glitter</a> <i class="fa fa-check"
+            <h6 class="author"><a  routerLink="/profile/{{user.username}}">{{user.user_profile.name}} </a> <i class="fa fa-check"
+                    *ngIf="user.user_profile.is_verified"
                     style="background-color: #2aa8df;border: white;border-radius: 8px;color: white;padding: 2px;"></i>
             </h6>
-            <span class="post-time">Nov. 13, 2022, 12:32 a.m.</span>
+            <span class="post-time">{{util.parseTimestamp(post.timestamp)}}</span>
         </div>
 
         <div class="post-settings-bar">
@@ -33,15 +33,15 @@
     <!-- post title start -->
     <div class="post-content">
         <p class="post-desc">
-            Hello World !
+            {{post.content}}
         </p>
 
         <div class="post-meta">
             <ul class="comment-share-meta">
                 <li>
-                    <a href="/post/1" style="text-decoration: none;" class="post-comment">
+                    <a routerLink="/post/{{post.id}}" style="text-decoration: none;" class="post-comment">
                         <i class="fa fa-comment"></i>
-                        <span>0</span>
+                        <span>{{post.comments.length}}</span>
                     </a>
                 </li>
                 <li>
@@ -51,7 +51,7 @@
                         <input type="text" style="display: none;" value="1" name="like">
                         <button class="post-meta-like" type="submit">
                             <i class="fa fa-heart"></i>
-                            <span>1</span>
+                            <span>{{post.likes.length}}</span>
                         </button>
                     </form>
                 </li>

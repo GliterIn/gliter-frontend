@@ -29,7 +29,7 @@
 
                         <!-- message content start -->
                         <div class="msg-content">
-                          <h6 class="author"><a href="profile/admin">Glitter Admin <i class="fa fa-check"
+                          <h6 class="author"><a routerLink="profile/admin">Glitter Admin <i class="fa fa-check"
                                 style="background-color: #2aa8df;border: white;border-radius: 8px;color: white;padding: 2px;"></i>
                             </a></h6>
                           <p>Welcome to the beta version of Glitter. We'll be rolling out messaging feature soon </p>
@@ -119,13 +119,13 @@
               <div class="profile-thumb-small">
                 <a href="javascript:void(0)" class="profile-triger">
                   <figure>
-                    <img src="https://avatars.githubusercontent.com/u/68241942?v=4" alt="profile picture">
+                    <img [src]="user.user_profile.profile_picture" alt="profile picture">
                   </figure>
                 </a>
                 <div class="profile-dropdown">
                   <div class="profile-head">
-                    <h5 class="name"><a routerLink="/profile/user.username"> user.userprofile.name </a></h5>
-                    <a class="mail" routerLink="/profile/user.username">@user.username</a>
+                    <h5 class="name"><a routerLink="/profile/{{user.username}}"> {{user.user_profile.name}} </a></h5>
+                    <a class="mail" routerLink="/profile/{{user.username}}">@{{user.username}}</a>
                   </div>
                   <div class="profile-body">
                     <ul>

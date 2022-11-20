@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Post } from 'src/app/models/Post.model';
+import { User } from 'src/app/models/User.model';
+import { AuthenticationService } from 'src/app/service/authentication.service';
+import { DatabaseService } from 'src/app/service/database.service';
+import { UtilsService } from 'src/app/service/utils.service';
 
 @Component({
   selector: 'app-user-feed',
@@ -7,7 +12,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserFeedComponent implements OnInit {
 
-  constructor() { }
+  user: User;
+  posts: Post[];
+  constructor(public database: DatabaseService,
+              public util: UtilsService, 
+              public auth: AuthenticationService) {
+    this.user = this.auth.get_current_user();
+    this.posts = this.database.get_posts(this.auth.get_current_user().username);
+  }
 
   ngOnInit(): void {
   }
