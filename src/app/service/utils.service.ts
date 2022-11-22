@@ -12,10 +12,10 @@ export class UtilsService {
 
   parseTimestampShort(date: Date) {
     var parsedDate = new Date(date);
-    return parsedDate.getDate() + " " + this.MONTHS[parsedDate.getMonth()] + " " + parsedDate.getFullYear();
+    return parsedDate.getUTCDate() + " " + this.MONTHS[parsedDate.getUTCMonth()] + " " + parsedDate.getUTCFullYear();
   }
   parseTimestamp(date: Date) {
     var parsedDate = new Date(date);
-    return parsedDate.getDate() + " " + this.MONTHS[parsedDate.getMonth()] + ". " + parsedDate.getFullYear() + ", " + parsedDate.getHours() + ":" + parsedDate.getMinutes();
+    return parsedDate.getUTCDate() + " " + this.MONTHS[parsedDate.getUTCMonth()] + ". " + parsedDate.getUTCFullYear() + ", " + parsedDate.getUTCHours() + ":" + parsedDate.getUTCMinutes();
   }
 }
