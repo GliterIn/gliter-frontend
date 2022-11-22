@@ -13,6 +13,11 @@ export class AppComponent implements OnInit{
     this.auth.logged_in.subscribe(
       (data) => {
         this.is_logged_in = data;
+
+        // Redirect to Sign Up if not logged in
+        if(data == false && document.location.pathname.indexOf("/signup") == -1){
+          document.location = "/signup";
+        }
       }
     )
   }
