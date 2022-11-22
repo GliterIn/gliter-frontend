@@ -15,7 +15,7 @@ export class AppComponent implements OnInit{
         this.is_logged_in = data;
 
         // Redirect to Sign Up if not logged in
-        if(data == false && document.location.pathname.indexOf("/signup") == -1){
+        if(data == false && document.location.pathname.toString() == "/"){
           document.location = "/signup";
         }
       }
