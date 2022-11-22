@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  title = 'Glitter';
+  title = 'Gliter';
   public loadScript(location: string) {
     let body = <HTMLDivElement>document.body;
     let script = document.createElement('script');
@@ -27,6 +27,5 @@ export class AppComponent implements OnInit{
     this.loadScript('assets/js/plugins/imagesloaded.pkgd.min.js');
     this.loadScript('assets/js/plugins/isotope.pkgd.min.js');
     this.loadScript('assets/js/main.js');
-
   }
 }
