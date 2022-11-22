@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from './service/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit{
   title = 'Gliter';
+  is_logged_in = false;
+  constructor(public auth:AuthenticationService){
+    this.auth.logged_in.subscribe(
+      (data) => {
+        this.is_logged_in = data;
+      }
+    )
+  }
   public loadScript(location: string) {
     let body = <HTMLDivElement>document.body;
     let script = document.createElement('script');

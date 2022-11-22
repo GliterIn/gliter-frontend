@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { User } from '../models/User.model';
 import { UserPrivacySetting } from '../models/UserPrivacySetting.model';
 import { UserProfile } from '../models/UserProfile.model';
@@ -7,6 +8,9 @@ import { UserProfile } from '../models/UserProfile.model';
   providedIn: 'root'
 })
 export class AuthenticationService {
+
+  logged_in = new BehaviorSubject<boolean>(false);
+
   SIDDHARTH_USER_PROFILE = new UserProfile(
     "Siddharth Singh",
     "https://avatars.githubusercontent.com/u/68241942?v=4",
@@ -29,7 +33,8 @@ export class AuthenticationService {
     true
   );
 
-  constructor() { }
+  constructor() {
+  }
   get_current_user(): User{
     return new User("siddharth", this.SIDDHARTH_USER_PROFILE, this.SIDDHARTH_USER_PRIVACY);
   }

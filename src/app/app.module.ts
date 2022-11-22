@@ -13,6 +13,9 @@ import { MyProfileSidebarComponent } from './components/my-profile-sidebar/my-pr
 import { ProfilePageHeaderComponent } from './components/profile-page-header/profile-page-header.component';
 import { ProfilePageDetailsComponent } from './components/profile-page-details/profile-page-details.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './components/login/login.component';
+import { LogoutComponent } from './components/logout/logout.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,9 @@ import { HttpClientModule } from '@angular/common/http';
     MyProfileSidebarComponent,
     ProfilePageHeaderComponent,
     ProfilePageDetailsComponent,
+    LoginComponent,
+    LogoutComponent,
+    SignUpComponent,
   ],
   imports: [
     BrowserModule,
