@@ -11,12 +11,12 @@ export class UtilsService {
 
   constructor() { }
 
-  parseTimestampShort(date:Date){
-    var parsedDate=new Date(date);
+  parseTimestampShort(date: Date) {
+    var parsedDate = new Date(date);
     return parsedDate.getDate() + " " + MONTHS[parsedDate.getMonth()] + " " + parsedDate.getFullYear();
   }
-  parseTimestamp(date:Date){
-    var parsedDate=new Date(date);
-    return parsedDate.getDate() + " " + MONTHS[parsedDate.getMonth()] + ". " + parsedDate.getFullYear() + ", " + parsedDate.getHours()+":"+parsedDate.getMinutes();
+  parseTimestamp(date: Date) {
+    var parsedDate = new Date(date);
+    return parsedDate.getDate() + " " + MONTHS[parsedDate.getMonth()] + ". " + parsedDate.getFullYear() + ", " + parsedDate.getHours() + ":" + parsedDate.getMinutes();
   }
 }

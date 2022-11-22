@@ -13,4 +13,7 @@ describe('UtilsService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+  it('should parse timestamp short', ()=>{
+    expect(service.parseTimestampShort(new Date(1669095632000))).toEqual('23 Nov 2022');
+  });
 });
