@@ -9,7 +9,7 @@ import { UserProfile } from '../models/UserProfile.model';
 })
 export class AuthenticationService {
 
-  logged_in = new BehaviorSubject<boolean>(false);
+  logged_in = new BehaviorSubject<boolean>(true);
 
   SIDDHARTH_USER_PROFILE = new UserProfile(
     "Siddharth Singh",
