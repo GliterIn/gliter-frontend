@@ -2,15 +2,15 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockAuthenticationService } from 'src/app/MockServices/MockAuth';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 
-import { SignUpComponent } from './sign-up.component';
+import { BeRightBackComponent } from './be-right-back.component';
 
-describe('SignUpComponent', () => {
-  let component: SignUpComponent;
-  let fixture: ComponentFixture<SignUpComponent>;
+describe('BeRightBackComponent', () => {
+  let component: BeRightBackComponent;
+  let fixture: ComponentFixture<BeRightBackComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SignUpComponent ],
+      declarations: [BeRightBackComponent],
       providers: [
         {
           provide: AuthenticationService,
@@ -18,9 +18,9 @@ describe('SignUpComponent', () => {
         }
       ]
     })
-    .compileComponents();
+      .compileComponents();
 
-    fixture = TestBed.createComponent(SignUpComponent);
+    fixture = TestBed.createComponent(BeRightBackComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

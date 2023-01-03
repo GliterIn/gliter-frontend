@@ -31,4 +31,11 @@ export class MockAuthenticationService {
   get_current_user(): User {
     return new User("siddharth", this.SIDDHARTH_USER_PROFILE, this.SIDDHARTH_USER_PRIVACY);
   }
+
+  login_user(){
+
+  }
+  logout_user(){
+    
+  }
 }

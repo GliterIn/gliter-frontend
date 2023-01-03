@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthenticationService } from './service/authentication.service';
 
 @Component({
@@ -9,14 +10,12 @@ import { AuthenticationService } from './service/authentication.service';
 export class AppComponent implements OnInit{
   title = 'Gliter';
   is_logged_in = false;
-  constructor(public auth:AuthenticationService){
+  constructor(public auth:AuthenticationService,private router: Router  ){
     this.auth.logged_in.subscribe(
       (data) => {
         this.is_logged_in = data;
-
-        // Redirect to Sign Up if not logged in
         if(data == false && document.location.pathname.toString() == "/"){
-          document.location = "/signup";
+          this.router.navigate(["/login"]);
         }
       }
     )

@@ -2,17 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 
 @Component({
-  selector: 'app-sign-up',
-  templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.css']
+  selector: 'app-be-right-back',
+  templateUrl: './be-right-back.component.html',
+  styleUrls: ['./be-right-back.component.css']
 })
-export class SignUpComponent implements OnInit {
-
-  is_logged_in = false;
+export class BeRightBackComponent implements OnInit {
+  logged_in=true;
   constructor(public auth:AuthenticationService) {
     this.auth.logged_in.subscribe(
       (data) => {
-        this.is_logged_in = data;
+        this.logged_in=data;
+        if(!data){
+          window.location.href = "/";
+        }
       }
     )
   }

@@ -17,7 +17,7 @@ export class UserFeedComponent implements OnInit {
   constructor(public database: DatabaseService,
               public util: UtilsService, 
               public auth: AuthenticationService) {
-    this.user = this.auth.get_current_user();
+    this.user = auth.get_current_user();
     this.database.posts.subscribe(
       (data) => {
         this.posts = data;

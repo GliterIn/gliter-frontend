@@ -15,7 +15,13 @@ import { ProfilePageDetailsComponent } from './components/profile-page-details/p
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
-import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from 'src/environments/environment';
+import { PERSISTENCE } from '@angular/fire/compat/auth';
+import { BeRightBackComponent } from './components/be-right-back/be-right-back.component';
+
 
 @NgModule({
   declarations: [
@@ -31,14 +37,17 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
     ProfilePageDetailsComponent,
     LoginComponent,
     LogoutComponent,
-    SignUpComponent,
+    BeRightBackComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    MatButtonModule,
   ],
-  providers: [],
+  providers: [{ provide: PERSISTENCE, useValue: 'session' },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

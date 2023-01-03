@@ -2,37 +2,24 @@
     <section id="about" class="about">
         <div class="container mt-3">
             <div class="row">
-                <div class="col-md-6">
-                    <fieldset class="form-group">
-                        <legend class="border-bottom mb-4">Log In</legend>
-                        <div id="div_id_username" class="form-group"> <label for="id_username" class=" requiredField">
-                                Username<span class="asteriskField">*</span> </label>
-                            <div> <input type="text" name="username" autofocus="" autocapitalize="none"
-                                    autocomplete="username" maxlength="150" class="textinput textInput form-control"
-                                    required="" id="id_username"> </div>
-                        </div>
-                        <div id="div_id_password" class="form-group"> <label for="id_password" class=" requiredField">
-                                Password<span class="asteriskField">*</span> </label>
-                            <div> <input type="password" name="password" autocomplete="current-password"
-                                    class="textinput textInput form-control" required="" id="id_password"> </div>
-                        </div>
+                <div class="col-md-3">
 
-                    </fieldset>
-                    <div class="form-group">
-                        <button class="btn btn-outline-info" type="submit">Login</button>
-                    </div>
-                    <div class="border-top pt-3">
-                        <small class="text-muted">
-                            Need An Account? <a class="ml-2" routerLink="/signup">Sign Up Now</a>
-                        </small>
-                    </div>
                 </div>
                 <div class="col-md-6 d-none d-md-block">
-                    <div class="container">
+                    <div class="container text-center">
                         <h1 class="display-4" style="text-align: center;">Gliter</h1>
+                        <img src="https://github.com/GliterIn/.github/raw/main/profile/GliterLogo.png"
+                            style="max-width: 250px;">
+                        <br>
+                        <br>
                         <p class="lead" style="display: flex;justify-content:center">
                             The cleanest micro-blogging platform.
                         </p>
+                        <div class="container">
+                            <button mat-raised-button color="primary" (click)="auth.login_user()">
+                                Log in with Google
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
