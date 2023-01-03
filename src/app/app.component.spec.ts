@@ -1,7 +1,9 @@
 import { TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { MockAuthenticationService } from './MockServices/MockAuth';
+import { MockRouter } from './MockServices/MockRouter';
 import { AuthenticationService } from './service/authentication.service';
 
 describe('AppComponent', () => {
@@ -17,6 +19,10 @@ describe('AppComponent', () => {
         {
           provide: AuthenticationService,
           useClass: MockAuthenticationService
+        },
+        {
+          provide: Router,
+          useClass: MockRouter
         }
       ]
     }).compileComponents();

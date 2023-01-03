@@ -21,6 +21,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 import { PERSISTENCE } from '@angular/fire/compat/auth';
 import { BeRightBackComponent } from './components/be-right-back/be-right-back.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({

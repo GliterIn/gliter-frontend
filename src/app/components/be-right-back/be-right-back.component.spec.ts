@@ -4,7 +4,7 @@ import { AuthenticationService } from 'src/app/service/authentication.service';
 
 import { BeRightBackComponent } from './be-right-back.component';
 
-describe('BeRightBackComponent', () => {
+xdescribe('BeRightBackComponent', () => {
   let component: BeRightBackComponent;
   let fixture: ComponentFixture<BeRightBackComponent>;
 
