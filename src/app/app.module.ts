@@ -22,6 +22,7 @@ import { environment } from 'src/environments/environment';
 import { PERSISTENCE } from '@angular/fire/compat/auth';
 import { BeRightBackComponent } from './components/be-right-back/be-right-back.component';
 import { RouterModule } from '@angular/router';
+import { OnboardingComponent } from './components/onboarding/onboarding.component';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { RouterModule } from '@angular/router';
     LoginComponent,
     LogoutComponent,
     BeRightBackComponent,
+    OnboardingComponent,
   ],
   imports: [
     BrowserModule,

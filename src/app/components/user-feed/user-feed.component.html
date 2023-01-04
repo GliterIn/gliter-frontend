@@ -1,61 +1,63 @@
-<div class="card" style="border-radius: 2%; border: none;" *ngFor="let post of posts">
-    <!-- post title start -->
-    <div class="post-title d-flex align-items-center">
-        <!-- profile picture end -->
-        <div class="profile-thumb">
-            <a routerLink="/profile/{{user.username}}">
-                <figure class="profile-thumb-middle">
-                    <img [src]="user.user_profile.profile_picture" alt="profile picture">
-                </figure>
-            </a>
-        </div>
-        <!-- profile picture end -->
+<div *ngIf="user != null">
+    <div class="card" style="border-radius: 2%; border: none;" *ngFor="let post of posts">
+        <!-- post title start -->
+        <div class="post-title d-flex align-items-center">
+            <!-- profile picture end -->
+            <div class="profile-thumb">
+                <a routerLink="/profile/{{user.username}}">
+                    <figure class="profile-thumb-middle">
+                        <img [src]="user.profile_picture" alt="profile picture">
+                    </figure>
+                </a>
+            </div>
+            <!-- profile picture end -->
 
-        <div class="posted-author">
-            <h6 class="author"><a  routerLink="/profile/{{user.username}}">{{user.user_profile.name}} </a> <i class="fa fa-check"
-                    *ngIf="user.user_profile.is_verified"
-                    style="background-color: #2aa8df;border: white;border-radius: 8px;color: white;padding: 2px;"></i>
-            </h6>
-            <span class="post-time">{{util.parseTimestamp(post.timestamp)}}</span>
-        </div>
+            <div class="posted-author">
+                <h6 class="author"><a routerLink="/profile/{{user.username}}">{{user.name}} </a> <i
+                        class="fa fa-check" *ngIf="user.is_verified"
+                        style="background-color: #2aa8df;border: white;border-radius: 8px;color: white;padding: 2px;"></i>
+                </h6>
+                <span class="post-time">{{util.parseTimestamp(post.timestamp)}}</span>
+            </div>
 
-        <div class="post-settings-bar">
-            <span></span>
-            <span></span>
-            <span></span>
-            <div class="post-settings arrow-shape">
-                <ul>
-                    <li><button>copy link to post</button></li>
-                </ul>
+            <div class="post-settings-bar">
+                <span></span>
+                <span></span>
+                <span></span>
+                <div class="post-settings arrow-shape">
+                    <ul>
+                        <li><button>copy link to post</button></li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- post title start -->
-    <div class="post-content">
-        <p class="post-desc">
-            {{post.content}}
-        </p>
+        <!-- post title start -->
+        <div class="post-content">
+            <p class="post-desc">
+                {{post.content}}
+            </p>
 
-        <div class="post-meta">
-            <ul class="comment-share-meta">
-                <li>
-                    <a routerLink="/post/{{post.id}}" style="text-decoration: none;" class="post-comment">
-                        <i class="fa fa-comment"></i>
-                        <span>{{post.comments.length}}</span>
-                    </a>
-                </li>
-                <li>
-                    <form method="post">
-                        <input type="hidden" name="csrfmiddlewaretoken"
-                            value="tDlKL25pkwcnKx2h8Zp1upoTw5wguwhQpVtDtZhrjhZ9MBLYDe8B41KxXsG7qV50">
-                        <input type="text" style="display: none;" value="1" name="like">
-                        <button class="post-meta-like" type="submit">
-                            <i class="fa fa-heart"></i>
-                            <span>{{post.likes.length}}</span>
-                        </button>
-                    </form>
-                </li>
-            </ul>
+            <div class="post-meta">
+                <ul class="comment-share-meta">
+                    <li>
+                        <a routerLink="/post/{{post.id}}" style="text-decoration: none;" class="post-comment">
+                            <i class="fa fa-comment"></i>
+                            <span>{{post.comments.length}}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <form method="post">
+                            <input type="hidden" name="csrfmiddlewaretoken"
+                                value="tDlKL25pkwcnKx2h8Zp1upoTw5wguwhQpVtDtZhrjhZ9MBLYDe8B41KxXsG7qV50">
+                            <input type="text" style="display: none;" value="1" name="like">
+                            <button class="post-meta-like" type="submit">
+                                <i class="fa fa-heart"></i>
+                                <span>{{post.likes.length}}</span>
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

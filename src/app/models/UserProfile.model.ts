@@ -1,6 +1,7 @@
-import { User } from "./User.model";
-
 export class UserProfile {
+    id: number;
+    uid: string;
+    username: string;
     name: string;
     profile_picture: string;
     cover_picture: string;
@@ -13,9 +14,11 @@ export class UserProfile {
     bio: string;
     is_verified: boolean;
     is_admin: boolean;
-    followers: User[];
-    following: User[];
+    is_onboarded: boolean;
     constructor(
+        id: number,
+        uid: string,
+        username: string,
         name: string,
         profile_picture: string,
         cover_picture: string,
@@ -28,8 +31,11 @@ export class UserProfile {
         bio: string,
         is_verified: boolean,
         is_admin: boolean,
-        followers: User[],
-        following: User[]) {
+        is_onboarded: boolean) {
+        this.id = id;
+        this.uid = uid;
+        this.username = username;
+        this.is_onboarded = is_onboarded;
         this.name = name;
         this.profile_picture = profile_picture;
         this.cover_picture = cover_picture;
@@ -42,7 +48,5 @@ export class UserProfile {
         this.bio = bio;
         this.is_verified = is_verified;
         this.is_admin = is_admin;
-        this.followers = followers;
-        this.following = following;
     }
 }

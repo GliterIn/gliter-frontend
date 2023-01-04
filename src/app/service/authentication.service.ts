@@ -1,8 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { User } from '../models/User.model';
-import { UserPrivacySetting } from '../models/UserPrivacySetting.model';
 import { UserProfile } from '../models/UserProfile.model';
 import { GoogleAuthProvider } from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
@@ -12,28 +10,9 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 })
 export class AuthenticationService {
   logged_in = new BehaviorSubject<boolean>(false);
+  API_BASE_URL = 'https://gliter-backend.herokuapp.com/api';
 
-  SIDDHARTH_USER_PROFILE = new UserProfile(
-    "Siddharth Singh",
-    "https://avatars.githubusercontent.com/u/68241942?v=4",
-    "https://img5.goodfon.com/original/1366x768/6/89/dresden-drezden-germaniia.jpg",
-    "Munich, Germany",
-    new Date(),
-    "Founder of Glitter",
-    new Date(),
-    "Male",
-    "Single",
-    "Yawn !",
-    true,
-    true,
-    [],
-    []
-  );
-
-  SIDDHARTH_USER_PRIVACY = new UserPrivacySetting(
-    true,
-    true
-  );
+  logged_in_user = new BehaviorSubject<UserProfile|null>(null);
 
   constructor(public http: HttpClient, public afAuth: AngularFireAuth) {
     this.afAuth.onAuthStateChanged((user) => {
@@ -47,10 +26,16 @@ export class AuthenticationService {
     return this.afAuth
       .signInWithPopup(provider)
       .then(
-        (data) => {
+        (oauth_login_data) => {
           console.log('You have been successfully logged in!');
-          this.logged_in.next(true);
-          console.log(data);
+          this.http.post<UserProfile>(this.API_BASE_URL + '/login',{
+            'uid': oauth_login_data.user?.uid
+          }).subscribe(
+            (backend_login_data) => {
+              this.logged_in.next(true);
+              this.logged_in_user.next(backend_login_data);
+            }
+          )
         }
       )
       .catch((error) => {
@@ -58,9 +43,16 @@ export class AuthenticationService {
       });
   }
 
+  onboard_user(user:UserProfile){
+    this.http.post<UserProfile>(this.API_BASE_URL + '/onboarding',user).subscribe(
+      (backend_login_data) => {
+        this.logged_in_user.next(backend_login_data);
+      }
+    )
+  }
 
-  get_current_user(): User {
-    return new User("siddharth", this.SIDDHARTH_USER_PROFILE, this.SIDDHARTH_USER_PRIVACY);
+  get_current_user(): BehaviorSubject<UserProfile|null> {
+    return this.logged_in_user;
   }
 
 

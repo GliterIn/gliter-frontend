@@ -1,4 +1,5 @@
-<div class="profile-banner-large bg-img" [style.background-image]="'url('+ user.user_profile.cover_picture + ')'">
+<span *ngIf="user != null">
+<div class="profile-banner-large bg-img" [style.background-image]="'url('+ user.cover_picture + ')'">
 </div>
 <div class="profile-menu-area bg-white">
     <div class="container">
@@ -8,7 +9,7 @@
                     <figure class="profile-picture">
                         <a routerLink="/profile/{{user.username}}">
                             <img style="background: transparent; border-radius: 50%;"
-                                [src]="user.user_profile.profile_picture" alt="profile picture">
+                                [src]="user.profile_picture" alt="profile picture">
                         </a>
                     </figure>
                 </div>
@@ -43,3 +44,4 @@
         </div>
     </div>
 </div>
+</span>

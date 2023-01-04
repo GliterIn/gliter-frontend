@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserProfile } from 'firebase/auth';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 
 @Component({
@@ -9,13 +10,18 @@ import { AuthenticationService } from 'src/app/service/authentication.service';
 })
 export class LoginComponent implements OnInit {
   
-  is_logged_in = false;
+  user: UserProfile|null;
   constructor(public auth:AuthenticationService, public router: Router) {
-    this.auth.logged_in.subscribe(
+    this.user = null;
+
+    this.auth.logged_in_user.subscribe(
       (data) => {
-        this.is_logged_in = data;
-        if(data == true){
-          this.router.navigate(["/brb"]);
+        if(data != null){
+          if(data.is_onboarded){
+            this.router.navigate(["/brb"]);
+          }else{
+            this.router.navigate(["/onboarding"]);
+          }
         }
       }
     )

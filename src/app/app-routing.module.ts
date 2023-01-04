@@ -4,10 +4,12 @@ import { BeRightBackComponent } from './components/be-right-back/be-right-back.c
 import { FeedComponent } from './components/feed/feed.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
+import { OnboardingComponent } from './components/onboarding/onboarding.component';
 import { ProfilePageComponent } from './components/profile-page/profile-page.component';
 
 const routes: Routes = [
   {path : 'feed' , title:'Feed', component : FeedComponent},
+  {path : 'onboarding' , title:'Onboarding', component : OnboardingComponent},
   {path : 'login' , title:'Login', component : LoginComponent},
   {path : 'logout' , title:'Logged Out', component : LogoutComponent},
   {path : 'brb' , title:'Coming Soon !', component : BeRightBackComponent},

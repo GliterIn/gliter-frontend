@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Post } from 'src/app/models/Post.model';
 import { User } from 'src/app/models/User.model';
+import { UserProfile } from 'src/app/models/UserProfile.model';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { DatabaseService } from 'src/app/service/database.service';
 import { UtilsService } from 'src/app/service/utils.service';
@@ -12,12 +13,17 @@ import { UtilsService } from 'src/app/service/utils.service';
 })
 export class UserFeedComponent implements OnInit {
 
-  user: User;
+  user: UserProfile | null;
   posts: Post[] = [];
   constructor(public database: DatabaseService,
-              public util: UtilsService, 
-              public auth: AuthenticationService) {
-    this.user = auth.get_current_user();
+    public util: UtilsService,
+    public auth: AuthenticationService) {
+    this.user = null;
+    auth.get_current_user().subscribe(
+      (data) => {
+        this.user = data;
+      }
+    )
     this.database.posts.subscribe(
       (data) => {
         this.posts = data;

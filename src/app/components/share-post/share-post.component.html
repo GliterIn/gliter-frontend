@@ -1,10 +1,10 @@
-<div class="card card-small" style="border-radius: 1%; border: none;">
+<div class="card card-small" style="border-radius: 1%; border: none;" *ngIf="user != null">
     <div class="share-box-inner">
         <!-- profile picture end -->
         <div class="profile-thumb">
             <a routerLink="/profile/{{user.username}}">
                 <figure class="profile-thumb-middle">
-                    <img [src]="user.user_profile.profile_picture" alt="profile picture">
+                    <img [src]="user.profile_picture" alt="profile picture">
                 </figure>
             </a>
         </div>

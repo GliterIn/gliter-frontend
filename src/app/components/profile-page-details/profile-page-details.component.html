@@ -1,32 +1,32 @@
 <aside class="widget-area profile-sidebar">
     <!-- widget single item start -->
-    <div class="card widget-item" style="border-radius: 2%; border: none;">
-        <h4 class="widget-title">Siddharth Singh <i class="fa fa-check" *ngIf="user.user_profile.is_verified"
+    <div class="card widget-item" style="border-radius: 2%; border: none;" *ngIf="user != null">
+        <h4 class="widget-title">Siddharth Singh <i class="fa fa-check" *ngIf="user.is_verified"
                 style="background-color: #2aa8df;border: white;border-radius: 8px;color: white;padding: 2px;"></i>
         </h4>
         <div class="widget-body">
             <div class="about-author">
 
-                <p>{{user.user_profile.bio}}</p>
+                <p>{{user.bio}}</p>
 
                 <ul class="author-into-list">
 
-                    <li><a href="#"><i class="fa fa-briefcase"></i>{{user.user_profile.occupation}}</a></li>
+                    <li><a href="#"><i class="fa fa-briefcase"></i>{{user.occupation}}</a></li>
 
 
-                    <li><a href="#"><i class="fa fa-home"></i>{{user.user_profile.location}}</a></li>
+                    <li><a href="#"><i class="fa fa-home"></i>{{user.location}}</a></li>
 
 
-                    <li><a href="#"><i class="fa fa-birthday-cake"></i>{{util.parseTimestampShort(user.user_profile.birthday)}}</a></li>
+                    <li><a href="#"><i class="fa fa-birthday-cake"></i>{{util.parseTimestampShort(user.birthday)}}</a></li>
 
 
-                    <li><a href="#"><i class="fa fa-clock-o"></i> {{util.parseTimestampShort(user.user_profile.joined_on)}}</a></li>
+                    <li><a href="#"><i class="fa fa-clock-o"></i> {{util.parseTimestampShort(user.joined_on)}}</a></li>
 
 
-                    <li><a href="#"><i class="fa fa-venus-mars"></i>{{user.user_profile.gender}}</a></li>
+                    <li><a href="#"><i class="fa fa-venus-mars"></i>{{user.gender}}</a></li>
 
 
-                    <li><a href="#"><i class="fa fa-heart"></i>{{user.user_profile.relationship}}</a></li>
+                    <li><a href="#"><i class="fa fa-heart"></i>{{user.relationship}}</a></li>
 
                 </ul>
             </div>
