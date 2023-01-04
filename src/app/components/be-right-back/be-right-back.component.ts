@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserProfile } from 'src/app/models/UserProfile.model';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 
 @Component({
@@ -8,17 +9,19 @@ import { AuthenticationService } from 'src/app/service/authentication.service';
   styleUrls: ['./be-right-back.component.css']
 })
 export class BeRightBackComponent implements OnInit {
-  logged_in=true;
+  user: UserProfile|null;
   constructor(public auth:AuthenticationService, public router:Router) {
-    this.auth.logged_in.subscribe(
+    this.user = null;
+    this.auth.logged_in_user.subscribe(
       (data) => {
-        this.logged_in=data;
         if(!data){
           this.router.navigate(["/"]).then(
             ()=>{
               window.location.reload();
             }
           )
+        }else{
+          this.user = data;
         }
       }
     )

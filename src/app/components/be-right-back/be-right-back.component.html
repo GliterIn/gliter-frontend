@@ -1,7 +1,12 @@
 <div class="container text-center">
-    <h1 style="font-weight: 300; font-size: 5rem;">Be right back !</h1>
+    <br>
+    <br>
+    <h3 *ngIf="user != null" style="font-weight: 300">Hey, {{user.name}} !</h3>
+    <h1 style="font-weight: 300; font-size: 5rem;">We'll be right back !</h1>
     <br>
     <br>
     <h3 style="font-weight: 300">Gliter is undergoing maintanance and is temporarily down !</h3>
+    <br>
+    <br>
     <button mat-raised-button color="primary" (click)="auth.logout_user()">Logout</button>
 </div>
