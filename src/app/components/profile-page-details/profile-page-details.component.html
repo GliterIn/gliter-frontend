@@ -6,28 +6,16 @@
         </h4>
         <div class="widget-body">
             <div class="about-author">
-
                 <p>{{user.bio}}</p>
-
                 <ul class="author-into-list">
-
-                    <li><a href="#"><i class="fa fa-briefcase"></i>{{user.occupation}}</a></li>
-
-
-                    <li><a href="#"><i class="fa fa-home"></i>{{user.location}}</a></li>
-
-
-                    <li><a href="#"><i class="fa fa-birthday-cake"></i>{{util.parseTimestampShort(user.birthday)}}</a></li>
-
-
-                    <li><a href="#"><i class="fa fa-clock-o"></i> {{util.parseTimestampShort(user.joined_on)}}</a></li>
-
-
-                    <li><a href="#"><i class="fa fa-venus-mars"></i>{{user.gender}}</a></li>
-
-
-                    <li><a href="#"><i class="fa fa-heart"></i>{{user.relationship}}</a></li>
-
+                    <li><i class="fa fa-briefcase"></i> <span class="pl-3">{{user.occupation}}</span></li>
+                    <li><i class="fa fa-home"></i> <span class="pl-3">{{user.location}}</span></li>
+                    <li><i class="fa fa-birthday-cake"></i><span
+                            class="pl-3">{{util.parseTimestampShort(user.birthday)}}</span></li>
+                    <li><i class="fa fa-clock-o"></i> <span
+                            class="pl-3">{{util.parseTimestampShort(user.joined_on)}}</span></li>
+                    <li><i class="fa fa-venus-mars"></i><span class="pl-3">{{user.gender}}</span></li>
+                    <li><i class="fa fa-heart"></i><span class="pl-3">{{user.relationship}}</span></li>
                 </ul>
             </div>
         </div>

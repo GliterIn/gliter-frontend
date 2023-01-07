@@ -1,5 +1,4 @@
 export class UserProfile {
-    id: number;
     uid: string;
     username: string;
     name: string;
@@ -16,7 +15,7 @@ export class UserProfile {
     is_admin: boolean;
     is_onboarded: boolean;
     constructor(
-        id: number,
+       
         uid: string,
         username: string,
         name: string,
@@ -32,7 +31,7 @@ export class UserProfile {
         is_verified: boolean,
         is_admin: boolean,
         is_onboarded: boolean) {
-        this.id = id;
+       
         this.uid = uid;
         this.username = username;
         this.is_onboarded = is_onboarded;

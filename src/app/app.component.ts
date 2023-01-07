@@ -11,10 +11,10 @@ export class AppComponent implements OnInit{
   title = 'Gliter';
   is_logged_in = false;
   constructor(public auth:AuthenticationService,private router: Router  ){
-    this.auth.logged_in.subscribe(
+    this.auth.logged_in_user.subscribe(
       (data) => {
-        this.is_logged_in = data;
-        if(data == false && document.location.pathname.toString() == "/"){
+        this.is_logged_in = true;
+        if(data == null && document.location.pathname.toString() == "/"){
           this.router.navigate(["/login"]);
         }
       }
