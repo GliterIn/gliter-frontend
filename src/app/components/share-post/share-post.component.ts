@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Post } from 'src/app/models/Post.model';
 import { UserProfile } from 'src/app/models/UserProfile.model';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { DatabaseService } from 'src/app/service/database.service';
@@ -11,6 +12,7 @@ import { UtilsService } from 'src/app/service/utils.service';
 })
 export class SharePostComponent implements OnInit {
   user: UserProfile|null;
+  content = '';
   constructor(public database: DatabaseService,
     public util: UtilsService,
     public auth: AuthenticationService) {
@@ -23,7 +25,10 @@ export class SharePostComponent implements OnInit {
 
   }
   ngOnInit(): void {
+  }
 
+  share_post(){
+    this.database.create_post(this.content);
   }
 
 }

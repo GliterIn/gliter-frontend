@@ -13,8 +13,8 @@
         <div class="share-content-box w-100">
             <form class="share-text-box" method="post">
                 <textarea name="share" class="share-text-field" aria-disabled="true" placeholder="Say Something"
-                    data-bs-toggle="modal" data-bs-target="#textbox" id="email"></textarea>
-                <button class="btn-share" type="submit">share</button>
+                    data-bs-toggle="modal" data-bs-target="#textbox" id="email" [(ngModel)]="content"></textarea>
+                <button class="btn-share" (click)="share_post()">share</button>
             </form>
         </div>
         <!-- share content box end -->
@@ -31,7 +31,7 @@
                         </div>
                         <div class="modal-body custom-scroll ps">
                             <textarea name="share" class="share-field-big custom-scroll ps"
-                                placeholder="Say Something"></textarea>
+                                placeholder="Say Something"  [(ngModel)]="content"></textarea>
                             <div class="ps__rail-x" style="left: 0px; bottom: 3px;">
                                 <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;">
                                 </div>
@@ -49,7 +49,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="post-share-btn" data-bs-dismiss="modal">cancel</button>
-                            <button type="submit" class="post-share-btn">post</button>
+                            <button class="post-share-btn" (click)="share_post()" data-bs-dismiss="modal">post</button>
                         </div>
                     </form>
                 </div>
