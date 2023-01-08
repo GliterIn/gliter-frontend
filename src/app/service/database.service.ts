@@ -18,7 +18,11 @@ export class DatabaseService {
       (user_response) => {
         this.user = user_response;
         if(user_response != null){
-          this.get_user_posts(user_response.username);
+          this.get_user_posts(user_response.username).subscribe(
+            (user_posts) => {
+              this.posts.next(user_posts);
+            }
+          );
         }
       }
     )
@@ -36,7 +40,11 @@ export class DatabaseService {
         (response) => {
           console.log(response);
           if(this.user != null){
-            this.get_user_posts(this.user.username);
+            this.get_user_posts(this.user.username).subscribe(
+              (user_posts) => {
+                this.posts.next(user_posts);
+              }
+            );
           }
         }
       )

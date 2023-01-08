@@ -29,7 +29,7 @@ export class UserFeedComponent implements OnInit {
             if(this.third_person){
               this.database.get_user_details(current_username).subscribe(
                 (current_user) => {
-                  this.database.get_user_posts(current_username).subscribe(
+                  this.database.posts.subscribe(
                     (response_post) => {
                       this.user = current_user;
                       this.posts = response_post;
@@ -39,7 +39,7 @@ export class UserFeedComponent implements OnInit {
               )
             }else{
               this.user = logged_in_user;
-              this.database.get_user_posts(this.user!.username).subscribe(
+              this.database.posts.subscribe(
                 (response_post) => {
                   this.posts = response_post;
                 }
