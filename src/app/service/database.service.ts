@@ -9,7 +9,7 @@ import { AuthenticationService } from './authentication.service';
   providedIn: 'root'
 })
 export class DatabaseService {
-  API_BASE_URL = 'http://localhost:8000/api/posts';
+  API_BASE_URL = 'https://gliter-backend.herokuapp.com/api/posts';
   posts = new BehaviorSubject<Post[]>([]);
   user: UserProfile | null;
   constructor(public http: HttpClient, public auth: AuthenticationService) {
