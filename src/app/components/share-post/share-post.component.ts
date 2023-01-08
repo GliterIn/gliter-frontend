@@ -40,6 +40,7 @@ export class SharePostComponent implements OnInit {
 
   share_post(){
     this.database.create_post(this.content);
+    this.content = '';
   }
 
 }
