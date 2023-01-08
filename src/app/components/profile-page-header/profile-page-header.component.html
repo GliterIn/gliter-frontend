@@ -18,8 +18,9 @@
                 <div class="profile-menu-wrapper">
                     <div class="main-menu-inner header-top-navigation">
 
-                        <div class="text-center d-md-none d-xl-none">
-                            <button class="edit-btn" routerLink = '/edit'>edit profile</button>
+                        <div class="text-center d-md-none d-xl-none" >
+                            <button class="edit-btn" routerLink = '/edit' *ngIf="!third_person">edit profile</button>
+                            <button class="edit-btn" routerLink = '/edit' *ngIf="third_person">Follow</button>
                         </div>
 
                         <nav>
@@ -35,7 +36,8 @@
             </div>
             <div class="col-lg-2 col-md-3 d-none d-md-block">
                 <div class="profile-edit-panel">
-                    <button class="edit-btn"  routerLink ='/edit'>edit profile</button>
+                    <button class="edit-btn"  routerLink ='/edit' *ngIf="!third_person">edit profile</button>
+                    <button class="edit-btn"  routerLink ='/edit' *ngIf="third_person">Follow</button>
                 </div>
             </div>
         </div>

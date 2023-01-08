@@ -16,7 +16,7 @@ const routes: Routes = [
   {path : 'login' , title:'Login', component : LoginComponent},
   {path : 'logout' , title:'Logged Out', component : LogoutComponent},
   {path : 'brb' , title:'Coming Soon !', component : BeRightBackComponent},
-  {path : 'profile/:username' , canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin} ,component : ProfilePageComponent},
+  {path : 'profile/:username', component : ProfilePageComponent},
 ];
 
 @NgModule({
