@@ -47,6 +47,7 @@ export class DatabaseService {
       }).subscribe(
         (response) => {
           console.log(response);
+          this.get_posts();
         }
       )
     }
