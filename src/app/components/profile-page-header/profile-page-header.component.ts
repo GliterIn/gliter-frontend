@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserProfile } from 'src/app/models/UserProfile.model';
 import { AuthenticationService } from 'src/app/service/authentication.service';
@@ -14,6 +14,7 @@ export class ProfilePageHeaderComponent implements OnInit {
 
   user: UserProfile | null;
   third_person = false;
+  @Input('is_editing') is_editing=false; 
   constructor(public database: DatabaseService,
     public util: UtilsService,
     public auth: AuthenticationService, public activatedRoute: ActivatedRoute) {

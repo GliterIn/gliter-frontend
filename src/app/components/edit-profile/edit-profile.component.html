@@ -1,0 +1,85 @@
+<main *ngIf="user != null">
+    <div class="main-wrapper">
+        <app-profile-page-header [is_editing]="true"></app-profile-page-header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 order-2 order-lg-1 d-none d-md-block">
+                    
+                </div>
+                <div class="col-lg-9 order-1 order-lg-2">
+                    <aside class="widget-area">
+                        <div class="card widget-item" style="border-radius: 1%; border: none;">
+                            <h4 class="widget-title">Edit Profile</h4>
+                            <fieldset class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div id="username" class="form-group"> 
+                                            <label for="username">
+                                                Username<span class="asteriskField">*</span> </label>
+                                            <div> <input type="text" name="username" maxlength="150" class="form-control" [(ngModel)]="user['username']">
+                                            </div>
+                                        </div>
+                                        <div id="name" class="form-group"> 
+                                            <label for="name">
+                                                Name<span class="asteriskField">*</span> </label>
+                                            <div> <input type="text" name="name" maxlength="150" class="form-control" [(ngModel)]="user['name']">
+                                            </div>
+                                        </div>
+                                        <div id="profile_picture" class="form-group"> 
+                                            <label for="profile_picture">
+                                                Profile Picture<span class="asteriskField">*</span> </label>
+                                            <div> <input type="text" name="profile_picture" maxlength="500" class="form-control" [(ngModel)]="user['profile_picture']">
+                                            </div>
+                                        </div>
+                                        <div id="cover_picture" class="form-group"> 
+                                            <label for="cover_picture">
+                                                Cover Picture<span class="asteriskField">*</span> </label>
+                                            <div> <input type="text" name="cover_picture" maxlength="500" class="form-control" [(ngModel)]="user['cover_picture']">
+                                            </div>
+                                        </div>
+                                        <div id="bio" class="form-group"> 
+                                            <label for="bio">
+                                                Bio<span class="asteriskField">*</span> </label>
+                                            <div> <input type="text" name="bio" maxlength="500" class="form-control" [(ngModel)]="user['bio']">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div id="location" class="form-group"> 
+                                            <label for="location">
+                                                Location<span class="asteriskField">*</span> </label>
+                                            <div> <input type="text" name="location" maxlength="500" class="form-control" [(ngModel)]="user['location']">
+                                            </div>
+                                        </div>
+                                        <div id="occupation" class="form-group"> 
+                                            <label for="occupation">
+                                                Occupation<span class="asteriskField">*</span> </label>
+                                            <div> <input type="text" name="occupation" maxlength="500" class="form-control" [(ngModel)]="user['occupation']">
+                                            </div>
+                                        </div>
+                                        <div id="gender" class="form-group"> 
+                                            <label for="gender">
+                                                Gender<span class="asteriskField">*</span> </label>
+                                            <div> <input type="text" name="gender" maxlength="500" class="form-control" [(ngModel)]="user['gender']">
+                                            </div>
+                                        </div>
+                                        <div id="relationship" class="form-group"> 
+                                            <label for="relationship">
+                                                Relationship<span class="asteriskField">*</span> </label>
+                                            <div> <input type="text" name="relationship" maxlength="500" class="form-control" [(ngModel)]="user['relationship']">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="form-group">
+                                <button class="btn btn-info" type="submit" (click)="save_data()">Save</button>
+                            </div>
+                        </div>
+                    </aside>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

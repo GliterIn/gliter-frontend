@@ -36,8 +36,9 @@
             </div>
             <div class="col-lg-2 col-md-3 d-none d-md-block">
                 <div class="profile-edit-panel">
-                    <button class="edit-btn"  routerLink ='/edit' *ngIf="!third_person">edit profile</button>
-                    <button class="edit-btn"  routerLink ='/edit' *ngIf="third_person">Follow</button>
+                    <button class="edit-btn"  routerLink ='/profile/{{user.username}}' *ngIf="is_editing">Go Back</button>
+                    <button class="edit-btn"  routerLink ='./edit' *ngIf="!is_editing && !third_person">edit profile</button>
+                    <button class="edit-btn"  routerLink ='/follow' *ngIf="!is_editing && third_person">Follow</button>
                 </div>
             </div>
         </div>
