@@ -60,6 +60,14 @@
                     <div> <input type="text" name="relationship" maxlength="500" class="form-control" [(ngModel)]="user['relationship']">
                     </div>
                 </div>
+                <div id="birthdate" class="form-group">
+                    <label for="birthdate">
+                        Birthday<span class="asteriskField">*</span> </label>
+                    <div>
+                        <input type="date" id="birthdate" class="form-control" name="birthdate" [(ngModel)]="user['birthday']">
+                    </div>
+
+                </div>
             </div>
         </div>
     </fieldset>
