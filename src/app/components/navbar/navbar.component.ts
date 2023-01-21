@@ -11,13 +11,24 @@ import { UtilsService } from 'src/app/service/utils.service';
 })
 export class NavbarComponent implements OnInit {
   user: UserProfile|null;
+  search_results: UserProfile[];
+  search_query:string='';
   constructor(public database: DatabaseService,
     public util: UtilsService,
     public auth: AuthenticationService) {
     this.user = null;
+    this.search_results = [];
     this.auth.get_current_user().subscribe(
       (data) => {
         this.user = data;
+      }
+    )
+  }
+
+  search_users(){
+    this.database.get_user_results(this.search_query).subscribe(
+      (search_results) => {
+        this.search_results = search_results;
       }
     )
   }

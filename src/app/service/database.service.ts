@@ -9,6 +9,7 @@ import { AuthenticationService } from './authentication.service';
   providedIn: 'root'
 })
 export class DatabaseService {
+  // API_BASE_URL = 'http://localhost:8000/api';
   API_BASE_URL = 'https://gliter-backend.herokuapp.com/api';
   posts = new BehaviorSubject<Post[]>([]);
   user: UserProfile | null;
@@ -54,6 +55,13 @@ export class DatabaseService {
   get_user_details(username:string){
     return this.http.post<UserProfile>(this.API_BASE_URL + "/users/get-user-details", {
       "username":username
+    });
+  }
+
+
+  get_user_results(query:string){
+    return this.http.post<UserProfile[]>(this.API_BASE_URL + "/users/get-user-results", {
+      "query":query
     });
   }
 
