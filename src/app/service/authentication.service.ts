@@ -10,7 +10,7 @@ import { UserCredential } from 'firebase/auth';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  // API_BASE_URL = 'http://localhost:8000/api';
+  //API_BASE_URL = 'http://localhost:8000/api';
   API_BASE_URL = 'https://gliter-backend.herokuapp.com/api';
   logged_in_user = new BehaviorSubject<UserProfile | null>(null);
   user_token = new BehaviorSubject<string>("");
@@ -77,6 +77,19 @@ export class AuthenticationService {
     }).subscribe(
       (backend_login_data) => {
         this.logged_in_user.next(backend_login_data);
+      }
+    )
+  }
+
+  update_user(user: UserProfile) {
+    this.http.post<UserProfile>(this.API_BASE_URL + '/update-user', {
+      'user': user,
+      'uid': this.uid_value,
+      'user_token': this.user_token_value
+    }).subscribe(
+      (backend_login_data) => {
+        this.logged_in_user.next(backend_login_data);
+        alert('Your changes were saved.')
       }
     )
   }
