@@ -1355,20 +1355,12 @@ only screen and (max-width: 767.98px) {
     right: 0;
     position: absolute;
     z-index: 999;
-    -webkit-transition: 0.4s;
-    -o-transition: 0.4s;
-    transition: 0.4s;
-    opacity: 0;
-    visibility: hidden;
 }
 
-.mob-search-box.show {
-    opacity: 1;
-    visibility: visible;
-}
 
 .mob-search-inner {
     position: relative;
+    background-color: white;
 }
 
 .mob-search-field {

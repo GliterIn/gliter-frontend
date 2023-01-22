@@ -24,6 +24,7 @@ import { BeRightBackComponent } from './components/be-right-back/be-right-back.c
 import { RouterModule } from '@angular/router';
 import { OnboardingComponent } from './components/onboarding/onboarding.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { ProfilePageAboutComponent } from './components/profile-page-about/profile-page-about.component';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
     BeRightBackComponent,
     OnboardingComponent,
     EditProfileComponent,
+    ProfilePageAboutComponent,
   ],
   imports: [
     BrowserModule,

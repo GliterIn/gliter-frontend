@@ -26,8 +26,8 @@
 
                         <nav>
                             <ul class="main-menu">
-                                <li class="active"><a routerLink="/profile/{{user.username}}">timeline</a></li>
-                                <!-- <li><a routerLink="/profile/{{user.username}}/about">about</a></li> -->
+                                <li [ngClass]="{'active' : active_tab=='timeline'}"><a routerLink="/profile/{{user.username}}">timeline</a></li>
+                                <li [ngClass]="{'active' : active_tab=='about'}"><a routerLink="/profile/{{user.username}}/about">about</a></li>
                                 <!-- <li><a routerLink="/profile/{{user.username}}/followers">7 followers</a></li>
                                 <li><a routerLink="/profile/{{user.username}}/following">1 following</a></li> -->
                             </ul>
@@ -38,7 +38,7 @@
             <div class="col-lg-2 col-md-3 d-none d-md-block">
                 <div class="profile-edit-panel">
                     <button class="edit-btn"  routerLink ='/profile/{{user.username}}' *ngIf="is_editing">Go Back</button>
-                    <button class="edit-btn"  routerLink ='./edit' *ngIf="!is_editing && !third_person">edit profile</button>
+                    <button class="edit-btn"  routerLink ='/profile/{{user.username}}/edit' *ngIf="!is_editing && !third_person">edit profile</button>
                     <button class="edit-btn"  routerLink ='/follow' *ngIf="!is_editing && third_person">Follow</button>
                 </div>
             </div>

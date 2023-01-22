@@ -160,14 +160,39 @@
             </a>
           </li> -->
           <li class="mt-2">
-            <button class="search-trigger">
+            <button class="search-trigger" (click)="show_mobile_search = !show_mobile_search">
               <i class="fa fa-search"></i>
-              <i class="fa fa-cross"></i>
             </button>
-            <div class="mob-search-box">
-              <form class="mob-search-inner">
-                <input type="text" placeholder="Search Here" class="mob-search-field">
-                <button class="mob-search-btn"><i class="fa fa-search"></i></button>
+            <div class="mob-search-box" *ngIf="show_mobile_search">
+              <form class="mob-search-inner pt-3 pb-3 border-top" >
+                <div class="dropdown show">
+                  
+                  <a class="profile-triger" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <button class="top-search-btn" (click)="search_users()"><i class="fa fa-search"></i></button>
+                  </a>
+                  <div class="dropdown-menu">
+                    <li class="unorder-list ml-2 mr-2"  *ngFor="let user of search_results">
+                      <div class="profile-thumb">
+                        <a href="/profile/{{user.username}}">
+                          <figure class="profile-thumb-small">
+                            <img [src]="user.profile_picture" alt="profile picture">
+                          </figure>
+                        </a>
+                      </div>
+                      <div class="unorder-list-info ml-3 mr-3">
+                        <h3 class="list-title"><a routerLink="/profile/{{user.username}}">{{user.name}} </a> <i *ngIf="user.is_verified"
+                            class="fa fa-check"
+                            style="background-color: #2aa8df;border: white;border-radius: 8px;color: white;padding: 2px;"></i>
+                        </h3>
+                        <!-- <p class="list-subtitle"><a href="#">10 mutual</a></p> -->
+                      </div>
+                    </li>
+                    <hr>
+                  </div>
+                  <input type="text" placeholder="Search" class="top-search-field" name="search_query"
+                    [(ngModel)]="search_query">
+                </div>
               </form>
             </div>
           </li>

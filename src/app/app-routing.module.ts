@@ -8,6 +8,7 @@ import { OnboardingComponent } from './components/onboarding/onboarding.componen
 import { ProfilePageComponent } from './components/profile-page/profile-page.component';
 import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/compat/auth-guard';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { ProfilePageAboutComponent } from './components/profile-page-about/profile-page-about.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path : 'onboarding' , title:'Onboarding', canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin},  component : OnboardingComponent},
   {path : 'login' , title:'Login', component : LoginComponent},
   {path : 'profile/:username/edit' , canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin} , component : EditProfileComponent},
+  {path : 'profile/:username/about' , canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin} , component : ProfilePageAboutComponent },
   {path : 'logout' , title:'Logged Out', component : LogoutComponent},
   {path : 'brb' , title:'Coming Soon !', component : BeRightBackComponent},
   {path : 'profile/:username', component : ProfilePageComponent},

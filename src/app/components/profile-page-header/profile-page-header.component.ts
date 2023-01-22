@@ -15,6 +15,7 @@ export class ProfilePageHeaderComponent implements OnInit {
   user: UserProfile | null;
   third_person = false;
   @Input('is_editing') is_editing=false; 
+  active_tab = 'timeline';
   constructor(public database: DatabaseService,
     public util: UtilsService,
     public auth: AuthenticationService, public activatedRoute: ActivatedRoute) {
@@ -23,6 +24,9 @@ export class ProfilePageHeaderComponent implements OnInit {
     this.activatedRoute.url.subscribe(
       (current_url) => {
         var current_username = current_url[1].toString();
+        if(current_url[2] != undefined){
+          this.active_tab = current_url[2].toString();
+        }
         this.auth.get_current_user().subscribe(
           (logged_in_user) => {
             if (logged_in_user == null || logged_in_user.username != current_username) {

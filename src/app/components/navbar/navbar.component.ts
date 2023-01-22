@@ -13,6 +13,7 @@ export class NavbarComponent implements OnInit {
   user: UserProfile|null;
   search_results: UserProfile[];
   search_query:string='';
+  show_mobile_search=false;
   constructor(public database: DatabaseService,
     public util: UtilsService,
     public auth: AuthenticationService) {
