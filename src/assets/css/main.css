@@ -862,6 +862,9 @@ textarea:focus {
         text-align: center;
         margin-top: 25px;
     }
+    .header-top-navigation-mobile{
+        margin-top: 50px !important;
+    }
 }
 
 .header-top-navigation ul li {

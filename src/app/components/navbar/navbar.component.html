@@ -146,7 +146,7 @@
   </div>
 </header>
 
-<header *ngIf="user != null">
+<header *ngIf="user != null && user.is_onboarded">
   <div class="mobile-header-wrapper sticky d-block d-lg-none">
     <div class="mobile-header position-relative ">
       <div class="mobile-menu w-100">

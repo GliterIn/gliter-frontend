@@ -19,7 +19,7 @@ const routes: Routes = [
   {path : 'onboarding' , title:'Onboarding', canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin},  component : OnboardingComponent},
   {path : 'login' , title:'Login', component : LoginComponent},
   {path : 'profile/:username/edit' , canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin} , component : EditProfileComponent},
-  {path : 'profile/:username/about' , canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin} , component : ProfilePageAboutComponent },
+  {path : 'profile/:username/about' , component : ProfilePageAboutComponent },
   {path : 'logout' , title:'Logged Out', component : LogoutComponent},
   {path : 'brb' , title:'Coming Soon !', component : BeRightBackComponent},
   {path : 'investors' , title:'Investors', component : InvestorsComponent},
