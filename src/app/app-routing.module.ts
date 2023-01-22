@@ -23,7 +23,7 @@ const routes: Routes = [
   {path : 'logout' , title:'Logged Out', component : LogoutComponent},
   {path : 'brb' , title:'Coming Soon !', component : BeRightBackComponent},
   {path : 'investors' , title:'Investors', component : InvestorsComponent},
-  {path : 'about' , title:'Investors', component : AboutComponent},
+  {path : 'about' , title:'About Gliter', component : AboutComponent},
   {path : 'profile/:username', component : ProfilePageComponent},
 ];
 
