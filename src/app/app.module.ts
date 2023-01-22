@@ -25,6 +25,8 @@ import { RouterModule } from '@angular/router';
 import { OnboardingComponent } from './components/onboarding/onboarding.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { ProfilePageAboutComponent } from './components/profile-page-about/profile-page-about.component';
+import { InvestorsComponent } from './components/investors/investors.component';
+import { AboutComponent } from './components/about/about.component';
 
 
 @NgModule({
@@ -45,6 +47,8 @@ import { ProfilePageAboutComponent } from './components/profile-page-about/profi
     OnboardingComponent,
     EditProfileComponent,
     ProfilePageAboutComponent,
+    InvestorsComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,

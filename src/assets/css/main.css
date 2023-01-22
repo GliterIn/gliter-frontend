@@ -860,7 +860,7 @@ textarea:focus {
 @media only screen and (max-width: 767.98px) {
     .header-top-navigation {
         text-align: center;
-        margin-top: 50px;
+        margin-top: 25px;
     }
 }
 

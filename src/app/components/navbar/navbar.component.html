@@ -220,3 +220,25 @@
     </div>
   </div>
 </header>
+
+
+
+<header *ngIf="user == null">
+  <div>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-5">
+          <div class="header-top-navigation">
+            <nav>
+              <ul style="margin-bottom: 0px !important;">
+                <li class="active"><a routerLink="/login">Home</a></li>
+                <li class="active"><a routerLink="/investors">Investors</a></li>
+                <li class="active"><a routerLink="/about">About</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

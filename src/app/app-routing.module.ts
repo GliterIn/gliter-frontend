@@ -9,6 +9,8 @@ import { ProfilePageComponent } from './components/profile-page/profile-page.com
 import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/compat/auth-guard';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { ProfilePageAboutComponent } from './components/profile-page-about/profile-page-about.component';
+import { AboutComponent } from './components/about/about.component';
+import { InvestorsComponent } from './components/investors/investors.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
@@ -20,6 +22,8 @@ const routes: Routes = [
   {path : 'profile/:username/about' , canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin} , component : ProfilePageAboutComponent },
   {path : 'logout' , title:'Logged Out', component : LogoutComponent},
   {path : 'brb' , title:'Coming Soon !', component : BeRightBackComponent},
+  {path : 'investors' , title:'Investors', component : InvestorsComponent},
+  {path : 'about' , title:'Investors', component : AboutComponent},
   {path : 'profile/:username', component : ProfilePageComponent},
 ];
 
