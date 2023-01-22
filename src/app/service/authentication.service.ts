@@ -77,6 +77,7 @@ export class AuthenticationService {
     }).subscribe(
       (backend_login_data) => {
         this.logged_in_user.next(backend_login_data);
+        window.location.href = '/feed';
       }
     )
   }
