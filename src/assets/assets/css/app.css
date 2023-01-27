@@ -2052,7 +2052,6 @@ nav.template-main-menu > ul > li:hover ul.mega-menu {
     -webkit-flex: 1;
     -ms-flex: 1;
     flex: 1;
-    margin-left: 30px;
 }
 
 @media only screen and (max-width: 1199px) {
@@ -10960,21 +10959,21 @@ nav.template-main-menu > ul > li:hover ul.mega-menu {
 }
 
 .widget-author .profile-img a:before {
-    content: url("../../media/figure/chat_round_shape5.png");
+    content: "";
     position: absolute;
     top: -8px;
     left: -8px;
 }
 
 .widget-author .profile-img a:after {
-    content: "\eed8";
+    content: "✓";
     font-family: IcoFont;
     font-size: 20px;
     color: #ffffff;
     height: 30px;
     width: 30px;
     line-height: 30px;
-    background-color: #17dd17;
+    background-color: skyblue;
     border-radius: 50%;
     position: absolute;
     bottom: -9px;
@@ -11156,7 +11155,7 @@ nav.template-main-menu > ul > li:hover ul.mega-menu {
 }
 
 .widget-memebers .media .item-img a:before {
-    content: url("../../media/figure/chat_round_shape.png");
+    content: "";
     position: absolute;
     top: -5px;
     left: -5px;

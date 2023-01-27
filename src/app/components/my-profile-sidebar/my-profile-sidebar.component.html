@@ -1,21 +1,30 @@
-<aside class="widget-area">
-    <!-- widget single item start -->
-    <div class="card card-profile widget-item p-0" style="border-radius: 2%; border: none;" *ngIf="user != null">
-        <div class="profile-banner">
-            <figure class="profile-banner-small">
-                <a routerLink="/profile/{{user.username}}">
-                    <img [src]="user.cover_picture" alt="">
-                </a>
-                <a routerLink="/profile/{{user.username}}" class="profile-thumb-2">
-                    <img [src]="user.profile_picture" alt="">
-                </a>
-            </figure>
-            <div class="profile-desc text-center">
-                <h6 class="author"><a routerLink="/profile">{{user.name}} <i *ngIf="user.is_verified" class="fa fa-check"
-                            style="background-color: #2aa8df;border: white;border-radius: 8px;color: white;padding: 2px;"></i>
-                    </a></h6>
-                <p>{{user.bio}}</p>
-            </div>
+<div class="widget widget-author" *ngIf="user != null">
+    <div class="author-heading">
+        <div class="cover-img">
+            <img src="{{user!.cover_picture}}" style="max-width: 360px; max-height: 100px;" alt="cover">
+        </div>
+        <div class="profile-img">
+            <a routerLink="/profile/{{user.username}}">
+                <img src="{{user!.profile_picture}}" style="max-height: 90px; max-width: 90px;" alt="author">
+            </a>
+        </div>
+        <div class="profile-name">
+            <h4 class="author-name"><a routerLink="/profile/{{user.username}}">{{user.name}}</a></h4>
+            <div class="author-location">{{user.location}}</div>
         </div>
     </div>
-</aside>
+    <ul class="author-badge">
+        {{user.bio}}
+    </ul>
+    <ul class="author-statistics">
+        <li>
+            <a routerLink="/profile/{{user.username}}"><span class="item-number">{{total_posts}}</span> <span class="item-text">POSTS</span></a>
+        </li>
+        <li>
+            <a routerLink="/profile/{{user.username}}"><span class="item-number">100K</span> <span class="item-text">FOLLOWERS</span></a>
+        </li>
+        <li>
+            <a routerLink="/profile/{{user.username}}"><span class="item-number">1,125</span> <span class="item-text">VIEWS</span></a>
+        </li>
+    </ul>
+</div>

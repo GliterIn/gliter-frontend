@@ -11,7 +11,8 @@ import { UtilsService } from 'src/app/service/utils.service';
 })
 export class MyProfileSidebarComponent implements OnInit {
 
-  user: UserProfile|null;
+  user: UserProfile | null;
+  total_posts = 0;
   constructor(public database: DatabaseService,
     public util: UtilsService,
     public auth: AuthenticationService) {
@@ -19,6 +20,11 @@ export class MyProfileSidebarComponent implements OnInit {
     this.auth.get_current_user().subscribe(
       (data) => {
         this.user = data;
+        this.database.get_user_posts(data!.username).subscribe(
+          (posts) => {
+            this.total_posts = posts.length;
+          }
+        )
       }
     )
   }

@@ -1,4 +1,4 @@
-<header class="fixed-header" *ngIf="user != null">
+<header class="fixed-header">
     <div class="header-menu">
         <div class="navbar">
             <div class="nav-item d-none d-sm-block">
@@ -7,12 +7,15 @@
                 <nav id="dropdown" class="template-main-menu">
                     <ul class="menu-content">
                         <li class="header-nav-item">
-                            <a routerLink="/" class="menu-link active">Home</a>
+                            <a routerLink="/login" class="menu-link active" *ngIf="user == null">Home</a>
                         </li>
-                        <li class="header-nav-item">
+                        <li class="header-nav-item" *ngIf="user != null">
+                            <a routerLink="/feed" class="menu-link active">Feed</a>
+                        </li>
+                        <li class="header-nav-item"  *ngIf="user == null">
                             <a routerLink="/investors" class="menu-link active">Investors</a>
                         </li>
-                        <li class="header-nav-item">
+                        <li class="header-nav-item"  *ngIf="user == null">
                             <a routerLink="/about" class="menu-link active">About</a>
                         </li>
                         <!-- <li class="header-nav-item">
@@ -54,7 +57,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="inline-item d-flex align-items-center">
+                <div class="inline-item d-flex align-items-center" *ngIf="user != null">
                     <div class="dropdown dropdown-friend">
                         <button class="dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
                             <i class="fa fa-users"></i>
@@ -149,7 +152,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="inline-item">
+                <div class="inline-item" *ngIf="user != null">
                     <div class="dropdown dropdown-admin">
                         <button class="dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
                             <span class="media">
