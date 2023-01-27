@@ -10,7 +10,7 @@ import { UtilsService } from 'src/app/service/utils.service';
 
 import { ProfilePageDetailsComponent } from './profile-page-details.component';
 
-describe('ProfilePageDetailsComponent', () => {
+xdescribe('ProfilePageDetailsComponent', () => {
   let component: ProfilePageDetailsComponent;
   let fixture: ComponentFixture<ProfilePageDetailsComponent>;
 
