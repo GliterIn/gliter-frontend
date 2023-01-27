@@ -1,25 +1,21 @@
-<aside class="widget-area profile-sidebar">
-    <!-- widget single item start -->
-    <div class="card widget-item" style="border-radius: 2%; border: none;" *ngIf="user != null">
-        <h4 class="widget-title">{{user.name}} <i class="fa fa-check" *ngIf="user.is_verified"
-                style="background-color: #2aa8df;border: white;border-radius: 8px;color: white;padding: 2px;"></i>
-        </h4>
-        <div class="widget-body">
-            <div class="about-author">
-                <p>{{user.bio}}</p>
-                <ul class="author-into-list">
-                    <li><i class="fa fa-briefcase"></i> <span class="pl-3">{{user.occupation}}</span></li>
-                    <li><i class="fa fa-home"></i> <span class="pl-3">{{user.location}}</span></li>
-                    <li><i class="fa fa-birthday-cake"></i><span
-                            class="pl-3">{{util.parseTimestampShort(user.birthday)}}</span></li>
-                    <li><i class="fa fa-clock-o"></i> <span
-                            class="pl-3">{{util.parseTimestampShort(user.joined_on)}}</span></li>
-                    <li><i class="fa fa-venus-mars"></i><span class="pl-3">{{user.gender}}</span></li>
-                    <li><i class="fa fa-heart"></i><span class="pl-3">{{user.relationship}}</span></li>
-                </ul>
-            </div>
-        </div>
+<div class="widget widget-user-about">
+    <div class="widget-heading">
+        <h3 class="widget-title">About Me</h3>
     </div>
-    <!-- widget single item end -->
-
-</aside>
+    <div class="user-info">
+        <p>{{user?.bio}}</p>
+        <ul class="info-list">
+            <li><span>Name:</span>{{user?.name}}</li>
+            <li><span>Joined:</span>{{util.parseTimestampShort(user!.joined_on)}}</li>
+            <li><span>Birthday:</span>{{util.parseTimestampShort(user!.birthday)}}</li>
+            <li><span>Location:</span>{{user!.location}}</li>
+            <li><span>Gender:</span>{{user!.gender}}</li>
+            <li class="social-share"><span>Social:</span>
+                <div class="social-icon">
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-instagram"></i></a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

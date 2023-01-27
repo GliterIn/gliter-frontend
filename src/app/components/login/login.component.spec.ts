@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
 import { MockAuthenticationService } from 'src/app/MockServices/MockAuth';
 import { MockRouter } from 'src/app/MockServices/MockRouter';
 import { AuthenticationService } from 'src/app/service/authentication.service';
-import { Router } from '@angular/router';
 
 import { LoginComponent } from './login.component';
 
@@ -12,7 +12,7 @@ describe('LoginComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LoginComponent],
+      declarations: [ LoginComponent ],
       providers: [
         {
           provide: AuthenticationService,
@@ -24,7 +24,7 @@ describe('LoginComponent', () => {
         }
       ]
     })
-      .compileComponents();
+    .compileComponents();
 
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;

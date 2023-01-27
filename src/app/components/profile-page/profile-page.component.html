@@ -1,20 +1,32 @@
-<main>
-    <div class="main-wrapper">
+<div class="page-content" *ngIf="user != null">
+    <div class="container">
+        <!-- Banner Area Start -->
         <app-profile-page-header></app-profile-page-header>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 order-2 order-lg-1 d-none d-md-block">
-                    <app-profile-page-details></app-profile-page-details>
-                </div>
-                <div class="col-lg-6 order-1 order-lg-2">
-                    <app-share-post></app-share-post>
-                    <br>
-                    <app-user-feed></app-user-feed>
-                </div>
-                <div class="col-lg-3 order-3 d-none d-md-block">
-                    <app-people-you-may-know></app-people-you-may-know>
-                </div>
-            </div>
+
+        <div class="block-box user-top-header">
+            <ul class="menu-list">
+                <li class="active"><a href="#">Timeline</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Followers</a></li>
+                <li><a href="#">Gallery</a></li>
+                <li><a href="#">Badges</a></li>
+                <li><a href="#">Blogs</a></li>
+                <!-- <li>
+                    <div class="dropdown">
+                        <button class="dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                            ...
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#">Shop</a>
+                            <a class="dropdown-item" href="#">Blog</a>
+                            <a class="dropdown-item" href="#">Others</a>
+                        </div>
+                    </div>
+                </li> -->
+            </ul>
         </div>
+
+        <app-profile-page-content></app-profile-page-content>
     </div>
-</main>
+    <app-footer></app-footer>
+</div>

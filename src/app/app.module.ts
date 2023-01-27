@@ -1,9 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from 'src/environments/environment';
+import { PERSISTENCE } from '@angular/fire/compat/auth';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { LoginComponent } from './components/login/login.component';
+import { LogoutComponent } from './components/logout/logout.component';
 import { ProfilePageComponent } from './components/profile-page/profile-page.component';
 import { FeedComponent } from './components/feed/feed.component';
 import { PeopleYouMayKnowComponent } from './components/people-you-may-know/people-you-may-know.component';
@@ -12,22 +19,18 @@ import { SharePostComponent } from './components/share-post/share-post.component
 import { MyProfileSidebarComponent } from './components/my-profile-sidebar/my-profile-sidebar.component';
 import { ProfilePageHeaderComponent } from './components/profile-page-header/profile-page-header.component';
 import { ProfilePageDetailsComponent } from './components/profile-page-details/profile-page-details.component';
-import { HttpClientModule } from '@angular/common/http';
-import { LoginComponent } from './components/login/login.component';
-import { LogoutComponent } from './components/logout/logout.component';
-import { FormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { AngularFireModule } from '@angular/fire/compat';
-import { environment } from 'src/environments/environment';
-import { PERSISTENCE } from '@angular/fire/compat/auth';
 import { BeRightBackComponent } from './components/be-right-back/be-right-back.component';
-import { RouterModule } from '@angular/router';
 import { OnboardingComponent } from './components/onboarding/onboarding.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { ProfilePageAboutComponent } from './components/profile-page-about/profile-page-about.component';
 import { InvestorsComponent } from './components/investors/investors.component';
 import { AboutComponent } from './components/about/about.component';
-
+import { ProfilePageContentComponent } from './components/profile-page-content/profile-page-content.component';
+import { ProfilePagePostsComponent } from './components/profile-page-posts/profile-page-posts.component';
+import { ProfilePageGalleryComponent } from './components/profile-page-gallery/profile-page-gallery.component';
+import { ProfilePageBadgesComponent } from './components/profile-page-badges/profile-page-badges.component';
+import { ProfilePageFollowersComponent } from './components/profile-page-followers/profile-page-followers.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +52,12 @@ import { AboutComponent } from './components/about/about.component';
     ProfilePageAboutComponent,
     InvestorsComponent,
     AboutComponent,
+    ProfilePageContentComponent,
+    ProfilePagePostsComponent,
+    ProfilePageGalleryComponent,
+    ProfilePageBadgesComponent,
+    ProfilePageFollowersComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

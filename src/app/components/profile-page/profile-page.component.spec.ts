@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MockAuthenticationService } from 'src/app/MockServices/MockAuth';
+import { AuthenticationService } from 'src/app/service/authentication.service';
 
 import { ProfilePageComponent } from './profile-page.component';
 
@@ -8,7 +10,13 @@ describe('ProfilePageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ProfilePageComponent ]
+      declarations: [ ProfilePageComponent ],
+      providers: [
+        {
+          provide: AuthenticationService,
+          useClass: MockAuthenticationService
+        }
+      ]
     })
     .compileComponents();
 
