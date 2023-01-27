@@ -1,48 +1,23 @@
 <span *ngIf="user != null">
-<div class="profile-banner-large bg-img" [style.background-image]="'url('+ user.cover_picture + ')'">
-</div>
-<div class="profile-menu-area bg-white">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-3 col-md-3">
-                <div class="profile-picture-box">
-                    <figure class="profile-picture">
-                        <a routerLink="/profile/{{user.username}}">
-                            <img style="background: transparent; border-radius: 50%;"
-                                [src]="user.profile_picture" alt="profile picture">
-                        </a>
-                    </figure>
+    <div class="banner-user" [style.background-image]="'url('+ user.cover_picture + ')'" style="max-width: 1170px; max-height: 400px;">
+        <div class="banner-content">
+            <div class="media">
+                <div class="item-img">
+                    <img src="{{user.profile_picture}}" style="max-width: 115px;" alt="User">
                 </div>
-            </div>
-            <div class="col-lg-6 col-md-6 offset-lg-1">
-                <div class="profile-menu-wrapper">
-                    <div class="main-menu-inner header-top-navigation header-top-navigation-mobile" >
-
-                        <div class="text-center d-md-none d-xl-none" >
-                            <button class="edit-btn"  routerLink ='/profile/{{user.username}}' *ngIf="is_editing">Go Back</button>                            
-                            <button class="edit-btn" routerLink = './edit' *ngIf="!is_editing && !third_person">edit profile</button>
-                            <button class="edit-btn" routerLink = '/edit' *ngIf="!is_editing && third_person">Follow</button>
-                        </div>
-
-                        <nav>
-                            <ul class="main-menu">
-                                <li [ngClass]="{'active' : active_tab=='timeline'}"><a routerLink="/profile/{{user.username}}">timeline</a></li>
-                                <li [ngClass]="{'active' : active_tab=='about'}"><a routerLink="/profile/{{user.username}}/about">about</a></li>
-                                <!-- <li><a routerLink="/profile/{{user.username}}/followers">7 followers</a></li>
-                                <li><a routerLink="/profile/{{user.username}}/following">1 following</a></li> -->
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-md-3 d-none d-md-block">
-                <div class="profile-edit-panel">
-                    <button class="edit-btn"  routerLink ='/profile/{{user.username}}' *ngIf="is_editing">Go Back</button>
-                    <button class="edit-btn"  routerLink ='/profile/{{user.username}}/edit' *ngIf="!is_editing && !third_person">edit profile</button>
-                    <button class="edit-btn"  routerLink ='/follow' *ngIf="!is_editing && third_person">Follow</button>
+                <div class="media-body">
+                    <h3 class="item-title">{{user.name}}</h3>
+                    <div class="item-subtitle">{{user.location}}</div>
+                    <ul class="item-social" *ngIf="third_person">
+                        <button class="btn btn-info">Follow</button>
+                    </ul>
+                    <ul class="user-meta">
+                        <li>Posts: <span>{{total_posts}}</span></li>
+                        <li>Followers: <span>100K</span></li>
+                        <li>Views: <span>1.2k</span></li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </span>
