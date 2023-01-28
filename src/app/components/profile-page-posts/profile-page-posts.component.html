@@ -5,7 +5,9 @@
                 <img src="{{user!.profile_picture}}" style="max-width: 50px;">
             </div>
             <div class="media-body">
-                <div class="user-title"><a href="/profile/{{user!.username}}">{{user!.name}}</a></div>
+                <div class="user-title"><a href="/profile/{{user!.username}}">{{user!.name}}</a> <i
+                    class="fa fa-check" *ngIf="user!.is_verified"
+                    style="background-color: #2aa8df;border: white;border-radius: 50%;color: white;"></i></div>
                 <ul class="entry-meta">
                     <li class="meta-time">{{util.parseTimestamp(post.timestamp)}}</li>
                 </ul>

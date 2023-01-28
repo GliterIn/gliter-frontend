@@ -6,8 +6,9 @@
                     <img src="{{user.profile_picture}}" style="max-width: 115px;" alt="User">
                 </div>
                 <div class="media-body">
-                    <h3 class="item-title">{{user.name}} <span *ngIf="user.is_verified" class="acc-verified" style="background-color: skyblue;color: white;border-radius: 50%;"><i
-                        class="fa fa-check"></i></span></h3>
+                    <h3 class="item-title">{{user.name}} <i
+                        class="fa fa-check" *ngIf="user!.is_verified"
+                        style="background-color: #2aa8df;border: white;border-radius: 50%;color: white;"></i></h3>
                     <div class="item-subtitle">{{user.location}}</div>
                     <ul class="item-social" *ngIf="third_person">
                         <button class="btn btn-info">Follow</button>
