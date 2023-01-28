@@ -17,7 +17,7 @@ describe('UtilsService', () => {
     expect(service.parseTimestampShort(new Date(1669095632000))).toEqual('22 Nov 2022');
   });
   it('should parse timestamp', ()=>{
-    expect(service.parseTimestamp(new Date(1669095632000))).toEqual('22 Nov. 2022, 5:40');
+    expect(service.parseTimestamp(new Date(1669095632000))).toEqual('22 Nov. 2022, 05:40 AM');
   });
   it('should have 12 months', ()=>{
     expect(service.MONTHS).toHaveSize(12);
