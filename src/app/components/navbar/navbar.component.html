@@ -35,7 +35,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="inline-item d-flex align-items-center" *ngIf="user != null">
+                <div class="inline-item d-flex align-items-center" *ngIf="user != null && user.is_onboarded">
                     <div class="dropdown dropdown-friend">
                         <a class="dropdown-toggle" routerLink="/feed" data-toggle="dropdown" aria-expanded="false">
                             <i class="fa fa-rss"></i>
@@ -151,7 +151,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="inline-item" *ngIf="user != null">
+                <div class="inline-item" *ngIf="user != null && user.is_onboarded">
                     <div class="dropdown dropdown-admin">
                         <button class="dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
                             <span class="media">

@@ -8,7 +8,6 @@ import { AuthenticationService } from 'src/app/service/authentication.service';
   styleUrls: ['./onboarding.component.css']
 })
 export class OnboardingComponent implements OnInit {
-
   user: UserProfile|null;
   constructor(public auth:AuthenticationService) { 
     this.user = null;
@@ -27,4 +26,6 @@ export class OnboardingComponent implements OnInit {
       this.auth.onboard_user(this.user);
     }
   }
+
+
 }

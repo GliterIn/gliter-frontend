@@ -6582,14 +6582,10 @@ nav.template-main-menu > ul > li:hover ul.mega-menu {
 }
 
 .banner-user .media .item-title:before {
-    content: "✓";
+    content: "";
     font-family: IcoFont;
     text-align: center;
     display: inline-block;
-    height: 26px;
-    width: 26px;
-    line-height: 26px;
-    background-color: skyblue;
     border-radius: 50%;
     font-size: 20px;
     color: #ffffff;
@@ -10971,13 +10967,10 @@ nav.template-main-menu > ul > li:hover ul.mega-menu {
 }
 
 .widget-author .profile-img a:after {
-    content: "✓";
+    content: "";
     font-family: IcoFont;
     font-size: 20px;
     color: #ffffff;
-    height: 30px;
-    width: 30px;
-    line-height: 30px;
     background-color: skyblue;
     border-radius: 50%;
     position: absolute;

@@ -1,77 +1,94 @@
-<div class="container" *ngIf="user != null">
-    <br>
-    <fieldset class="form-group">
-        <legend class="border-bottom mb-4">Welcome, let's get you onboarded</legend>
-        <div class="row">
-            <div class="col-md-6">
-                <div id="username" class="form-group"> 
-                    <label for="username">
-                        Username<span class="asteriskField">*</span> </label>
-                    <div> <input type="text" name="username" maxlength="150" class="form-control" [(ngModel)]="user['username']">
+<main id="main">
+    <section id="about" class="page-content" style="background-color: white;">
+        <div class="container" *ngIf="user != null">
+            <br>
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Welcome, let's get you onboarded</legend>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="username" class="form-group">
+                            <mat-form-field style="width: 100%;">
+                                <mat-label>Username</mat-label>
+                                <input matInput placeholder="Username" name="username" [(ngModel)]="user['username']">
+                            </mat-form-field>
+                        </div>
+                        <div id="name" class="form-group">
+                            <mat-form-field style="width: 100%;">
+                                <mat-label>Name</mat-label>
+                                <input matInput placeholder="Full Name" name="name" [(ngModel)]="user['name']">
+                            </mat-form-field>
+                        </div>
+                        <div id="profile_picture" class="form-group">
+                            <mat-form-field style="width: 100%;">
+                                <mat-label>Profile Picture (Add Link)</mat-label>
+                                <input matInput placeholder="Profile Picture" name="profile_picture"
+                                    [(ngModel)]="user['profile_picture']">
+                            </mat-form-field>
+                        </div>
+                        <div id="cover_picture" class="form-group">
+                            <mat-form-field style="width: 100%;">
+                                <mat-label>Cover Picture (Add Link)</mat-label>
+                                <input matInput placeholder="Cover Picture" name="cover_picture"
+                                    [(ngModel)]="user['cover_picture']">
+                            </mat-form-field>
+                        </div>
+                        <div id="gender" class="form-group">
+                            <mat-form-field appearance="fill" style="width: 100%;">
+                                <mat-label>Select an option</mat-label>
+                                <mat-select [(value)]="user['gender']">
+                                    <mat-option value="Other">Other</mat-option>
+                                    <mat-option value="Male">Male</mat-option>
+                                    <mat-option value="Female">Female</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
                     </div>
-                </div>
-                <div id="name" class="form-group"> 
-                    <label for="name">
-                        Name<span class="asteriskField">*</span> </label>
-                    <div> <input type="text" name="name" maxlength="150" class="form-control" [(ngModel)]="user['name']">
-                    </div>
-                </div>
-                <div id="profile_picture" class="form-group"> 
-                    <label for="profile_picture">
-                        Profile Picture<span class="asteriskField">*</span> </label>
-                    <div> <input type="text" name="profile_picture" maxlength="500" class="form-control" [(ngModel)]="user['profile_picture']">
-                    </div>
-                </div>
-                <div id="cover_picture" class="form-group"> 
-                    <label for="cover_picture">
-                        Cover Picture<span class="asteriskField">*</span> </label>
-                    <div> <input type="text" name="cover_picture" maxlength="500" class="form-control" [(ngModel)]="user['cover_picture']">
-                    </div>
-                </div>
-                <div id="bio" class="form-group"> 
-                    <label for="bio">
-                        Bio<span class="asteriskField">*</span> </label>
-                    <div> <input type="text" name="bio" maxlength="500" class="form-control" [(ngModel)]="user['bio']">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div id="location" class="form-group"> 
-                    <label for="location">
-                        Location<span class="asteriskField">*</span> </label>
-                    <div> <input type="text" name="location" maxlength="500" class="form-control" [(ngModel)]="user['location']">
-                    </div>
-                </div>
-                <div id="occupation" class="form-group"> 
-                    <label for="occupation">
-                        Occupation<span class="asteriskField">*</span> </label>
-                    <div> <input type="text" name="occupation" maxlength="500" class="form-control" [(ngModel)]="user['occupation']">
-                    </div>
-                </div>
-                <div id="gender" class="form-group"> 
-                    <label for="gender">
-                        Gender<span class="asteriskField">*</span> </label>
-                    <div> <input type="text" name="gender" maxlength="500" class="form-control" [(ngModel)]="user['gender']">
-                    </div>
-                </div>
-                <div id="relationship" class="form-group"> 
-                    <label for="relationship">
-                        Relationship<span class="asteriskField">*</span> </label>
-                    <div> <input type="text" name="relationship" maxlength="500" class="form-control" [(ngModel)]="user['relationship']">
-                    </div>
-                </div>
-                <div id="birthdate" class="form-group">
-                    <label for="birthdate">
-                        Birthday<span class="asteriskField">*</span> </label>
-                    <div>
-                        <input type="date" id="birthdate" class="form-control" name="birthdate" [(ngModel)]="user['birthday']">
-                    </div>
+                    <div class="col-md-6">
+                        <div id="location" class="form-group">
+                            <mat-form-field style="width: 100%;">
+                                <mat-label>Location</mat-label>
+                                <input matInput placeholder="Location" name="location" [(ngModel)]="user['location']">
+                            </mat-form-field>
+                        </div>
+                        <div id="occupation" class="form-group">
+                            <mat-form-field style="width: 100%;">
+                                <mat-label>Occupation</mat-label>
+                                <input matInput placeholder="Occupation" name="occupation"
+                                    [(ngModel)]="user['occupation']">
+                            </mat-form-field>
+                        </div>
 
+                        <div id="bio" class="form-group">
+                            <mat-form-field style="width: 100%;">
+                                <mat-label>Bio</mat-label>
+                                <input matInput placeholder="Bio" name="bio" [(ngModel)]="user['bio']">
+                            </mat-form-field>
+                        </div>
+
+                        <div id="birthdate" class="form-group">
+                            <label for="birthdate">
+                                Birthday<span class="asteriskField">*</span> </label>
+                            <div>
+                                <input type="date" id="birthdate" class="form-control" name="birthdate" [(ngModel)]="user['birthday']">
+                            </div>
+                        </div>
+
+                        <div id="relationship" class="form-group">
+                            <mat-form-field appearance="fill" style="width: 100%;">
+                                <mat-label>Select an option</mat-label>
+                                <mat-select [(value)]="user['relationship']" name="relationship">
+                                    <mat-option value="Private">Private</mat-option>
+                                    <mat-option value="Single">Single</mat-option>
+                                    <mat-option value="Dating">Dating</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
                 </div>
+            </fieldset>
+            <div class="form-group">
+                <button mat-raised-button color="primary" type="submit" (click)="save_data()">Save</button>
             </div>
         </div>
-    </fieldset>
-    <div class="form-group">
-        <button class="btn btn-outline-info" type="submit" (click)="save_data()">Save</button>
-    </div>
-</div>
+    </section>
+</main>

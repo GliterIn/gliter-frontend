@@ -3,13 +3,14 @@
         <div class="cover-img">
             <img src="{{user!.cover_picture}}" style="max-width: 360px; max-height: 100px;" alt="cover">
         </div>
-        <div class="profile-img">
+        <div class="profile-img" >
             <a routerLink="/profile/{{user.username}}">
                 <img src="{{user!.profile_picture}}" style="max-height: 90px; max-width: 90px;" alt="author">
             </a>
         </div>
         <div class="profile-name">
-            <h4 class="author-name"><a routerLink="/profile/{{user.username}}">{{user.name}}</a></h4>
+            <h4 class="author-name"><a routerLink="/profile/{{user.username}}">{{user.name}} <span *ngIf="user.is_verified" class="acc-verified" style="background-color: skyblue;color: white;border-radius: 50%;"><i
+                class="fa fa-check"></i></span></a></h4>
             <div class="author-location">{{user.location}}</div>
         </div>
     </div>

@@ -31,6 +31,11 @@ import { ProfilePageGalleryComponent } from './components/profile-page-gallery/p
 import { ProfilePageBadgesComponent } from './components/profile-page-badges/profile-page-badges.component';
 import { ProfilePageFollowersComponent } from './components/profile-page-followers/profile-page-followers.component';
 import { FooterComponent } from './components/footer/footer.component';
+import {MatSelectModule} from '@angular/material/select';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import {MatInputModule} from '@angular/material/input';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -66,6 +71,11 @@ import { FooterComponent } from './components/footer/footer.component';
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     MatButtonModule,
+    MatSelectModule,
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [{ provide: PERSISTENCE, useValue: 'session' },],
   bootstrap: [AppComponent]
