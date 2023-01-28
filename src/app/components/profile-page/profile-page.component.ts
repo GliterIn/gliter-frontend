@@ -14,10 +14,17 @@ import { UtilsService } from 'src/app/service/utils.service';
 export class ProfilePageComponent implements OnInit {
 
   third_person = false;
+  user:string='';
+  tab_name = '';
   constructor(public database: DatabaseService, public activatedRoute: ActivatedRoute, public router:Router, public sitedata:SitedataService) {
     this.activatedRoute.url.subscribe(
       (current_url) => {
         var current_username = current_url[1].toString();
+        if(current_url.length>=3){
+          var current_tab = current_url[2].toString();
+          this.tab_name = current_tab;
+        }
+        this.user = current_username;
         this.database.get_user_details(current_username).subscribe(
           (user) => {
             this.sitedata.user_on_screen.next(user);

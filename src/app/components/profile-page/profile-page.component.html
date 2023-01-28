@@ -1,32 +1,18 @@
 <div class="page-content">
     <div class="container">
-        <!-- Banner Area Start -->
         <app-profile-page-header></app-profile-page-header>
 
         <div class="block-box user-top-header">
             <ul class="menu-list">
-                <li class="active"><a href="#">Timeline</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Followers</a></li>
-                <li><a href="#">Gallery</a></li>
-                <li><a href="#">Badges</a></li>
-                <li><a href="#">Blogs</a></li>
-                <!-- <li>
-                    <div class="dropdown">
-                        <button class="dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-                            ...
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="#">Shop</a>
-                            <a class="dropdown-item" href="#">Blog</a>
-                            <a class="dropdown-item" href="#">Others</a>
-                        </div>
-                    </div>
-                </li> -->
+                <li [ngClass]="{'active': tab_name == ''}"><a routerLink="/profile/{{user}}">Timeline</a></li>
+                <li [ngClass]="{'active': tab_name == 'about'}"><a routerLink="/profile/{{user}}/about">About</a></li>
+                <li><a>Followers</a></li>
+                <li><a>Gallery</a></li>
+                <li><a>Badges</a></li>
+                <li><a>Blogs</a></li>
             </ul>
         </div>
-
-        <app-profile-page-content></app-profile-page-content>
+        <app-profile-page-content [tab_name]="tab_name"></app-profile-page-content>
     </div>
     <app-footer></app-footer>
 </div>

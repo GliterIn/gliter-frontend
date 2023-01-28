@@ -7,6 +7,7 @@ import { UserProfile } from '../models/UserProfile.model';
 })
 export class SitedataService {
   user_on_screen = new BehaviorSubject<UserProfile | null>(null);
+  post_count = new BehaviorSubject<number>(0);
   constructor() {
     
   }

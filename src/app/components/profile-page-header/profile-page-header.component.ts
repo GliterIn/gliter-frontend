@@ -25,9 +25,9 @@ export class ProfilePageHeaderComponent implements OnInit {
     this.activatedRoute.url.subscribe(
       (current_url) => {
         var current_username = current_url[1].toString();
-        this.database.get_user_posts(current_username).subscribe(
+        this.sitedata.post_count.subscribe(
           (posts) => {
-            this.total_posts = posts.length;
+            this.total_posts = posts;
           }
         )
         this.auth.get_current_user().subscribe(

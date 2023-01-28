@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-profile-page-content',
@@ -7,7 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfilePageContentComponent implements OnInit {
 
-  constructor() { }
+  @Input('tab_name') tab_name='';
+  constructor() {
+
+  }
 
   ngOnInit(): void {
   }

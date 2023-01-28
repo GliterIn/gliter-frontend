@@ -34,6 +34,7 @@ export class ProfilePagePostsComponent implements OnInit {
                     (response_post) => {
                       this.user = current_user;
                       this.posts = response_post;
+                      this.sitedata.post_count.next(this.posts.length);
                     }
                   )
                 }
@@ -43,6 +44,7 @@ export class ProfilePagePostsComponent implements OnInit {
               this.database.posts.subscribe(
                 (response_post) => {
                   this.posts = response_post;
+                  this.sitedata.post_count.next(this.posts.length);
                 }
               )
             }
