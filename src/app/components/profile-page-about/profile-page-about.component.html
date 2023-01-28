@@ -1,1 +1,6 @@
-<app-profile-page-details></app-profile-page-details>
+<button mat-raised-button color="primary" *ngIf="!is_editing && logged_in_user!=null" (click)="is_editing = !is_editing">Edit</button>
+<button mat-raised-button color="accent" *ngIf="is_editing && logged_in_user!=null" (click)="is_editing = !is_editing">Back</button>
+<br *ngIf="logged_in_user != null">
+<br *ngIf="logged_in_user != null">
+<app-profile-page-details *ngIf="!is_editing"></app-profile-page-details>
+<app-edit-profile *ngIf="is_editing"></app-edit-profile>

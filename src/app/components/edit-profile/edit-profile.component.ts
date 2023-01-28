@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserProfile } from 'src/app/models/UserProfile.model';
 import { AuthenticationService } from 'src/app/service/authentication.service';
+import { UtilsService } from 'src/app/service/utils.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -10,7 +11,7 @@ import { AuthenticationService } from 'src/app/service/authentication.service';
 export class EditProfileComponent implements OnInit {
 
   user: UserProfile|null;
-  constructor(public auth:AuthenticationService) {
+  constructor(public auth:AuthenticationService, public util:UtilsService) {
     this.user = null;
   }
 
