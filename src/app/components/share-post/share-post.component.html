@@ -1,4 +1,4 @@
-<div class="block-box post-input-tab">
+<div class="block-box post-input-tab" *ngIf="!third_person">
     <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item" role="presentation" data-toggle="tooltip" data-placement="top" title="" data-original-title="STATUS">
             <a class="nav-link active" data-toggle="tab" href="#post-status" role="tab" aria-selected="true"><i class="fa fa-copy"></i>Status</a>
@@ -23,12 +23,12 @@
     </div>
     <div class="post-footer">
         <div class="insert-btn">
-            <a href="#"><i class="fa fa-camera"></i></a>
-            <a href="#"><i class="fa fa-tag"></i></a>
-            <a href="#"><i class="fa fa-map-pin"></i></a>
+            <a><i class="fa fa-camera"></i></a>
+            <a><i class="fa fa-tag"></i></a>
+            <a><i class="fa fa-map-pin"></i></a>
         </div>
         <div class="submit-btn">
-            <a (click)="share_post()">Post Submit</a>
+            <a (click)="share_post()">Post</a>
         </div>
     </div>
 </div>

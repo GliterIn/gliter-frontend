@@ -4,6 +4,7 @@ import { Post } from 'src/app/models/Post.model';
 import { UserProfile } from 'src/app/models/UserProfile.model';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { DatabaseService } from 'src/app/service/database.service';
+import { SitedataService } from 'src/app/service/sitedata.service';
 import { UtilsService } from 'src/app/service/utils.service';
 
 @Component({
@@ -18,7 +19,7 @@ export class ProfilePagePostsComponent implements OnInit {
   posts: Post[] = [];
   constructor(public database: DatabaseService,
     public util: UtilsService,
-    public auth: AuthenticationService, public activatedRoute: ActivatedRoute) {
+    public auth: AuthenticationService, public activatedRoute: ActivatedRoute, public sitedata: SitedataService) {
     this.user = null;
     this.activatedRoute.url.subscribe(
       (current_url) => {
@@ -27,7 +28,7 @@ export class ProfilePagePostsComponent implements OnInit {
           (logged_in_user) => {
             this.third_person = logged_in_user == null || logged_in_user.username != current_username;
             if(this.third_person){
-              this.database.get_user_details(current_username).subscribe(
+              this.sitedata.user_on_screen.subscribe(
                 (current_user) => {
                   this.database.get_user_posts(current_username).subscribe(
                     (response_post) => {

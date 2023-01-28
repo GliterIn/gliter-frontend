@@ -1943,7 +1943,6 @@ nav.template-main-menu > ul > li:hover ul.mega-menu {
 }
 
 .fixed-header .header-menu {
-    padding: 0 90px !important;
     background-color: #615dfa;
 }
 
@@ -2004,19 +2003,20 @@ nav.template-main-menu > ul > li:hover ul.mega-menu {
 
 @media only screen and (max-width: 1439px) {
     .fixed-header .navbar {
-        padding: 0 25px;
+        padding: 10px 25px;
+        justify-content: center;
     }
 }
 
 @media only screen and (max-width: 1360px) {
     .fixed-header .navbar {
-        padding: 0 15px;
+        padding: 5px 15px;
     }
 }
 
 @media only screen and (max-width: 1199px) {
     .fixed-header .navbar {
-        padding: 19px 15px;
+        padding: 10px 15px;
     }
 }
 
@@ -2028,7 +2028,7 @@ nav.template-main-menu > ul > li:hover ul.mega-menu {
 
 @media only screen and (max-width: 767px) {
     .fixed-header .navbar {
-        padding: 2px 10px;
+        padding: 8px 10px;
     }
 }
 
@@ -2043,7 +2043,7 @@ nav.template-main-menu > ul > li:hover ul.mega-menu {
 
 @media only screen and (max-width: 479px) {
     .fixed-header .navbar {
-        padding: 2px 5px;
+        padding: 8px 5px;
     }
 }
 
@@ -2129,24 +2129,30 @@ nav.template-main-menu > ul > li:hover ul.mega-menu {
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
-    width: 250px;
+    width: 750px;
 }
 
 @media only screen and (max-width: 1360px) {
     .fixed-header .header-control .input-group {
-        width: 200px;
+        width: 750px;
     }
 }
 
 @media only screen and (max-width: 1199px) {
     .fixed-header .header-control .input-group {
-        width: 250px;
+        width: 750px;
     }
 }
 
 @media only screen and (max-width: 991px) {
     .fixed-header .header-control .input-group {
         width: 170px;
+    }
+}
+
+@media only screen and (max-width: 391px) {
+    .fixed-header .header-control .input-group {
+        width: 110px;
     }
 }
 
@@ -2634,7 +2640,6 @@ nav.template-main-menu > ul > li:hover ul.mega-menu {
 }
 
 .fixed-header .header-control .dropdown-admin .dropdown-toggle:before {
-    content: "...";
     font-size: 22px;
     color: #eff4fb;
     font-weight: 700;
@@ -3837,7 +3842,7 @@ nav.template-main-menu > ul > li:hover ul.mega-menu {
 }
 
 .page-content {
-    padding: 160px 90px 0;
+    padding: 100px 90px 0;
 }
 
 @media only screen and (max-width: 1360px) {

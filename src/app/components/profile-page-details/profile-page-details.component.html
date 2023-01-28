@@ -1,6 +1,7 @@
 <div class="widget widget-user-about">
     <div class="widget-heading">
-        <h3 class="widget-title">About Me</h3>
+        <h3 class="widget-title" *ngIf="!third_person">About Me</h3>
+        <h3 class="widget-title" *ngIf="third_person">About {{user?.name}}</h3>
     </div>
     <div class="user-info">
         <p>{{user?.bio}}</p>

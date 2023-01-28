@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserProfile } from 'src/app/models/UserProfile.model';
 import { AuthenticationService } from 'src/app/service/authentication.service';
+import { SitedataService } from 'src/app/service/sitedata.service';
 
 @Component({
   selector: 'app-profile-page-about',
@@ -10,12 +11,12 @@ import { AuthenticationService } from 'src/app/service/authentication.service';
 export class ProfilePageAboutComponent implements OnInit {
 
   user: UserProfile|null;
-  constructor(public auth:AuthenticationService) {
+  constructor(public sitedata:SitedataService) {
     this.user = null;
   }
 
   ngOnInit(): void {
-    this.auth.get_current_user().subscribe(
+    this.sitedata.user_on_screen.subscribe(
       (current_user) => {
         this.user = current_user;
       }

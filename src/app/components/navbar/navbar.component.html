@@ -1,63 +1,46 @@
 <header class="fixed-header">
     <div class="header-menu">
         <div class="navbar">
-            <div class="nav-item d-none d-sm-block">
-            </div>
-            <div class="nav-item nav-top-menu">
-                <nav id="dropdown" class="template-main-menu">
-                    <ul class="menu-content">
-                        <li class="header-nav-item">
-                            <a routerLink="/login" class="menu-link active" *ngIf="user == null">Home</a>
-                        </li>
-                        <li class="header-nav-item" *ngIf="user != null">
-                            <a routerLink="/feed" class="menu-link active">Feed</a>
-                        </li>
-                        <li class="header-nav-item"  *ngIf="user == null">
-                            <a routerLink="/investors" class="menu-link active">Investors</a>
-                        </li>
-                        <li class="header-nav-item"  *ngIf="user == null">
-                            <a routerLink="/about" class="menu-link active">About</a>
-                        </li>
-                        <!-- <li class="header-nav-item">
-                            <a href="#" class="menu-link">Community</a>
-                            <ul class="mega-menu mega-menu-col-2">
-                                <li>
-                                    <ul class="sub-menu">
-                                        <li>
-                                            <a href="newsfeed.html">NewsFeed</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <ul class="sub-menu">
-                                        <li>
-                                            <a href="user-badges.html">Profile Badges</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="header-nav-item">
-                            <a href="#" class="menu-link">Pages</a>
-                            <ul class="sub-menu">
-                                <li>
-                                    <a href="about-us.html">About</a>
-                                </li>
-                            </ul>
-                        </li> -->
-                    </ul>
-                </nav>
-            </div>
             <div class="nav-item header-control">
-                <div class="inline-item d-none d-md-block">
+                <div class="inline-item d-md-block">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search here.......">
+                        <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="search_query">
                         <div class="input-group-append">
-                            <button class="submit-btn" type="button"><i class="fa fa-search"></i></button>
+                            <button class="submit-btn" type="button" data-toggle="dropdown" aria-expanded="false"
+                                (click)="search_users()"><i class="fa fa-search"></i></button>
+                            <div class="dropdown dropdown-friend">
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <div class="item-heading">
+                                        <h6 class="heading-title">Search Results</h6>
+                                    </div>
+                                    <div class="item-body" *ngFor="let result of search_results">
+                                        <div class="media">
+                                            <div class="item-img">
+                                                <img [src]="result.profile_picture" style="max-width: 50px;"
+                                                    alt="Notify">
+                                                <span class="chat-status offline"></span>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="item-title"><a
+                                                        routerLink="/profile/{{result.username}}">{{result.name}}
+                                                        <span *ngIf="result.is_verified"
+                                                            style="background-color: skyblue; font-family: IcoFont; text-align: center; display: inline-block; height: 20px; width: 20px; line-height: 20px; background-color: skyblue; border-radius: 50%; font-size: 20px;color: #ffffff;">✓</span>
+                                                    </a></h6>
+                                                <p>@{{result.username}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="inline-item d-flex align-items-center" *ngIf="user != null">
+                    <div class="dropdown dropdown-friend">
+                        <a class="dropdown-toggle" routerLink="/feed" data-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </div>
                     <div class="dropdown dropdown-friend">
                         <button class="dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
                             <i class="fa fa-users"></i>
@@ -82,7 +65,7 @@
                                         <p>4 in mutual friends</p>
                                         <div class="btn-area">
                                             <a href="#" class="item-btn"><i class="fa fa-plus"></i></a>
-                                            <a href="#" class="item-btn"><i class="fa fa-minus"></i></a>
+                                            <a hr ef="#" class="item-btn"><i class="fa fa-minus"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -137,7 +120,8 @@
                             <div class="item-body">
                                 <a href="#" class="media">
                                     <div class="item-img">
-                                        <img src="https://radiustheme.com/demo/html/cirkle/media/figure/chat_8.jpg" alt="Notify">
+                                        <img src="https://radiustheme.com/demo/html/cirkle/media/figure/chat_8.jpg"
+                                            alt="Notify">
                                     </div>
                                     <div class="media-body">
                                         <h6 class="item-title">Siddharth Singh</h6>
@@ -152,13 +136,29 @@
                         </div>
                     </div>
                 </div>
+                <div class="inline-item d-flex align-items-center" *ngIf="user == null">
+                    <button mat-raised-button class="dropdown-toggle" type="button" data-toggle="dropdown"
+                        aria-expanded="false">
+                        More
+                    </button>
+                    <div class="dropdown dropdown-admin">
+                        <div class="dropdown-menu dropdown-menu-right" style="top: 40px">
+                            <ul class="admin-options">
+                                <li><a (click)="auth.login_user()">Login</a></li>
+                                <li><a routerLink="/investors">Investors</a></li>
+                                <li><a routerLink="/about">About</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
                 <div class="inline-item" *ngIf="user != null">
                     <div class="dropdown dropdown-admin">
                         <button class="dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
                             <span class="media">
                                 <span class="item-img">
                                     <img src="{{user.profile_picture}}" style="max-width: 50px;" alt="Chat">
-                                    <span class="acc-verified"><i class="fa fa-check"></i></span>
+                                    <span *ngIf="user.is_verified" class="acc-verified"><i
+                                            class="fa fa-check"></i></span>
                                 </span>
                             </span>
                         </button>

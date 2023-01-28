@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UserProfile } from 'src/app/models/UserProfile.model';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { DatabaseService } from 'src/app/service/database.service';
+import { SitedataService } from 'src/app/service/sitedata.service';
 import { UtilsService } from 'src/app/service/utils.service';
 
 @Component({
@@ -17,7 +18,8 @@ export class ProfilePageHeaderComponent implements OnInit {
   third_person = false;
   constructor(public database: DatabaseService,
     public util: UtilsService,
-    public auth: AuthenticationService, public activatedRoute: ActivatedRoute) {
+    public auth: AuthenticationService, public activatedRoute: ActivatedRoute,
+    public sitedata:SitedataService) {
     this.user = null;
     
     this.activatedRoute.url.subscribe(
@@ -32,7 +34,7 @@ export class ProfilePageHeaderComponent implements OnInit {
           (logged_in_user) => {
             if (logged_in_user == null || logged_in_user.username != current_username) {
               this.third_person = true;
-              this.database.get_user_details(current_username).subscribe(
+              this.sitedata.user_on_screen.subscribe(
                 (current_user) => {
                   this.user = current_user;
                 }
