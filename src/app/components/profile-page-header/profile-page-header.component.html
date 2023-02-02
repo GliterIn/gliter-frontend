@@ -11,11 +11,12 @@
                         style="background-color: #2aa8df;border: white;border-radius: 50%;color: white;"></i></h3>
                     <div class="item-subtitle">{{user.location}}</div>
                     <ul class="item-social" *ngIf="third_person">
-                        <button class="btn btn-info">Follow</button>
+                        <button class="btn btn-info" (click)="toggle_follow()" *ngIf="!is_following">Follow</button>
+                        <button class="btn btn-info" (click)="toggle_follow()" *ngIf="is_following">Unfollow</button>
                     </ul>
                     <ul class="user-meta">
                         <li>Posts: <span>{{total_posts}}</span></li>
-                        <li>Followers: <span>100K</span></li>
+                        <li>Followers: <span>{{total_followers}}</span></li>
                         <li>Views: <span>1.2k</span></li>
                     </ul>
                 </div>

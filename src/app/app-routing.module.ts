@@ -20,6 +20,8 @@ const routes: Routes = [
   {path : 'login' , title:'Login', component : LoginComponent},
   // {path : 'profile/:username/edit' , canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin} , component : EditProfileComponent},
   {path : 'profile/:username/about' , component : ProfilePageComponent },
+  {path : 'profile/:username/followers' , component : ProfilePageComponent },
+  {path : 'profile/:username/following' , component : ProfilePageComponent },
   {path : 'logout' , title:'Logged Out', component : LogoutComponent},
   {path : 'brb' , title:'Coming Soon !', component : BeRightBackComponent},
   {path : 'investors' , title:'Investors', component : InvestorsComponent},

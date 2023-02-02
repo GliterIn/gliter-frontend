@@ -4,16 +4,17 @@ import { BehaviorSubject } from 'rxjs';
 import { Post } from '../models/Post.model';
 import { UserProfile } from '../models/UserProfile.model';
 import { AuthenticationService } from './authentication.service';
+import { SitedataService } from './sitedata.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatabaseService {
-  // API_BASE_URL = 'http://localhost:8000/api';
+  //API_BASE_URL = 'http://localhost:8000/api';
   API_BASE_URL = 'https://gliter-backend.herokuapp.com/api';
   posts = new BehaviorSubject<Post[]>([]);
   user: UserProfile | null;
-  constructor(public http: HttpClient, public auth: AuthenticationService) {
+  constructor(public http: HttpClient, public auth: AuthenticationService, public sitedata:SitedataService) {
     this.user = null;
     this.auth.logged_in_user.subscribe(
       (user_response) => {
@@ -70,5 +71,37 @@ export class DatabaseService {
     return this.http.post<Post[]>(this.API_BASE_URL + "/posts/get-posts", {
       "username":username
     });
+  }
+
+  get_user_followers(username:string){
+    return this.http.post<string>(this.API_BASE_URL + "/users/get-user-followers", {
+      "username":username
+    });
+  }
+
+  get_user_following(username:string){
+    return this.http.post<string>(this.API_BASE_URL + "/users/get-user-following", {
+      "username":username
+    });
+  }
+
+  follow_user(user_to_follow: string) {
+    if (this.user != null) {
+      this.http.post<string>(this.API_BASE_URL + '/actions/follow', {
+        'user': this.user,
+        'uid': this.auth.uid_value,
+        'user_token': this.auth.user_token_value,
+        'user_to_follow':user_to_follow
+      }).subscribe(
+        (response) => {
+          console.log(response);
+          this.get_user_followers(this.user!.username).subscribe(
+            (all_followers) => {
+              this.sitedata.followers_on_screen.next(JSON.parse(all_followers));
+            }
+          )
+        }
+      )
+    }
   }
 }

@@ -6,7 +6,8 @@
             <ul class="menu-list">
                 <li [ngClass]="{'active': tab_name == ''}"><a routerLink="/profile/{{user}}">Timeline</a></li>
                 <li [ngClass]="{'active': tab_name == 'about'}"><a routerLink="/profile/{{user}}/about">About</a></li>
-                <li><a>Followers</a></li>
+                <li [ngClass]="{'active': tab_name == 'followers'}"><a routerLink="/profile/{{user}}/followers">Followers</a></li>
+                <li [ngClass]="{'active': tab_name == 'following'}"><a routerLink="/profile/{{user}}/following">Following</a></li>
                 <li><a>Gallery</a></li>
                 <li><a>Badges</a></li>
                 <li><a>Blogs</a></li>

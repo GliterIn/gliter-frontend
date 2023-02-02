@@ -14,13 +14,16 @@ import { UtilsService } from 'src/app/service/utils.service';
 export class ProfilePageComponent implements OnInit {
 
   third_person = false;
-  user:string='';
+  user: string = '';
   tab_name = '';
-  constructor(public database: DatabaseService, public activatedRoute: ActivatedRoute, public router:Router, public sitedata:SitedataService) {
+  constructor(public database: DatabaseService, public activatedRoute: ActivatedRoute, public router: Router, public sitedata: SitedataService) {
+
+  }
+  ngOnInit(): void {
     this.activatedRoute.url.subscribe(
       (current_url) => {
         var current_username = current_url[1].toString();
-        if(current_url.length>=3){
+        if (current_url.length >= 3) {
           var current_tab = current_url[2].toString();
           this.tab_name = current_tab;
         }
@@ -28,16 +31,33 @@ export class ProfilePageComponent implements OnInit {
         this.database.get_user_details(current_username).subscribe(
           (user) => {
             this.sitedata.user_on_screen.next(user);
+
+            this.database.get_user_following(current_username).subscribe(
+              (all_followers) => {
+                this.sitedata.following_on_screen.next(JSON.parse(all_followers));
+              }
+            )
+
+            this.database.get_user_followers(current_username).subscribe(
+              (all_followers) => {
+                this.sitedata.followers_on_screen.next(JSON.parse(all_followers));
+              }
+            )
+
+            this.database.get_user_posts(current_username).subscribe(
+              (all_posts) => {
+                this.sitedata.posts_on_screen.next(all_posts);
+              }
+            )
           },
-          (error) =>{
-            alert(error.error);
-            router.navigate(['feed']);
+          (error) => {
+            console.log(error.error);
+            this.router.navigate(['feed']);
           }
         )
+
       }
     )
-  }
-  ngOnInit(): void {
   }
 
 }

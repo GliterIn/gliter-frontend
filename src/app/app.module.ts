@@ -36,6 +36,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { ProfilePageFollowingComponent } from './components/profile-page-following/profile-page-following.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     ProfilePageBadgesComponent,
     ProfilePageFollowersComponent,
     FooterComponent,
+    ProfilePageFollowingComponent,
   ],
   imports: [
     BrowserModule,

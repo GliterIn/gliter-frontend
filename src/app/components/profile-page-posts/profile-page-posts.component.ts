@@ -30,21 +30,19 @@ export class ProfilePagePostsComponent implements OnInit {
             if(this.third_person){
               this.sitedata.user_on_screen.subscribe(
                 (current_user) => {
-                  this.database.get_user_posts(current_username).subscribe(
+                  this.sitedata.posts_on_screen.subscribe(
                     (response_post) => {
                       this.user = current_user;
                       this.posts = response_post;
-                      this.sitedata.post_count.next(this.posts.length);
                     }
                   )
                 }
               )
             }else{
               this.user = logged_in_user;
-              this.database.posts.subscribe(
+              this.sitedata.posts_on_screen.subscribe(
                 (response_post) => {
                   this.posts = response_post;
-                  this.sitedata.post_count.next(this.posts.length);
                 }
               )
             }
