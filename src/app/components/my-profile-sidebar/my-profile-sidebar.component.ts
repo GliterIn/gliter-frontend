@@ -13,6 +13,7 @@ export class MyProfileSidebarComponent implements OnInit {
 
   user: UserProfile | null;
   total_posts = 0;
+  total_followers = 0;
   constructor(public database: DatabaseService,
     public util: UtilsService,
     public auth: AuthenticationService) {
@@ -23,6 +24,11 @@ export class MyProfileSidebarComponent implements OnInit {
         this.database.get_user_posts(data!.username).subscribe(
           (posts) => {
             this.total_posts = posts.length;
+          }
+        ),
+        this.database.get_user_followers(data!.username).subscribe(
+          (all_followers) => {
+            this.total_followers = all_followers.length;
           }
         )
       }
