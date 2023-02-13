@@ -22,10 +22,34 @@ export class OnboardingComponent implements OnInit {
   }
 
   save_data(){
-    if(this.user != null){
+    if(this.user != null && this.validate_user()){
       this.auth.onboard_user(this.user);
     }
   }
 
+  validate_user():boolean{
+    if(this.user == null) return false;
 
+    if(this.is_empty_string(this.user.bio,'Bio') || 
+      this.is_empty_string(this.user.cover_picture,'Cover Picture') ||
+      this.is_empty_string(this.user.location, "Location") ||
+      this.is_empty_string(this.user.name, "Name") ||
+      this.is_empty_string(this.user.occupation, "Occupation") || 
+      this.is_empty_string(this.user.username, "Username") || 
+      this.is_empty_string(this.user.gender, "Gender") || 
+      this.is_empty_string(this.user.relationship, "Relationship")
+    ){
+      return false;
+    }
+    
+    
+    return true;
+  }
+  is_empty_string(data:string,name:string):boolean{
+    if(data.length==0){
+      alert("You can't have empty " + name);
+      return true;
+    }
+    return false;
+  }
 }
