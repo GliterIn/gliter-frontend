@@ -8,9 +8,9 @@
                 <li [ngClass]="{'active': tab_name == 'about'}"><a routerLink="/profile/{{user}}/about">About</a></li>
                 <li [ngClass]="{'active': tab_name == 'followers'}"><a routerLink="/profile/{{user}}/followers">Followers</a></li>
                 <li [ngClass]="{'active': tab_name == 'following'}"><a routerLink="/profile/{{user}}/following">Following</a></li>
-                <li><a>Gallery</a></li>
+                <!-- <li><a>Gallery</a></li>
                 <li><a>Badges</a></li>
-                <li><a>Blogs</a></li>
+                <li><a>Blogs</a></li> -->
             </ul>
         </div>
         <app-profile-page-content [tab_name]="tab_name"></app-profile-page-content>

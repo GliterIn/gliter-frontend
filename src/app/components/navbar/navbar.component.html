@@ -16,7 +16,7 @@
                                     <div class="item-body" *ngFor="let result of search_results">
                                         <div class="media">
                                             <div class="item-img">
-                                                <img [src]="result.profile_picture" style="max-width: 50px;"
+                                                <img [src]="result.profile_picture" style="width: 50px; height: 50px; object-fit: cover;"
                                                     alt="Notify">
                                                 <span class="chat-status offline"></span>
                                             </div>
@@ -56,8 +56,8 @@
                             <div class="item-body">
                                 <div class="media">
                                     <div class="item-img">
-                                        <img src="https://radiustheme.com/demo/html/cirkle/media/figure/chat_8.jpg"
-                                            alt="Notify">
+                                        <img src="https://avatars.githubusercontent.com/u/68241942?v=4"
+                                            alt="Notify" style="width: 50px; height: 50px; object-fit: cover;">
                                         <span class="chat-status offline"></span>
                                     </div>
                                     <div class="media-body">
@@ -90,7 +90,7 @@
                             <div class="item-body">
                                 <a href="#" class="media">
                                     <div class="item-img">
-                                        <img src="https://radiustheme.com/demo/html/cirkle/media/figure/chat_8.jpg"
+                                        <img src="https://avatars.githubusercontent.com/u/68241942?v=4" style="width: 50px; height: 50px; object-fit: cover;"
                                             alt="Notify">
                                     </div>
                                     <div class="media-body">
@@ -120,7 +120,7 @@
                             <div class="item-body">
                                 <a href="#" class="media">
                                     <div class="item-img">
-                                        <img src="https://radiustheme.com/demo/html/cirkle/media/figure/chat_8.jpg"
+                                        <img src="https://avatars.githubusercontent.com/u/68241942?v=4" style="width: 50px; height: 50px; object-fit: cover;"
                                             alt="Notify">
                                     </div>
                                     <div class="media-body">
@@ -156,7 +156,7 @@
                         <button class="dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
                             <span class="media">
                                 <span class="item-img">
-                                    <img src="{{user.profile_picture}}" style="max-width: 50px;" alt="Chat">
+                                    <img src="{{user.profile_picture}}" style="width: 50px; height: 50px; object-fit: cover;" alt="Chat">
                                     <span *ngIf="user.is_verified" class="acc-verified"><i
                                             class="fa fa-check"></i></span>
                                 </span>

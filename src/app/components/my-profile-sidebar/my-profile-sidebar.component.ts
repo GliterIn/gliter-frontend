@@ -28,7 +28,7 @@ export class MyProfileSidebarComponent implements OnInit {
         ),
         this.database.get_user_followers(data!.username).subscribe(
           (all_followers) => {
-            this.total_followers = all_followers.length;
+            this.total_followers = JSON.parse(all_followers).length;
           }
         )
       }
