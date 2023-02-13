@@ -38,6 +38,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ProfilePageFollowingComponent } from './components/profile-page-following/profile-page-following.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,7 +65,7 @@ import { ProfilePageFollowingComponent } from './components/profile-page-followi
     ProfilePageBadgesComponent,
     ProfilePageFollowersComponent,
     FooterComponent,
-    ProfilePageFollowingComponent,
+    ProfilePageFollowingComponent
   ],
   imports: [
     BrowserModule,

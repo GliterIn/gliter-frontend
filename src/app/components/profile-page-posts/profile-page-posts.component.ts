@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, UrlSegment } from '@angular/router';
 import { Post } from 'src/app/models/Post.model';
 import { UserProfile } from 'src/app/models/UserProfile.model';
 import { AuthenticationService } from 'src/app/service/authentication.service';
@@ -23,35 +23,55 @@ export class ProfilePagePostsComponent implements OnInit {
     this.user = null;
     this.activatedRoute.url.subscribe(
       (current_url) => {
-        var current_username = current_url[1].toString();
-        this.auth.get_current_user().subscribe(
-          (logged_in_user) => {
-            this.third_person = logged_in_user == null || logged_in_user.username != current_username;
-            if(this.third_person){
-              this.sitedata.user_on_screen.subscribe(
-                (current_user) => {
-                  this.sitedata.posts_on_screen.subscribe(
-                    (response_post) => {
-                      this.user = current_user;
-                      this.posts = response_post;
-                    }
-                  )
-                }
-              )
-            }else{
-              this.user = logged_in_user;
-              this.sitedata.posts_on_screen.subscribe(
-                (response_post) => {
-                  this.posts = response_post;
-                }
-              )
-            }
-          }
-        )
+        if (current_url[0].toString() == "profile") {
+          this.initialize_profile_page_posts(current_url);
+        }else if(current_url[0].toString() == "feed"){
+          this.initialize_feed_posts(current_url);
+        }
       }
     )
   }
 
   ngOnInit(): void {
+  }
+
+  initialize_profile_page_posts(current_url: UrlSegment[]): void {
+    var current_username = current_url[1].toString();
+    this.auth.get_current_user().subscribe(
+      (logged_in_user) => {
+        this.third_person = logged_in_user == null || logged_in_user.username != current_username;
+        if (this.third_person) {
+          this.sitedata.user_on_screen.subscribe(
+            (current_user) => {
+              this.sitedata.posts_on_screen.subscribe(
+                (response_post) => {
+                  this.user = current_user;
+                  this.posts = response_post;
+                }
+              )
+            }
+          )
+        } else {
+          this.user = logged_in_user;
+          this.sitedata.posts_on_screen.subscribe(
+            (response_post) => {
+              this.posts = response_post;
+            }
+          )
+        }
+      }
+    )
+  }
+  initialize_feed_posts(current_url: UrlSegment[]): void {
+    this.auth.get_current_user().subscribe(
+      (logged_in_user) => {
+        this.user = logged_in_user;
+          this.database.posts.subscribe(
+            (response_post) => {
+              this.posts = response_post;
+            }
+          )
+      }
+    )
   }
 }

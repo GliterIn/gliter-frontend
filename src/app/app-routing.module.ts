@@ -3,12 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/compat/auth-guard';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
-import { ProfilePageAboutComponent } from './components/profile-page-about/profile-page-about.component';
 import { BeRightBackComponent } from './components/be-right-back/be-right-back.component';
 import { InvestorsComponent } from './components/investors/investors.component';
 import { AboutComponent } from './components/about/about.component';
 import { ProfilePageComponent } from './components/profile-page/profile-page.component';
-import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { OnboardingComponent } from './components/onboarding/onboarding.component';
 import { FeedComponent } from './components/feed/feed.component';
 
