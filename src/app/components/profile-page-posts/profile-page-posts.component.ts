@@ -16,6 +16,7 @@ export class ProfilePagePostsComponent implements OnInit {
 
   user: UserProfile | null;
   third_person = false;
+  viewing_feed=false;
   posts: Post[] = [];
   constructor(public database: DatabaseService,
     public util: UtilsService,
@@ -24,8 +25,10 @@ export class ProfilePagePostsComponent implements OnInit {
     this.activatedRoute.url.subscribe(
       (current_url) => {
         if (current_url[0].toString() == "profile") {
+          this.viewing_feed=false;
           this.initialize_profile_page_posts(current_url);
-        }else if(current_url[0].toString() == "feed"){
+        } else if (current_url[0].toString() == "feed") {
+          this.viewing_feed=true;
           this.initialize_feed_posts(current_url);
         }
       }
@@ -66,11 +69,11 @@ export class ProfilePagePostsComponent implements OnInit {
     this.auth.get_current_user().subscribe(
       (logged_in_user) => {
         this.user = logged_in_user;
-          this.database.posts.subscribe(
-            (response_post) => {
-              this.posts = response_post;
-            }
-          )
+        this.database.get_user_feed().subscribe(
+          (response) => {
+            this.posts = JSON.parse(response);
+          }
+        )
       }
     )
   }

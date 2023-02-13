@@ -2,11 +2,18 @@
     <div class="post-header">
         <div class="media">
             <div class="user-img">
-                <img src="{{user!.profile_picture}}" style="width: 50px; height: 50px; object-fit: cover;">
+                <img *ngIf="viewing_feed" src="{{post.user['profile_picture']}}" style="width: 50px; height: 50px; object-fit: cover;">
+                <img *ngIf="!viewing_feed" src="{{user!.profile_picture}}" style="width: 50px; height: 50px; object-fit: cover;">
             </div>
             <div class="media-body">
-                <div class="user-title"><a href="/profile/{{user!.username}}">{{user!.name}}</a> <i
-                    class="fa fa-check" *ngIf="user!.is_verified"
+                <div class="user-title">
+                    <a *ngIf="viewing_feed" href="/profile/{{post.user['username']}}">{{post.user['name']}}</a>
+                    <a *ngIf="!viewing_feed" href="/profile/{{user!.username}}">{{user!.name}}</a>
+                    <i
+                    class="fa fa-check" *ngIf="viewing_feed && post.user['is_verified']"
+                    style="background-color: #2aa8df;border: white;border-radius: 50%;color: white;"></i>
+                    <i
+                    class="fa fa-check" *ngIf="!viewing_feed && user!.is_verified"
                     style="background-color: #2aa8df;border: white;border-radius: 50%;color: white;"></i></div>
                 <ul class="entry-meta">
                     <li class="meta-time">{{util.parseTimestamp(post.timestamp)}}</li>

@@ -13,6 +13,7 @@ export class DatabaseService {
   //API_BASE_URL = 'http://localhost:8000/api';
   API_BASE_URL = 'https://gliter-backend.herokuapp.com/api';
   posts = new BehaviorSubject<Post[]>([]);
+  feed_posts = new BehaviorSubject<Post[]>([]);
   user: UserProfile | null;
   constructor(public http: HttpClient, public auth: AuthenticationService, public sitedata:SitedataService) {
     this.user = null;
@@ -85,6 +86,15 @@ export class DatabaseService {
     });
   }
 
+  get_user_feed() {
+      return this.http.post<string>(this.API_BASE_URL + '/users/get-user-feed', {
+        'user': this.user,
+        'uid': this.auth.uid_value,
+        'user_token': this.auth.user_token_value,
+      });
+  }
+  
+  
   follow_user(user_to_follow: string) {
     if (this.user != null) {
       this.http.post<string>(this.API_BASE_URL + '/actions/follow', {
@@ -103,5 +113,5 @@ export class DatabaseService {
         }
       )
     }
-  }
+  }  
 }

@@ -21,24 +21,26 @@ export class SharePostComponent implements OnInit {
     this.user = null;
     this.activatedRoute.url.subscribe(
       (current_url) => {
-        var current_username = current_url[1].toString();
-        this.auth.get_current_user().subscribe(
-          (logged_in_user) => {
-            if (logged_in_user == null || logged_in_user.username != current_username) {
-              this.third_person = true;
-            } else {
-              this.user = logged_in_user;
-              this.third_person = false;
+        if (current_url.length > 1) {
+          var current_username = current_url[1].toString();
+          this.auth.get_current_user().subscribe(
+            (logged_in_user) => {
+              if (logged_in_user == null || logged_in_user.username != current_username) {
+                this.third_person = true;
+              } else {
+                this.user = logged_in_user;
+                this.third_person = false;
+              }
             }
-          }
-        )
+          )
+        }
       }
     )
   }
   ngOnInit(): void {
   }
 
-  share_post(){
+  share_post() {
     this.database.create_post(this.content);
     this.content = '';
   }
