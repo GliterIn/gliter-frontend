@@ -59,6 +59,22 @@
                     </mat-form-field>
                 </div>
             </li>
+            <li>
+                <div id="profile_picture" class="form-group">
+                    <mat-form-field style="width: 100%;">
+                        <mat-label>Profile Picture</mat-label>
+                        <input matInput placeholder="profile_picture" name="profile_picture" [(ngModel)]="user['profile_picture']">
+                    </mat-form-field>
+                </div>
+            </li>
+            <li>
+                <div id="cover_picture" class="form-group">
+                    <mat-form-field style="width: 100%;">
+                        <mat-label>Cover Picture</mat-label>
+                        <input matInput placeholder="cover_picture" name="cover_picture" [(ngModel)]="user['cover_picture']">
+                    </mat-form-field>
+                </div>
+            </li>
         </ul>
         <button mat-raised-button color="primary" (click)="save_data()">Update</button>
     </div>
