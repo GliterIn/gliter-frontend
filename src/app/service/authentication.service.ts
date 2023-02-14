@@ -80,7 +80,7 @@ export class AuthenticationService {
         window.location.href = '/feed';
       },
       (error) => {
-        alert(error);
+        alert(error.error);
       }
     )
   }
