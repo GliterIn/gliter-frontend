@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/compat/auth-guard';
-import { LoginComponent } from './components/login/login.component';
-import { LogoutComponent } from './components/logout/logout.component';
+import { LoginComponent } from './components/authentication/login/login.component';
+import { LogoutComponent } from './components/authentication/logout/logout.component';
 import { BeRightBackComponent } from './components/be-right-back/be-right-back.component';
-import { InvestorsComponent } from './components/investors/investors.component';
-import { AboutComponent } from './components/about/about.component';
-import { ProfilePageComponent } from './components/profile-page/profile-page.component';
-import { OnboardingComponent } from './components/onboarding/onboarding.component';
-import { FeedComponent } from './components/feed/feed.component';
+import { InvestorsComponent } from './components/customer-facing/investors/investors.component';
+import { AboutComponent } from './components/customer-facing/about/about.component';
+import { ProfilePageComponent } from './components/user-profile/profile-page/profile-page.component';
+import { OnboardingComponent } from './components/authentication/onboarding/onboarding.component';
+import { FeedComponent } from './components/common/feed/feed.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
