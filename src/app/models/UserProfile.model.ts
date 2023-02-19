@@ -1,6 +1,7 @@
 export class UserProfile {
     uid: string;
     username: string;
+    email: string;
     name: string;
     profile_picture: string;
     cover_picture: string;
@@ -18,6 +19,7 @@ export class UserProfile {
        
         uid: string,
         username: string,
+        email:string,
         name: string,
         profile_picture: string,
         cover_picture: string,
@@ -34,6 +36,7 @@ export class UserProfile {
        
         this.uid = uid;
         this.username = username;
+        this.email = email;
         this.is_onboarded = is_onboarded;
         this.name = name;
         this.profile_picture = profile_picture;

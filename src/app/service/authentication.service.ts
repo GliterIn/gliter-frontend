@@ -25,7 +25,8 @@ export class AuthenticationService {
         oauth_login_data?.getIdToken(true).then(
           (user_token_response) => {
             this.http.post<UserProfile>(this.API_BASE_URL + '/login', {
-              'uid': oauth_login_data?.uid
+              'uid': oauth_login_data?.uid,
+              'email': oauth_login_data?.email
             }).subscribe(
               (backend_login_data) => {
                 this.user_token_value = user_token_response;
