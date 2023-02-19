@@ -25,7 +25,7 @@
         <div class="post-no-thumbnail">
             <p [innerHTML]="post.content"></p>
         </div>
-        <div class="post-meta-wrap">
+        <div class="post-meta-wrap"  *ngIf="false">
             <div class="post-meta">
                 <div class="post-reaction">
                     <div class="reaction-icon">
@@ -42,7 +42,7 @@
             </div>
         </div>
     </div>
-    <div class="post-footer">
+    <div class="post-footer"  *ngIf="false">
         <ul>
             <li class="post-react">
                 <a ><i class="fa fa-thumbs-up"></i>React!</a>
