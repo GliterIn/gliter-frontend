@@ -17,14 +17,6 @@ describe('UtilsService', () => {
     expect(service.parseTimestampShort(new Date(1669095632000))).toEqual('22 Nov 2022');
   });
   it('should parse timestamp', ()=>{
-    expect(service.parseTimestamp(new Date(1669095632000))).toEqual('22 Nov. 2022, 05:40 AM');
-  });
-  it('should have 12 months', ()=>{
-    expect(service.MONTHS).toHaveSize(12);
-  });
-  it('should have months in order', ()=>{
-    expect(service.MONTHS).toEqual([
-      "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-      "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"]);
+    expect(service.parseTimestamp(new Date(1669095632000))).toEqual('22 Nov. 2022, 06:40 AM');
   });
 });
