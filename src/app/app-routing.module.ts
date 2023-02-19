@@ -20,7 +20,7 @@ const routes: Routes = [
   {path : 'profile/:username/followers' , component : ProfilePageComponent },
   {path : 'profile/:username/following' , component : ProfilePageComponent },
   {path : 'logout' , title:'Logged Out', component : LogoutComponent},
-  {path : 'brb' , title:'Coming Soon !', component : BeRightBackComponent},
+  {path : 'brb' , title:'Be right back !', component : BeRightBackComponent},
   {path : 'investors' , title:'Investors', component : InvestorsComponent},
   {path : 'about' , title:'About Gliter', component : AboutComponent},
   {path : 'profile/:username', component : ProfilePageComponent},
