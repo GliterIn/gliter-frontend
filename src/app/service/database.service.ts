@@ -40,8 +40,7 @@ export class DatabaseService {
         'user_token': this.auth.user_token_value,
         'post': post_content
       }).subscribe(
-        (response) => {
-          console.log(response);
+        (_) => {
           if(this.user != null){
             this.get_user_posts(this.user.username).subscribe(
               (user_posts) => {

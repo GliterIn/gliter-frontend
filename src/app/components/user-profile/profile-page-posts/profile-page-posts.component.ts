@@ -56,7 +56,7 @@ export class ProfilePagePostsComponent implements OnInit {
           )
         } else {
           this.user = logged_in_user;
-          this.sitedata.posts_on_screen.subscribe(
+          this.database.posts.subscribe(
             (response_post) => {
               this.posts = response_post;
             }
