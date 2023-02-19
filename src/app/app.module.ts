@@ -14,7 +14,6 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { ProfilePageComponent } from './components/profile-page/profile-page.component';
 import { FeedComponent } from './components/feed/feed.component';
 import { PeopleYouMayKnowComponent } from './components/people-you-may-know/people-you-may-know.component';
-import { UserFeedComponent } from './components/user-feed/user-feed.component';
 import { SharePostComponent } from './components/share-post/share-post.component';
 import { MyProfileSidebarComponent } from './components/my-profile-sidebar/my-profile-sidebar.component';
 import { ProfilePageHeaderComponent } from './components/profile-page-header/profile-page-header.component';
@@ -46,7 +45,6 @@ import { ProfilePageFollowingComponent } from './components/profile-page-followi
     ProfilePageComponent,
     FeedComponent,
     PeopleYouMayKnowComponent,
-    UserFeedComponent,
     SharePostComponent,
     MyProfileSidebarComponent,
     ProfilePageHeaderComponent,
