@@ -61,7 +61,7 @@ export class ProfilePageComponent implements OnInit {
 
   setMetaTags(user:UserProfile):void{
     if(this.tab_name==''){
-      this.title.setTitle(user.name+"'s Profile");
+      this.title.setTitle(user.name+" | Gliter");
     }else if(this.tab_name == 'about'){
       this.title.setTitle(user.name+"'s About");
     }else if(this.tab_name == 'followers'){
