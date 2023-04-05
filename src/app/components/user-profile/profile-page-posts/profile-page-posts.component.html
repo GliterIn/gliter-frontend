@@ -9,12 +9,10 @@
                 <div class="user-title">
                     <a *ngIf="viewing_feed" href="/profile/{{post.user['username']}}">{{post.user['name']}}</a>
                     <a *ngIf="!viewing_feed" href="/profile/{{user!.username}}">{{user!.name}}</a>
-                    <i
-                    class="fa fa-check" *ngIf="viewing_feed && post.user['is_verified']"
-                    style="background-color: #2aa8df;border: white;border-radius: 50%;color: white;"></i>
-                    <i
-                    class="fa fa-check" *ngIf="!viewing_feed && user!.is_verified"
-                    style="background-color: #2aa8df;border: white;border-radius: 50%;color: white;"></i></div>
+                    <img *ngIf="viewing_feed && post.user['is_verified']" src="assets/img/verified.png" alt="Verified User" class="mr-2" style="width: 20px; margin-bottom: 2px;">
+                    <img *ngIf="!viewing_feed && user!.is_verified" src="assets/img/verified.png" alt="Verified User" class="mr-2" style="width: 20px; margin-bottom: 2px;">
+                    
+                </div>
                 <ul class="entry-meta">
                     <li class="meta-time">{{util.parseTimestamp(post.timestamp)}}</li>
                 </ul>

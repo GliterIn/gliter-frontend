@@ -13,9 +13,9 @@
                             </a>
                         </div>
                         <div class="profile-name">
-                            <h4 class="author-name"><a routerLink="/profile/{{follower.username}}">{{follower.name}} <i
-                                class="fa fa-check" *ngIf="follower.is_verified"
-                                style="background-color: #2aa8df;border: white;border-radius: 50%;color: white;"></i></a></h4>
+                            <h4 class="author-name"><a routerLink="/profile/{{follower.username}}">{{follower.name}} 
+                                <img *ngIf="follower.is_verified" src="assets/img/verified.png" alt="Verified User" class="mr-2" style="width: 20px;">
+                                </a></h4>
                             <div class="author-location">@{{follower.username}}</div>
                         </div>
                     </div>

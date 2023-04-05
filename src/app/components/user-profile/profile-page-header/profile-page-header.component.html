@@ -6,9 +6,8 @@
                     <img src="{{user.profile_picture}}" style="width: 115px; height: 115px; object-fit: cover;" alt="User">
                 </div>
                 <div class="media-body">
-                    <h3 class="item-title">{{user.name}} <i
-                        class="fa fa-check" *ngIf="user!.is_verified"
-                        style="background-color: #2aa8df;border: white;border-radius: 50%;color: white;"></i></h3>
+                    <h3 class="item-title">{{user.name}}
+                        <img *ngIf="user!.is_verified" src="assets/img/verified.png" alt="" class="mr-2" style="width: 25px;"></h3>
                     <div class="item-subtitle">{{user.location}}</div>
                     <ul class="item-social" *ngIf="third_person">
                         <button class="btn btn-info" (click)="toggle_follow()" *ngIf="!is_following">Follow</button>
