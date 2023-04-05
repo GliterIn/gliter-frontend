@@ -41,8 +41,12 @@ export class SharePostComponent implements OnInit {
   }
 
   share_post() {
-    this.database.create_post(this.content);
-    this.content = '';
+    if(this.content.length != 0){
+      this.database.create_post(this.content);
+      this.content = '';
+    }else{
+      alert("Post content is empty !")
+    }
   }
 
 }
