@@ -41,6 +41,15 @@ export class OnboardingComponent implements OnInit {
     ){
       return false;
     }
+
+    if(this.is_valid_length(this.user.bio,'Bio',5,40) || 
+      this.is_valid_length(this.user.location, "Location",3,20) ||
+      this.is_valid_length(this.user.name, "Name",3,20) ||
+      this.is_valid_length(this.user.occupation, "Occupation",3,20) || 
+      this.is_valid_length(this.user.username, "Username",3,15)
+    ){
+      return false;
+    }
     
     
     return true;
@@ -48,6 +57,17 @@ export class OnboardingComponent implements OnInit {
   is_empty_string(data:string,name:string):boolean{
     if(data.length==0){
       alert("You can't have empty " + name);
+      return true;
+    }
+    return false;
+  }
+  is_valid_length(data:string,name:string,minimum:number,maximum:number):boolean{
+    if(data.length>maximum){
+      alert(name + " is very long.");
+      return true;
+    }
+    if(data.length<minimum){
+      alert(name + " is very long.");
       return true;
     }
     return false;
