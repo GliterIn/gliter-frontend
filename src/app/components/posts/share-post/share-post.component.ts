@@ -49,4 +49,8 @@ export class SharePostComponent implements OnInit {
     }
   }
 
+  
+  coming_soon(){
+    alert('Coming soon !');
+  }
 }
