@@ -278,4 +278,22 @@ export class OnboardingComponent implements OnInit {
   is_valid_url(url: string) {
     return this.url_regex.test(url);
   }
+
+  upload_profile_picture(e:any) {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      this.user!['profile_picture'] = reader.result!.toString()
+    };
+
+  }
+  upload_cover_picture(e:any) {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      this.user!['cover_picture'] = reader.result!.toString()
+    };
+  }
 }
