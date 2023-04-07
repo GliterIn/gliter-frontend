@@ -23,9 +23,10 @@
                                             </div>
                                             <div class="media-body">
                                                 <h6 class="item-title"><a
-                                                        routerLink="/profile/{{result.username}}">{{result.name}}
-                                                        <span *ngIf="result.is_verified"
-                                                            style="background-color: skyblue; font-family: IcoFont; text-align: center; display: inline-block; height: 20px; width: 20px; line-height: 20px; background-color: skyblue; border-radius: 50%; font-size: 20px;color: #ffffff;">✓</span>
+                                                        routerLink="/profile/{{result.username}}" (click)="isDropdownOpen = false">{{result.name}}
+                                                        <img *ngIf="result.is_verified" src="assets/img/verified.png" alt="Verified User"
+                                        class="acc-verified mr-2" style="width: 20px;">
+                                                        
                                                     </a></h6>
                                                 <p>@{{result.username}}</p>
                                             </div>
