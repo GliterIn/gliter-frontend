@@ -11,8 +11,6 @@ import { UtilsService } from 'src/app/service/utils.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  @ViewChild('dropdownButton') dropdownButton!: ElementRef<HTMLButtonElement>;
-  @ViewChild('dropdownMenu') dropdownMenu!: ElementRef<HTMLDivElement>;
 
   user: UserProfile | null;
   search_results: UserProfile[];
@@ -20,8 +18,6 @@ export class NavbarComponent implements OnInit {
   show_mobile_search = false;
   private searchSubject = new Subject<string>();
   isDropdownOpen = false;
-
-
   constructor(public database: DatabaseService,
     public util: UtilsService,
     public auth: AuthenticationService) {
@@ -34,14 +30,9 @@ export class NavbarComponent implements OnInit {
     )
   }
   triggerDropdown() {
-    this.isDropdownOpen = !this.isDropdownOpen;
-
-    this.dropdownButton.nativeElement.setAttribute('aria-expanded',''+ this.isDropdownOpen);
-
-    // Toggle show class and aria-hidden on the dropdown menu
-    this.dropdownMenu.nativeElement.classList.toggle('show', this.isDropdownOpen);
-    this.dropdownMenu.nativeElement.setAttribute('aria-hidden',''+ !this.isDropdownOpen);
-
+    if (this.isDropdownOpen == false) {
+      this.isDropdownOpen = true;
+    }
   }
 
   search_users() {
@@ -50,9 +41,8 @@ export class NavbarComponent implements OnInit {
         (search_results) => {
           this.search_results = search_results;
           if (this.search_results.length != 0) {
-            //this.triggerDropdown();
+            this.triggerDropdown();
           }
-          console.log(this.dropdownMenu.nativeElement.getAttribute('aria-expanded'));
         }
       )
     }
@@ -63,19 +53,20 @@ export class NavbarComponent implements OnInit {
       debounceTime(500) // Delay for 500 milliseconds
     ).subscribe((searchText: string) => {
       // Invoke your search function here with searchText
-      this.search_results = [];
-      this.search_query = searchText;
-      this.search_users();
+      if (searchText.length == 0) {
+        this.isDropdownOpen = false;
+      } else {
+        this.search_results = [];
+        this.search_query = searchText;
+        this.search_users();
+      }
     });
 
   }
 
   onSearch(event: KeyboardEvent) {
     const searchQuery = (event.target as HTMLInputElement).value.trim();
-    if (searchQuery.length > 0) {
-
-      this.searchSubject.next(searchQuery);
-    }
+    this.searchSubject.next(searchQuery);
   }
 
 }
