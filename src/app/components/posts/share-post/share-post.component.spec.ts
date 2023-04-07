@@ -46,4 +46,10 @@ describe('SharePostComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should create a post ', () => {
+    component.content = 'test this post';
+    component.share_post();
+    expect(component.content.length).toEqual(0);
+  });
 });

@@ -10,25 +10,30 @@ export class MockDatabaseService{
     }
     get_user_results(query:string){
       if(query != 'test') return of([]);
-      const userProfile = new UserProfile(
-        '1234567890',
-        'john_doe',
-        'john.doe@example.com',
-        'John Doe',
-        'https://example.com/profile_picture.jpg',
-        'https://example.com/cover_picture.jpg',
-        'San Francisco, CA',
-        new Date('1990-01-01'),
-        'Software Engineer',
-        new Date(),
-        'Male',
-        'Single',
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        true,
-        false,
-        true
-      );
+      const userProfile: UserProfile = {
+        uid: '1234567890',
+        username: 'john_doe',
+        email: 'john.doe@example.com',
+        name: 'John Doe',
+        profile_picture: 'https://example.com/profile_picture.jpg',
+        cover_picture: 'https://example.com/cover_picture.jpg',
+        location: 'San Francisco, CA',
+        birthday: new Date('1990-01-01'),
+        occupation: 'Software Engineer',
+        joined_on: new Date(),
+        gender: 'Male',
+        relationship: 'Single',
+        bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        is_verified: true,
+        is_admin: false,
+        is_onboarded: true
+      };
+      
       return of([userProfile]);
+    }
+
+    create_post(post_content:string){
+      return true;
     }
   }
   
