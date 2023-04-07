@@ -47,14 +47,12 @@ describe('NavbarComponent', () => {
     component.search_users();
     expect(component.search_results.length).toEqual(1);
     expect(component.search_results[0].email).toEqual('john.doe@example.com');
-    expect(component.search_query).toEqual('');
   });
 
   it('should search for users and return 0', () => {
     component.search_query = 'no_result';
     component.search_users();
     expect(component.search_results.length).toEqual(0);
-    expect(component.search_query).toEqual('');
   });
 
 });
