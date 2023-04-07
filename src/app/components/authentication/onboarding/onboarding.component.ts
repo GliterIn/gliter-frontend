@@ -9,6 +9,7 @@ import { AuthenticationService } from 'src/app/service/authentication.service';
 })
 export class OnboardingComponent implements OnInit {
   user: UserProfile|null;
+  url_regex =  /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*(\?.*)?$/;
   constructor(public auth:AuthenticationService) { 
     this.user = null;
     this.auth.get_current_user().subscribe(
@@ -42,11 +43,11 @@ export class OnboardingComponent implements OnInit {
       return false;
     }
 
-    if(this.is_valid_length(this.user.bio,'Bio',5,40) || 
-      this.is_valid_length(this.user.location, "Location",3,20) ||
-      this.is_valid_length(this.user.name, "Name",3,20) ||
-      this.is_valid_length(this.user.occupation, "Occupation",3,20) || 
-      this.is_valid_length(this.user.username, "Username",3,15)
+    if(!this.is_valid_length(this.user.bio,'Bio',5,40) || 
+      !this.is_valid_length(this.user.location, "Location",3,20) ||
+      !this.is_valid_length(this.user.name, "Name",3,20) ||
+      !this.is_valid_length(this.user.occupation, "Occupation",3,20) || 
+      !this.is_valid_length(this.user.username, "Username",3,15)
     ){
       return false;
     }
@@ -64,12 +65,16 @@ export class OnboardingComponent implements OnInit {
   is_valid_length(data:string,name:string,minimum:number,maximum:number):boolean{
     if(data.length>maximum){
       alert(name + " is very long.");
-      return true;
+      return false;
     }
     if(data.length<minimum){
-      alert(name + " is very long.");
-      return true;
+      alert(name + " is very short.");
+      return false;
     }
-    return false;
+    return true;
+  }
+
+  is_valid_url(url:string){
+    return this.url_regex.test(url)
   }
 }

@@ -9,8 +9,8 @@
                 <div class="user-title">
                     <a *ngIf="viewing_feed" href="/profile/{{post.user['username']}}">{{post.user['name']}}</a>
                     <a *ngIf="!viewing_feed" href="/profile/{{user!.username}}">{{user!.name}}</a>
-                    <img *ngIf="viewing_feed && post.user['is_verified']" src="assets/img/verified.png" alt="Verified User" class="mr-2" style="width: 20px; margin-bottom: 2px;">
-                    <img *ngIf="!viewing_feed && user!.is_verified" src="assets/img/verified.png" alt="Verified User" class="mr-2" style="width: 20px; margin-bottom: 2px;">
+                    <img *ngIf="viewing_feed && post.user['is_verified']" src="assets/img/verified.png" alt="Verified User" class="mr-2" style="width: 20px; margin-bottom: 2px;margin-left: 2px;">
+                    <img *ngIf="!viewing_feed && user!.is_verified" src="assets/img/verified.png" alt="Verified User" class="mr-2" style="width: 20px; margin-bottom: 2px;margin-left: 2px;">
                     
                 </div>
                 <ul class="entry-meta">
@@ -277,6 +277,6 @@
         </div>
     </div>
 </div>
-<div class="block-box load-more-btn">
+<div class="block-box load-more-btn" *ngIf="false">
     <a  class="item-btn"><i class="icofont-refresh"></i>Load More Posts</a>
 </div>
