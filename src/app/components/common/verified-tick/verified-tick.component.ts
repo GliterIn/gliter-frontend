@@ -17,10 +17,10 @@ export class VerifiedTickComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    if(this.is_admin){
-      this.title = "Admin";
-      this.verified = this.verified_admin;
-    }
+    // if(this.is_admin){
+    //   this.title = "Admin";
+    //   this.verified = this.verified_admin;
+    // }
   }
 
 }
