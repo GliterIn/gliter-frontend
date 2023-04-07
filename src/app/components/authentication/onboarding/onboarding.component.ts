@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserProfile } from 'src/app/models/UserProfile.model';
 import { AuthenticationService } from 'src/app/service/authentication.service';
+import { UtilsService } from 'src/app/service/utils.service';
 
 
 @Component({
@@ -208,7 +209,7 @@ export class OnboardingComponent implements OnInit {
     'Zimbabwe',
   ];
   url_regex = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*(\?.*)?$/;
-  constructor(public auth: AuthenticationService) {
+  constructor(public auth: AuthenticationService, public util:UtilsService) {
     this.user = null;
     this.auth.get_current_user().subscribe((data) => {
       this.user = data;
@@ -279,21 +280,34 @@ export class OnboardingComponent implements OnInit {
     return this.url_regex.test(url);
   }
 
-  upload_profile_picture(e:any) {
+  upload_profile_picture(e: any) {
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-      this.user!['profile_picture'] = reader.result!.toString()
+      this.util.downscaleImage(reader.result!.toString(), 500, 500)
+        .then((downscaledImage) => {
+          // Use the downscaled image
+          this.user!['profile_picture'] = downscaledImage;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     };
-
   }
-  upload_cover_picture(e:any) {
+  upload_cover_picture(e: any) {
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-      this.user!['cover_picture'] = reader.result!.toString()
+      this.util.downscaleImage(reader.result!.toString(), 700, 700)
+        .then((downscaledImage) => {
+          // Use the downscaled image
+          this.user!['cover_picture'] = downscaledImage;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     };
   }
 }

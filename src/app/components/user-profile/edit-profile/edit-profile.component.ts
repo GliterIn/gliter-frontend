@@ -222,21 +222,36 @@ export class EditProfileComponent implements OnInit {
     }
   }
 
-  upload_profile_picture(e:any) {
+  upload_profile_picture(e: any) {
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-      this.user!['profile_picture'] = reader.result!.toString()
+      this.util.downscaleImage(reader.result!.toString(), 500, 500)
+        .then((downscaledImage) => {
+          // Use the downscaled image
+          this.user!['profile_picture'] = downscaledImage;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     };
+  }
+  upload_cover_picture(e: any) {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      this.util.downscaleImage(reader.result!.toString(), 700, 700)
+        .then((downscaledImage) => {
+          // Use the downscaled image
+          this.user!['cover_picture'] = downscaledImage;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    };
+  }
 
-  }
-  upload_cover_picture(e:any) {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      this.user!['cover_picture'] = reader.result!.toString()
-    };
-  }
+  
 }
