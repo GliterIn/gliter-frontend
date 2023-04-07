@@ -31,7 +31,6 @@ export class NavbarComponent implements OnInit {
       this.database.get_user_results(this.search_query).subscribe(
         (search_results) => {
           this.search_results = search_results;
-          console.log(search_results);
           this.search_query = '';
         }
       )

@@ -11,6 +11,7 @@ import { NavbarComponent } from './navbar.component';
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
   let fixture: ComponentFixture<NavbarComponent>;
+ 
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -40,4 +41,20 @@ describe('NavbarComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should search for users and return 1', () => {
+    component.search_query = 'test';
+    component.search_users();
+    expect(component.search_results.length).toEqual(1);
+    expect(component.search_results[0].email).toEqual('john.doe@example.com');
+    expect(component.search_query).toEqual('');
+  });
+
+  it('should search for users and return 0', () => {
+    component.search_query = 'no_result';
+    component.search_users();
+    expect(component.search_results.length).toEqual(0);
+    expect(component.search_query).toEqual('');
+  });
+
 });
