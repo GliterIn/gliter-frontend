@@ -4,11 +4,11 @@
             <div class="nav-item header-control">
                 <div class="inline-item d-md-block">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="search_query">
+                        <input type="text" class="form-control" placeholder="Search..." (keyup)="onSearch($event)" [(ngModel)]="search_query">
                         <div class="input-group-append">
                             <button class="submit-btn" type="button" data-toggle="dropdown" aria-expanded="false"
                                 (click)="search_users()"><i class="fa fa-search"></i></button>
-                            <div class="dropdown dropdown-friend">
+                            <div class="dropdown dropdown-friend" aria-expanded="true">
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <div class="item-heading">
                                         <h6 class="heading-title">Search Results</h6>
