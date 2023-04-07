@@ -1,13 +1,16 @@
 <span *ngIf="user != null">
-    <div class="banner-user" [style.background-image]="'url('+ user.cover_picture + ')'" style="max-width: 1170px; max-height: 400px;">
+    <div class="banner-user" [style.background-image]="'url('+ user.cover_picture + ')'"
+        style="max-width: 1170px; max-height: 400px;">
         <div class="banner-content">
             <div class="media">
                 <div class="item-img">
-                    <img src="{{user.profile_picture}}" style="width: 115px; height: 115px; object-fit: cover;" alt="User">
+                    <img src="{{user.profile_picture}}" style="width: 115px; height: 115px; object-fit: cover;"
+                        alt="User">
                 </div>
                 <div class="media-body">
                     <h3 class="item-title">{{user.name}}
-                        <img *ngIf="user!.is_verified" src="assets/img/verified.png" alt="" class="mr-2" style="width: 25px;"></h3>
+                        <app-verified-tick class="mr-2" [condition]="user!.is_verified" [is_admin]="user!.is_admin" [size]="'25px'"></app-verified-tick>
+                    </h3>
                     <div class="item-subtitle">{{user.location}}</div>
                     <ul class="item-social" *ngIf="third_person">
                         <button class="btn btn-info" (click)="toggle_follow()" *ngIf="!is_following">Follow</button>
@@ -16,7 +19,7 @@
                     <ul class="user-meta">
                         <li>Posts: <span>{{total_posts}}</span></li>
                         <li>Followers: <span>{{total_followers}}</span></li>
-                        <li  *ngIf="false">Views: <span>1.2k</span></li>
+                        <li *ngIf="false">Views: <span>1.2k</span></li>
                     </ul>
                 </div>
             </div>

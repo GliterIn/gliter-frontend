@@ -14,7 +14,7 @@
                         </div>
                         <div class="profile-name">
                             <h4 class="author-name"><a routerLink="/profile/{{follower.username}}">{{follower.name}} 
-                                <img *ngIf="follower.is_verified" src="assets/img/verified.png" alt="Verified User" class="mr-2" style="width: 20px;">
+                                <app-verified-tick class="mr-2" [condition]="follower.is_verified"  [is_admin]="follower.is_admin"></app-verified-tick>
                                 </a></h4>
                             <div class="author-location">@{{follower.username}}</div>
                         </div>

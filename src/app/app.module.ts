@@ -36,6 +36,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ProfilePageFollowingComponent } from './components/user-profile/profile-page-following/profile-page-following.component';
+import { VerifiedTickComponent } from './components/common/verified-tick/verified-tick.component';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import { ProfilePageFollowingComponent } from './components/user-profile/profile
     ProfilePageBadgesComponent,
     ProfilePageFollowersComponent,
     FooterComponent,
-    ProfilePageFollowingComponent
+    ProfilePageFollowingComponent,
+    VerifiedTickComponent
   ],
   imports: [
     BrowserModule,

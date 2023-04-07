@@ -10,7 +10,7 @@
         </div>
         <div class="profile-name">
             <h4 class="author-name"><a routerLink="/profile/{{user.username}}">{{user.name}}
-                <img *ngIf="user!.is_verified" src="assets/img/verified.png" alt="Verified User" class="mr-2" style="width: 20px;">
+                <app-verified-tick class="mr-2" [condition]="user!.is_verified"  [is_admin]="user!.is_admin"></app-verified-tick>
                 </a></h4>
             <div class="author-location">{{user.location}}</div>
         </div>

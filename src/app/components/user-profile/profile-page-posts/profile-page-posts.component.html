@@ -9,8 +9,8 @@
                 <div class="user-title">
                     <a *ngIf="viewing_feed" href="/profile/{{post.user['username']}}">{{post.user['name']}}</a>
                     <a *ngIf="!viewing_feed" href="/profile/{{user!.username}}">{{user!.name}}</a>
-                    <img *ngIf="viewing_feed && post.user['is_verified']" src="assets/img/verified.png" alt="Verified User" class="mr-2" style="width: 20px; margin-bottom: 2px;margin-left: 2px;">
-                    <img *ngIf="!viewing_feed && user!.is_verified" src="assets/img/verified.png" alt="Verified User" class="mr-2" style="width: 20px; margin-bottom: 2px;margin-left: 2px;">
+                    <app-verified-tick [is_admin]="post.user['is_admin']"  [condition]="viewing_feed && post.user['is_verified']"></app-verified-tick>
+                    <app-verified-tick [is_admin]="user!.is_admin" [condition]="!viewing_feed && user!.is_verified"></app-verified-tick>
                     
                 </div>
                 <ul class="entry-meta">
