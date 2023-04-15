@@ -26,13 +26,15 @@ export class ProfilePageComponent implements OnInit {
     this.activatedRoute.url.subscribe(
       (current_url) => {
         this.user = current_url[1].toString();
-        
+        // console.log("this.user" + this.user);
+        // console.log("cache" + this.sitedata.user_on_screen_username);
         if (current_url.length >= 3) {
           var current_tab = current_url[2].toString();
           this.tab_name = current_tab;
         }
 
         if (this.sitedata.user_on_screen_username != this.user) {
+          this.profile_loaded=false;
           this.database
             .get_user_details(this.user)
             .subscribe((new_user_profile) => {
