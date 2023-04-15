@@ -1,19 +1,36 @@
 <div class="page-content">
-    <div class="container">
-        <app-profile-page-header></app-profile-page-header>
+  <div
+    class="container text-center"
+    *ngIf="!profile_loaded"
+    style="height: 100vh"
+  >
+    <div class="spinner-border spinner-border-lg text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+  <div class="container" *ngIf="profile_loaded">
+    <app-profile-page-header></app-profile-page-header>
 
-        <div class="block-box user-top-header">
-            <ul class="menu-list">
-                <li [ngClass]="{'active': tab_name == ''}"><a routerLink="/profile/{{user}}">Timeline</a></li>
-                <li [ngClass]="{'active': tab_name == 'about'}"><a routerLink="/profile/{{user}}/about">About</a></li>
-                <li [ngClass]="{'active': tab_name == 'followers'}"><a routerLink="/profile/{{user}}/followers">Followers</a></li>
-                <li [ngClass]="{'active': tab_name == 'following'}"><a routerLink="/profile/{{user}}/following">Following</a></li>
-                <!-- <li><a>Gallery</a></li>
+    <div class="block-box user-top-header">
+      <ul class="menu-list">
+        <li [ngClass]="{ active: tab_name == '' }">
+          <a routerLink="/profile/{{ user }}">Timeline</a>
+        </li>
+        <li [ngClass]="{ active: tab_name == 'about' }">
+          <a routerLink="/profile/{{ user }}/about">About</a>
+        </li>
+        <li [ngClass]="{ active: tab_name == 'followers' }">
+          <a routerLink="/profile/{{ user }}/followers">Followers</a>
+        </li>
+        <li [ngClass]="{ active: tab_name == 'following' }">
+          <a routerLink="/profile/{{ user }}/following">Following</a>
+        </li>
+        <!-- <li><a>Gallery</a></li>
                 <li><a>Badges</a></li>
                 <li><a>Blogs</a></li> -->
-            </ul>
-        </div>
-        <app-profile-page-content [tab_name]="tab_name"></app-profile-page-content>
+      </ul>
     </div>
-    <app-footer></app-footer>
+    <app-profile-page-content [tab_name]="tab_name"></app-profile-page-content>
+  </div>
+  <app-footer></app-footer>
 </div>
