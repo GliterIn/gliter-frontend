@@ -45,6 +45,7 @@ export class DatabaseService {
             this.get_user_posts(this.user.username).subscribe(
               (user_posts) => {
                 this.posts.next(user_posts);
+                this.sitedata.posts_on_screen.next(user_posts);
               }
             );
           }
