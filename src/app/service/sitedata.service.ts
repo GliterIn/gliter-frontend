@@ -9,8 +9,16 @@ import { UserProfile } from '../models/UserProfile.model';
 export class SitedataService {
   user_on_screen_username='';
   user_on_screen = new BehaviorSubject<UserProfile | null>(null);
+
   followers_on_screen = new BehaviorSubject<UserProfile[]>([]);
   following_on_screen = new BehaviorSubject<UserProfile[]>([]);
+
+  followers_count_on_screen = new BehaviorSubject<number>(0);
+  following_count_on_screen = new BehaviorSubject<number>(0);
+  
+  is_follower_hidden = new BehaviorSubject<boolean>(false);
+  is_following_hidden = new BehaviorSubject<boolean>(false);
+
   posts_on_screen = new BehaviorSubject<Post[]>([]);
   constructor() {
     

@@ -47,12 +47,39 @@ export class ProfilePageComponent implements OnInit {
                       this.database
                         .get_user_posts(this.user)
                         .subscribe((all_posts) => {
-                          this.sitedata.following_on_screen.next(
-                            JSON.parse(all_following)
-                          );
-                          this.sitedata.followers_on_screen.next(
-                            JSON.parse(all_followers)
-                          );
+
+                          if(all_following != "Hidden"){
+                            this.sitedata.following_on_screen.next(
+                              JSON.parse(all_following)
+                            );
+                            this.sitedata.is_following_hidden.next(false);
+                            this.sitedata.following_count_on_screen.next(JSON.parse(all_following).length)
+                          }else{
+                            this.sitedata.following_on_screen.next([]);
+                            this.sitedata.is_following_hidden.next(true);
+                            this.database.get_user_following_count(this.user).subscribe(
+                              (following_count)=>{
+                                this.sitedata.following_count_on_screen.next(+following_count);
+                              }
+                            )
+                          }
+
+                          if(all_followers != "Hidden"){
+                            this.sitedata.followers_on_screen.next(
+                              JSON.parse(all_followers)
+                            );
+                            this.sitedata.is_follower_hidden.next(false);
+                            this.sitedata.followers_count_on_screen.next(JSON.parse(all_followers).length)
+                          }else{
+                            this.sitedata.followers_on_screen.next([]);
+                            this.sitedata.is_follower_hidden.next(true);
+                            this.database.get_user_followers_count(this.user).subscribe(
+                              (followers_count)=>{
+                                this.sitedata.followers_count_on_screen.next(+followers_count);
+                              }
+                            )
+                          }
+
                           this.sitedata.posts_on_screen.next(all_posts);
                           this.setMetaTags(new_user_profile);
 
