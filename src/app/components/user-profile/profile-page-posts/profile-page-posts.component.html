@@ -7,8 +7,8 @@
             </div>
             <div class="media-body">
                 <div class="user-title">
-                    <a *ngIf="viewing_feed" href="/profile/{{post.user['username']}}">{{post.user['name']}}</a>
-                    <a *ngIf="!viewing_feed" href="/profile/{{user!.username}}">{{user!.name}}</a>
+                    <a *ngIf="viewing_feed" routerLink="/profile/{{post.user['username']}}">{{post.user['name']}}</a>
+                    <a *ngIf="!viewing_feed" routerLink="/profile/{{user!.username}}">{{user!.name}}</a>
                     <app-verified-tick [is_admin]="post.user['is_admin']"  [condition]="viewing_feed && post.user['is_verified']"></app-verified-tick>
                     <app-verified-tick [is_admin]="user!.is_admin" [condition]="!viewing_feed && user!.is_verified"></app-verified-tick>
                     

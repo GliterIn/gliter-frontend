@@ -26,9 +26,9 @@ export class MyProfileSidebarComponent implements OnInit {
             this.total_posts = posts.length;
           }
         ),
-        this.database.get_user_followers(data!.username).subscribe(
+        this.database.get_user_followers_count(data!.username).subscribe(
           (all_followers) => {
-            this.total_followers = JSON.parse(all_followers).length;
+            this.total_followers = +all_followers;
           }
         )
       }

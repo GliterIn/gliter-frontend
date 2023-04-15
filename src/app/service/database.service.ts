@@ -75,24 +75,24 @@ export class DatabaseService {
     });
   }
 
-  get_user_followers(username: string) {
+  get_user_followers(username: string, uid: string, user_token: string) {
     return this.http.post<string>(
       this.API_BASE_URL + '/users/get-user-followers',
       {
         username: username,
-        uid: this.auth.uid_value,
-        user_token: this.auth.user_token_value,
+        uid: uid,
+        user_token: user_token,
       }
     );
   }
 
-  get_user_following(username: string) {
+  get_user_following(username: string, uid: string, user_token: string) {
     return this.http.post<string>(
       this.API_BASE_URL + '/users/get-user-following',
       {
         username: username,
-        uid: this.auth.uid_value,
-        user_token: this.auth.user_token_value,
+        uid: uid,
+        user_token: user_token,
       }
     );
   }
@@ -133,12 +133,22 @@ export class DatabaseService {
           user_to_follow: user_to_follow,
         })
         .subscribe((response) => {
-          console.log(response);
-          this.get_user_followers(this.user!.username).subscribe(
-            (all_followers) => {
-              this.sitedata.followers_on_screen.next(JSON.parse(all_followers));
-            }
-          );
+          this.auth.user_token.subscribe((token) => {
+            this.get_user_followers(
+              this.user!.username,
+              this.user!.uid,
+              token
+            ).subscribe((all_followers) => {
+              if(all_followers == "Hidden"){
+                this.sitedata.is_follower_hidden.next(true);
+                this.sitedata.followers_on_screen.next([]);
+              }else{
+                this.sitedata.followers_on_screen.next(JSON.parse(all_followers));
+                this.sitedata.is_follower_hidden.next(false);
+                this.sitedata.followers_count_on_screen.next(JSON.parse(all_followers).length)
+              }
+            });
+          });
         });
     }
   }

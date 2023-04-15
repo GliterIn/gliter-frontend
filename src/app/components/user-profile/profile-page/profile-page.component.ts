@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserProfile } from 'src/app/models/UserProfile.model';
+import { AuthenticationService } from 'src/app/service/authentication.service';
 import { DatabaseService } from 'src/app/service/database.service';
 import { SitedataService } from 'src/app/service/sitedata.service';
 
@@ -20,7 +21,8 @@ export class ProfilePageComponent implements OnInit {
     public activatedRoute: ActivatedRoute,
     public router: Router,
     public sitedata: SitedataService,
-    public title: Title
+    public title: Title,
+    public auth: AuthenticationService
   ) {}
   ngOnInit(): void {
     this.activatedRoute.url.subscribe(
@@ -34,60 +36,79 @@ export class ProfilePageComponent implements OnInit {
         }
 
         if (this.sitedata.user_on_screen_username != this.user) {
-          this.profile_loaded=false;
+          this.profile_loaded = false;
           this.database
             .get_user_details(this.user)
             .subscribe((new_user_profile) => {
-              this.database
-                .get_user_following(this.user)
-                .subscribe((all_following) => {
+              this.auth.user_token.subscribe((token) => {
+                // if (token) {
                   this.database
-                    .get_user_followers(this.user)
-                    .subscribe((all_followers) => {
+                    .get_user_following(
+                      new_user_profile.username,
+                      this.auth.uid_value,
+                      token
+                    )
+                    .subscribe((all_following) => {
                       this.database
-                        .get_user_posts(this.user)
-                        .subscribe((all_posts) => {
-
-                          if(all_following != "Hidden"){
-                            this.sitedata.following_on_screen.next(
-                              JSON.parse(all_following)
-                            );
-                            this.sitedata.is_following_hidden.next(false);
-                            this.sitedata.following_count_on_screen.next(JSON.parse(all_following).length)
-                          }else{
-                            this.sitedata.following_on_screen.next([]);
-                            this.sitedata.is_following_hidden.next(true);
-                            this.database.get_user_following_count(this.user).subscribe(
-                              (following_count)=>{
-                                this.sitedata.following_count_on_screen.next(+following_count);
+                        .get_user_followers(
+                          new_user_profile.username,
+                          this.auth.uid_value,
+                          token
+                        )
+                        .subscribe((all_followers) => {
+                          this.database
+                            .get_user_posts(this.user)
+                            .subscribe((all_posts) => {
+                              if (all_following != 'Hidden') {
+                                this.sitedata.following_on_screen.next(
+                                  JSON.parse(all_following)
+                                );
+                                this.sitedata.is_following_hidden.next(false);
+                                this.sitedata.following_count_on_screen.next(
+                                  JSON.parse(all_following).length
+                                );
+                              } else {
+                                this.sitedata.following_on_screen.next([]);
+                                this.sitedata.is_following_hidden.next(true);
+                                this.database
+                                  .get_user_following_count(this.user)
+                                  .subscribe((following_count) => {
+                                    this.sitedata.following_count_on_screen.next(
+                                      +following_count
+                                    );
+                                  });
                               }
-                            )
-                          }
 
-                          if(all_followers != "Hidden"){
-                            this.sitedata.followers_on_screen.next(
-                              JSON.parse(all_followers)
-                            );
-                            this.sitedata.is_follower_hidden.next(false);
-                            this.sitedata.followers_count_on_screen.next(JSON.parse(all_followers).length)
-                          }else{
-                            this.sitedata.followers_on_screen.next([]);
-                            this.sitedata.is_follower_hidden.next(true);
-                            this.database.get_user_followers_count(this.user).subscribe(
-                              (followers_count)=>{
-                                this.sitedata.followers_count_on_screen.next(+followers_count);
+                              if (all_followers != 'Hidden') {
+                                this.sitedata.followers_on_screen.next(
+                                  JSON.parse(all_followers)
+                                );
+                                this.sitedata.is_follower_hidden.next(false);
+                                this.sitedata.followers_count_on_screen.next(
+                                  JSON.parse(all_followers).length
+                                );
+                              } else {
+                                this.sitedata.followers_on_screen.next([]);
+                                this.sitedata.is_follower_hidden.next(true);
+                                this.database
+                                  .get_user_followers_count(this.user)
+                                  .subscribe((followers_count) => {
+                                    this.sitedata.followers_count_on_screen.next(
+                                      +followers_count
+                                    );
+                                  });
                               }
-                            )
-                          }
 
-                          this.sitedata.posts_on_screen.next(all_posts);
-                          this.setMetaTags(new_user_profile);
+                              this.sitedata.posts_on_screen.next(all_posts);
+                              this.setMetaTags(new_user_profile);
 
-                          this.sitedata.update_user(new_user_profile);
-                          this.profile_loaded = true;
+                              this.sitedata.update_user(new_user_profile);
+                              this.profile_loaded = true;
+                            });
                         });
                     });
-                });
+                // }
+              });
             });
         } else {
           this.profile_loaded = true;
