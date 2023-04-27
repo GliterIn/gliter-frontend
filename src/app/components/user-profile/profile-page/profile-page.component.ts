@@ -37,9 +37,11 @@ export class ProfilePageComponent implements OnInit {
 
         if (this.sitedata.user_on_screen_username != this.user) {
           this.profile_loaded = false;
+          
           this.database
             .get_user_details(this.user)
             .subscribe((new_user_profile) => {
+              
               this.auth.user_token.subscribe((token) => {
                 // if (token) {
                   this.database
@@ -49,6 +51,7 @@ export class ProfilePageComponent implements OnInit {
                       token
                     )
                     .subscribe((all_following) => {
+                      console.log("User : " + this.user);
                       this.database
                         .get_user_followers(
                           new_user_profile.username,
@@ -59,13 +62,14 @@ export class ProfilePageComponent implements OnInit {
                           this.database
                             .get_user_posts(this.user)
                             .subscribe((all_posts) => {
-                              if (all_following != 'Hidden') {
+                              //all_following != 'Hidden'
+                              if (true ) {
                                 this.sitedata.following_on_screen.next(
-                                  JSON.parse(all_following)
+                                  all_following
                                 );
                                 this.sitedata.is_following_hidden.next(false);
                                 this.sitedata.following_count_on_screen.next(
-                                  JSON.parse(all_following).length
+                                  all_following.length
                                 );
                               } else {
                                 this.sitedata.following_on_screen.next([]);
@@ -78,14 +82,14 @@ export class ProfilePageComponent implements OnInit {
                                     );
                                   });
                               }
-
-                              if (all_followers != 'Hidden') {
+//all_followers != 'Hidden'
+                              if (true) {
                                 this.sitedata.followers_on_screen.next(
-                                  JSON.parse(all_followers)
+                                  all_followers
                                 );
                                 this.sitedata.is_follower_hidden.next(false);
                                 this.sitedata.followers_count_on_screen.next(
-                                  JSON.parse(all_followers).length
+                                  all_followers.length
                                 );
                               } else {
                                 this.sitedata.followers_on_screen.next([]);

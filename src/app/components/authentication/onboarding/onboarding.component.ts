@@ -219,6 +219,8 @@ export class OnboardingComponent implements OnInit {
   ngOnInit(): void {}
 
   save_data() {
+    console.log(this.user);
+    console.log(this.validate_user());
     if (this.user != null && this.validate_user()) {
       this.auth.onboard_user(this.user);
     }
@@ -280,34 +282,4 @@ export class OnboardingComponent implements OnInit {
     return this.url_regex.test(url);
   }
 
-  upload_profile_picture(e: any) {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      this.util.downscaleImage(reader.result!.toString(), 500, 500)
-        .then((downscaledImage) => {
-          // Use the downscaled image
-          this.user!['profile_picture'] = downscaledImage;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    };
-  }
-  upload_cover_picture(e: any) {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      this.util.downscaleImage(reader.result!.toString(), 700, 700)
-        .then((downscaledImage) => {
-          // Use the downscaled image
-          this.user!['cover_picture'] = downscaledImage;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    };
-  }
 }

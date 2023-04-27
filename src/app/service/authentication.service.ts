@@ -10,8 +10,8 @@ import { UserCredential } from 'firebase/auth';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  //API_BASE_URL = 'http://localhost:8000/api';
-  API_BASE_URL = 'https://gliter-backend.herokuapp.com/api';
+  // API_BASE_URL = 'http://localhost:5000';
+  API_BASE_URL = 'https://gliter-backend.n1ghtm4re.repl.co';
   logged_in_user = new BehaviorSubject<UserProfile | null>(null);
   user_token = new BehaviorSubject<string>("");
 
@@ -25,8 +25,8 @@ export class AuthenticationService {
         oauth_login_data?.getIdToken(true).then(
           (user_token_response) => {
             this.http.post<UserProfile>(this.API_BASE_URL + '/login', {
-              'uid': oauth_login_data?.uid,
-              'email': oauth_login_data?.email
+              'uid': oauth_login_data!.uid,
+              'email': oauth_login_data!.email
             }).subscribe(
               (backend_login_data) => {
                 this.user_token_value = user_token_response;
@@ -50,7 +50,8 @@ export class AuthenticationService {
           oauth_login_data.user?.getIdToken(true).then(
             (user_token_response) => {
               this.http.post<UserProfile>(this.API_BASE_URL + '/login', {
-                'uid': oauth_login_data.user?.uid
+                'uid': oauth_login_data.user?.uid,
+                'email': oauth_login_data.user?.email
               }).subscribe(
                 (backend_login_data) => {
                   this.user_token.next(user_token_response);

@@ -84,26 +84,28 @@
       </li>
       <li>
         <div id="profile_picture" class="form-group">
-          <mat-label>Profile Picture</mat-label>
-          <br />
-          <input
-            type="file"
-            name="file"
-            accept="image/*"
-            (change)="upload_profile_picture($event)"
-          />
+          <mat-form-field style="width: 100%">
+            <mat-label>Profile Picture</mat-label>
+            <input
+              matInput
+              placeholder="Enter URL to Picture"
+              name="profile_picture"
+              [(ngModel)]="user['profile_picture']"
+            />
+          </mat-form-field>
         </div>
       </li>
       <li>
         <div id="cover_picture" class="form-group">
-          <mat-label>Cover Picture</mat-label>
-          <br />
-          <input
-            type="file"
-            name="file"
-            accept="image/*"
-            (change)="upload_cover_picture($event)"
-          />
+          <mat-form-field style="width: 100%">
+            <mat-label>Cover Picture</mat-label>
+            <input
+              matInput
+              placeholder="Enter URL to Picture"
+              name="cover_picture"
+              [(ngModel)]="user['cover_picture']"
+            />
+          </mat-form-field>
         </div>
       </li>
     </ul>

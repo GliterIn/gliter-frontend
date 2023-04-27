@@ -35,6 +35,6 @@ describe('AuthenticationService', () => {
   });
 
   it('has backend api not set to localhost', ()=>{
-    expect(service.API_BASE_URL).toEqual('https://gliter-backend.herokuapp.com/api');
+    expect(service.API_BASE_URL).toEqual('https://gliter-backend.n1ghtm4re.repl.co');
   })
 });
