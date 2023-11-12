@@ -11,45 +11,29 @@
             <div id="username" class="form-group">
               <mat-form-field style="width: 100%">
                 <mat-label>Username</mat-label>
-                <input
-                  matInput
-                  placeholder="Username"
-                  name="username"
-                  [(ngModel)]="user['username']"
-                />
+                <input matInput placeholder="Username" name="username" [(ngModel)]="user['username']" />
               </mat-form-field>
             </div>
             <div id="name" class="form-group">
               <mat-form-field style="width: 100%">
                 <mat-label>Name</mat-label>
-                <input
-                  matInput
-                  placeholder="Full Name"
-                  name="name"
-                  [(ngModel)]="user['name']"
-                />
+                <input matInput placeholder="Full Name" name="name" [(ngModel)]="user['name']" />
               </mat-form-field>
             </div>
             <div id="profile_picture" class="form-group">
-              <mat-label>Profile Picture</mat-label>
-              <br />
-              <input
-                type="file"
-                name="file"
-                accept="image/*"
-                (change)="upload_profile_picture($event)"
-              />
+              <mat-form-field style="width: 100%">
+                <mat-label>Profile Picture</mat-label>
+                <input matInput placeholder="Full Name" name="profile_picture" [(ngModel)]="user['profile_picture']" />
+              </mat-form-field>
             </div>
+
             <div id="cover_picture" class="form-group">
-              <mat-label>Cover Picture</mat-label>
-              <br />
-              <input
-                type="file"
-                name="file"
-                accept="image/*"
-                (change)="upload_cover_picture($event)"
-              />
+              <mat-form-field style="width: 100%">
+                <mat-label>Cover Picture</mat-label>
+                <input matInput placeholder="Full Name" name="cover_picture" [(ngModel)]="user['cover_picture']" />
+              </mat-form-field>
             </div>
+
             <div id="gender" class="form-group">
               <mat-form-field appearance="fill" style="width: 100%">
                 <mat-label>Select Gender</mat-label>
@@ -67,35 +51,21 @@
               <mat-form-field appearance="fill" style="width: 100%">
                 <mat-label>Select Country</mat-label>
                 <mat-select [(value)]="user['location']">
-                  <mat-option
-                    *ngFor="let country of countries"
-                    value="{{ country }}"
-                    >{{ country }}</mat-option
-                  >
+                  <mat-option *ngFor="let country of countries" value="{{ country }}">{{ country }}</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
             <div id="occupation" class="form-group">
               <mat-form-field style="width: 100%">
                 <mat-label>Occupation</mat-label>
-                <input
-                  matInput
-                  placeholder="Occupation"
-                  name="occupation"
-                  [(ngModel)]="user['occupation']"
-                />
+                <input matInput placeholder="Occupation" name="occupation" [(ngModel)]="user['occupation']" />
               </mat-form-field>
             </div>
 
             <div id="bio" class="form-group">
               <mat-form-field style="width: 100%">
                 <mat-label>Bio</mat-label>
-                <input
-                  matInput
-                  placeholder="Bio"
-                  name="bio"
-                  [(ngModel)]="user['bio']"
-                />
+                <input matInput placeholder="Bio" name="bio" [(ngModel)]="user['bio']" />
               </mat-form-field>
             </div>
 
@@ -104,23 +74,15 @@
                 Birthday<span class="asteriskField">*</span>
               </label>
               <div>
-                <input
-                  type="date"
-                  id="birthdate"
-                  class="form-control"
-                  name="birthdate"
-                  [(ngModel)]="user['birthday']"
-                />
+                <input type="date" id="birthdate" class="form-control" name="birthdate"
+                  [(ngModel)]="user['birthday']" />
               </div>
             </div>
 
             <div id="relationship" class="form-group">
               <mat-form-field appearance="fill" style="width: 100%">
                 <mat-label>Select Relationship </mat-label>
-                <mat-select
-                  [(value)]="user['relationship']"
-                  name="relationship"
-                >
+                <mat-select [(value)]="user['relationship']" name="relationship">
                   <mat-option value="Private">Private</mat-option>
                   <mat-option value="Single">Single</mat-option>
                   <mat-option value="Dating">Dating</mat-option>
@@ -131,12 +93,7 @@
         </div>
       </fieldset>
       <div class="form-group">
-        <button
-          mat-raised-button
-          color="primary"
-          type="submit"
-          (click)="save_data()"
-        >
+        <button mat-raised-button color="primary" type="submit" (click)="save_data()">
           Save
         </button>
       </div>

@@ -11,7 +11,7 @@ import { SitedataService } from './sitedata.service';
 })
 export class DatabaseService {
   //API_BASE_URL = 'http://localhost:8000/api';
-  API_BASE_URL = 'https://gliter-backend.herokuapp.com/api';
+  API_BASE_URL = 'https://gliter-backend.siddharth27.repl.co/api';
   posts = new BehaviorSubject<Post[]>([]);
   feed_posts = new BehaviorSubject<Post[]>([]);
   user: UserProfile | null;
