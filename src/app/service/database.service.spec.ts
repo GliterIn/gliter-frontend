@@ -36,6 +36,6 @@ describe('DatabaseService', () => {
   });
 
   it('has backend api not set to localhost', ()=>{
-    expect(service.API_BASE_URL).toEqual('https://gliter-backend.n1ghtm4re.repl.co');
+    expect(service.API_BASE_URL).toEqual('https://gliter-backend.herokuapp.com/api');
   })
 });

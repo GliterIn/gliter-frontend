@@ -7,10 +7,10 @@
         <p>{{user?.bio}}</p>
         <ul class="info-list">
             <li><span>Name:</span>{{user?.name}}</li>
-            <li><span>Gender:</span>{{user?.gender}}</li>
-            <li><span>Location:</span>{{user?.location}}</li>
-            <li><span>Joined:</span>{{user!.joined_on}}</li>
-            <li><span>Birthday:</span>{{user!.birthday}}</li>
+            <li><span>Joined:</span>{{util.parseTimestampShort(user!.joined_on)}}</li>
+            <li><span>Birthday:</span>{{util.parseTimestampShort(user!.birthday)}}</li>
+            <li><span>Location:</span>{{user!.location}}</li>
+            <li><span>Gender:</span>{{user!.gender}}</li>
             <li class="social-share" *ngIf="false"><span>Social:</span>
                 <div class="social-icon">
                     <a><i class="fa fa-facebook"></i></a>

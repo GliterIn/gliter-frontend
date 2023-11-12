@@ -11,7 +11,7 @@ import { SitedataService } from './sitedata.service';
 })
 export class DatabaseService {
   //API_BASE_URL = 'http://localhost:8000/api';
-  API_BASE_URL = 'https://gliter-387021.uc.r.appspot.com/api';
+  API_BASE_URL = 'https://gliter-backend.herokuapp.com/api';
   posts = new BehaviorSubject<Post[]>([]);
   feed_posts = new BehaviorSubject<Post[]>([]);
   user: UserProfile | null;
@@ -76,7 +76,7 @@ export class DatabaseService {
   }
 
   get_user_followers(username: string, uid: string, user_token: string) {
-    return this.http.post<UserProfile[]>(
+    return this.http.post<string>(
       this.API_BASE_URL + '/users/get-user-followers',
       {
         username: username,
@@ -87,7 +87,7 @@ export class DatabaseService {
   }
 
   get_user_following(username: string, uid: string, user_token: string) {
-    return this.http.post<UserProfile[]>(
+    return this.http.post<string>(
       this.API_BASE_URL + '/users/get-user-following',
       {
         username: username,
@@ -139,14 +139,13 @@ export class DatabaseService {
               this.user!.uid,
               token
             ).subscribe((all_followers) => {
-              //all_followers == "Hidden"
-              if(false){
+              if(all_followers == "Hidden"){
                 this.sitedata.is_follower_hidden.next(true);
                 this.sitedata.followers_on_screen.next([]);
               }else{
-                this.sitedata.followers_on_screen.next(all_followers);
+                this.sitedata.followers_on_screen.next(JSON.parse(all_followers));
                 this.sitedata.is_follower_hidden.next(false);
-                this.sitedata.followers_count_on_screen.next(all_followers.length)
+                this.sitedata.followers_count_on_screen.next(JSON.parse(all_followers).length)
               }
             });
           });
