@@ -6389,6 +6389,7 @@ nav.template-main-menu > ul > li:hover ul.mega-menu {
     background-color: #ffffff;
     border-radius: 8px;
     margin-bottom: 20px;
+    border: 1px solid #cfcfcf;
 }
 
 /*------------------- 6.2 Banner -------------------*/
@@ -10790,6 +10791,7 @@ nav.template-main-menu > ul > li:hover ul.mega-menu {
     background-color: #ffffff;
     border-radius: 8px;
     padding: 25px 30px 35px;
+    border: 1px solid #cfcfcf;
 }
 
 @media only screen and (max-width: 1199px) {
