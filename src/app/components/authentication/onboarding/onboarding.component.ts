@@ -257,7 +257,7 @@ export class OnboardingComponent implements OnInit {
     return true;
   }
   isLetter(str:string) {
-    return str.length === 1 && str.match(/[a-z]/i);
+    return str.length === 1 && str.match(/[a-z0-9]/i);
   }
   
   is_valid_username(username: string): boolean {
