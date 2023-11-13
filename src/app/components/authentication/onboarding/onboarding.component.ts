@@ -262,7 +262,7 @@ export class OnboardingComponent implements OnInit {
   
   is_valid_username(username: string): boolean {
     for (let i = 0; i < username.length; i++) {
-      if (this.isLetter(username[i]) &&  (username[i] == username[i].toLowerCase() || username[i] == '_'))  {
+      if (this.isLetter(username[i])  || username[i] == '_')  {
         continue;
       }
       return false;
