@@ -256,10 +256,13 @@ export class OnboardingComponent implements OnInit {
 
     return true;
   }
-
+  isLetter(str:string) {
+    return str.length === 1 && str.match(/[a-z]/i);
+  }
+  
   is_valid_username(username: string): boolean {
     for (let i = 0; i < username.length; i++) {
-      if (username[i] == username[i].toLowerCase() || username[i] == '_')  {
+      if (this.isLetter(username[i]) &&  (username[i] == username[i].toLowerCase() || username[i] == '_'))  {
         continue;
       }
       return false;
