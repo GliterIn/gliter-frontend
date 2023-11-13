@@ -227,6 +227,10 @@ export class OnboardingComponent implements OnInit {
   validate_user(): boolean {
     if (this.user == null) return false;
 
+    if(!this.is_valid_username(this.user.username)){
+      alert("Please enter a valid username. Usernames must contain only lowercase letters and underscores.");
+      return false;
+    }
     if (
       this.is_empty_string(this.user.bio, 'Bio') ||
       this.is_empty_string(this.user.cover_picture, 'Cover Picture') ||
@@ -250,6 +254,16 @@ export class OnboardingComponent implements OnInit {
       return false;
     }
 
+    return true;
+  }
+
+  is_valid_username(username: string): boolean {
+    for (let i = 0; i < username.length; i++) {
+      if (username[i] == username[i].toLowerCase() || username[i] == '_')  {
+        continue;
+      }
+      return false;
+    }
     return true;
   }
   is_empty_string(data: string, name: string): boolean {
