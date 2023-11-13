@@ -10,7 +10,7 @@ describe('OnboardingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OnboardingComponent ],
+      declarations: [OnboardingComponent],
       providers: [
         {
           provide: AuthenticationService,
@@ -18,7 +18,7 @@ describe('OnboardingComponent', () => {
         }
       ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(OnboardingComponent);
     component = fixture.componentInstance;
@@ -38,19 +38,19 @@ describe('OnboardingComponent', () => {
   })
 
   it('should validate correct string', () => {
-    expect(component.is_valid_length("foobar","test",3,10)).toBeTruthy();
+    expect(component.is_valid_length("foobar", "test", 3, 10)).toBeTruthy();
   })
 
   it('should not validate correct string', () => {
-    expect(component.is_valid_length("foobarfoobar","test",3,10)).toBeFalsy();
+    expect(component.is_valid_length("foobarfoobar", "test", 3, 10)).toBeFalsy();
   })
-  
+
   it('should validate non empty string', () => {
-    expect(component.is_empty_string("foobarfoobar","test")).toBeFalsy();
+    expect(component.is_empty_string("foobarfoobar", "test")).toBeFalsy();
   })
 
   it('should not validate empty string', () => {
-    expect(component.is_empty_string("","test")).toBeTruthy();
+    expect(component.is_empty_string("", "test")).toBeTruthy();
   })
 
   it('should match a valid URL', () => {
@@ -73,5 +73,11 @@ describe('OnboardingComponent', () => {
     expect(component.url_regex.test(urlWithQueryString)).toBe(true);
   });
 
+  it('should detect valid username', () => {
+    expect(component.is_valid_username("foobar_123")).toBeTrue();
+  });
 
+  it('should detect invalid username', () => {
+    expect(component.is_valid_username("foo bar")).toBeFalse();
+  });
 });
