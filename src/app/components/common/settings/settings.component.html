@@ -1,0 +1,30 @@
+<main id="main">
+    <section id="about" class="page-content" style="background-color: white">
+      <div class="container" *ngIf="is_loaded">
+        <br />
+        <fieldset class="form-group">
+          <legend class="border-bottom mb-4">
+            Settings
+          </legend>
+          <div class="row">
+            <div class="col-md-6">
+              <div id="username" class="form-group">
+                <mat-slide-toggle [(ngModel)]="user_settings.follower_visible">Hide followers</mat-slide-toggle>
+              </div>
+              <div id="username" class="form-group">
+                <mat-slide-toggle [(ngModel)]="user_settings.following_visible">Hide following</mat-slide-toggle>
+              </div>
+            </div>
+            <div class="col-md-6">
+              
+            </div>
+          </div>
+        </fieldset>
+        <div class="form-group">
+          <button mat-raised-button color="primary" type="submit" (click)="save_data()">
+            Save
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>

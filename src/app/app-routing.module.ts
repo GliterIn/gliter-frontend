@@ -9,13 +9,15 @@ import { AboutComponent } from './components/customer-facing/about/about.compone
 import { ProfilePageComponent } from './components/user-profile/profile-page/profile-page.component';
 import { OnboardingComponent } from './components/authentication/onboarding/onboarding.component';
 import { FeedComponent } from './components/common/feed/feed.component';
+import { SettingsComponent } from './components/common/settings/settings.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
 const routes: Routes = [
   {path : 'feed' , title:'Feed', canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin} ,component : FeedComponent},
   {path : 'onboarding' , title:'Onboarding', canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin},  component : OnboardingComponent},
-  {path : 'login' , title:'Login', component : LoginComponent},
+  {path : 'login' , title:'Login', canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin}, component : LoginComponent},
+  {path: 'settings', title: 'Settings', component: SettingsComponent},
   {path : 'profile/:username/about' , component : ProfilePageComponent },
   {path : 'profile/:username/followers' , component : ProfilePageComponent },
   {path : 'profile/:username/following' , component : ProfilePageComponent },

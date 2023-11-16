@@ -1,10 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 import { Post } from '../models/Post.model';
 import { UserProfile } from '../models/UserProfile.model';
 import { AuthenticationService } from './authentication.service';
 import { SitedataService } from './sitedata.service';
+import { UserSettings } from '../models/Settings.model';
 
 @Injectable({
   providedIn: 'root',
@@ -139,10 +140,10 @@ export class DatabaseService {
               this.user!.uid,
               token
             ).subscribe((all_followers) => {
-              if(all_followers == "Hidden"){
+              if (all_followers == "Hidden") {
                 this.sitedata.is_follower_hidden.next(true);
                 this.sitedata.followers_on_screen.next([]);
-              }else{
+              } else {
                 this.sitedata.followers_on_screen.next(JSON.parse(all_followers));
                 this.sitedata.is_follower_hidden.next(false);
                 this.sitedata.followers_count_on_screen.next(JSON.parse(all_followers).length)
@@ -151,5 +152,38 @@ export class DatabaseService {
           });
         });
     }
+  }
+
+
+  get_user_settings() {
+    return this.http.post<any>(
+      this.API_BASE_URL + '/users/get-user-settings',
+      {
+        user: this.user,
+        uid: this.auth.uid_value,
+        user_token: this.auth.user_token_value,
+      }
+    ).pipe(
+      map( (data_:string )=>{
+        var data = JSON.parse(data_);
+        var user_settings = <UserSettings>{};
+        user_settings.username = data['username'];
+        user_settings.follower_visible = data['follower_visible'];
+        user_settings.following_visible = data['following_visible'];
+        return user_settings;
+      })
+    );
+  }
+
+  set_user_settings(user_settings: UserSettings) {
+    return this.http.post<string>(
+      this.API_BASE_URL + '/users/set-user-settings',
+      {
+        user: this.user,
+        uid: this.auth.uid_value,
+        user_token: this.auth.user_token_value,
+        setting: user_settings,
+      }
+    );
   }
 }

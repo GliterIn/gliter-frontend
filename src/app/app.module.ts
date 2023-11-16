@@ -37,7 +37,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ProfilePageFollowingComponent } from './components/user-profile/profile-page-following/profile-page-following.component';
 import { VerifiedTickComponent } from './components/common/verified-tick/verified-tick.component';
-
+import { SettingsComponent } from './components/common/settings/settings.component';
+import { MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { VerifiedTickComponent } from './components/common/verified-tick/verifie
     ProfilePageFollowersComponent,
     FooterComponent,
     ProfilePageFollowingComponent,
-    VerifiedTickComponent
+    VerifiedTickComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +80,8 @@ import { VerifiedTickComponent } from './components/common/verified-tick/verifie
     BrowserAnimationsModule,
     MatInputModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSlideToggleModule
   ],
   providers: [{ provide: PERSISTENCE, useValue: 'session' },],
   bootstrap: [AppComponent]
