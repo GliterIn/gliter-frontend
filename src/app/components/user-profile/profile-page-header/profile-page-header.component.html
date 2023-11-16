@@ -15,6 +15,7 @@
                     <ul class="item-social" *ngIf="third_person">
                         <button class="btn btn-info" (click)="toggle_follow()" *ngIf="!is_following">Follow</button>
                         <button class="btn btn-info" (click)="toggle_follow()" *ngIf="is_following">Unfollow</button>
+                        <button class="btn btn-success ml-2" (click)="verify_user()" *ngIf="is_admin">{{user!.is_verified ? 'UnVerify':'Verify'}}</button>
                     </ul>
                     <ul class="user-meta">
                         <li>Posts: <span>{{total_posts}}</span></li>

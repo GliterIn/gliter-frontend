@@ -18,6 +18,7 @@ export class ProfilePageHeaderComponent implements OnInit {
   total_followers: number = 0;
   third_person = false;
   is_following=false;
+  is_admin = false;
   constructor(public database: DatabaseService,
     public util: UtilsService,
     public auth: AuthenticationService, public activatedRoute: ActivatedRoute,
@@ -39,6 +40,8 @@ export class ProfilePageHeaderComponent implements OnInit {
         )
         this.auth.get_current_user().subscribe(
           (logged_in_user) => {
+            if(logged_in_user)
+              this.is_admin = logged_in_user.is_admin;
             this.sitedata.followers_on_screen.subscribe(
               (followers) => {
                 for(let follower of followers){
@@ -72,6 +75,12 @@ export class ProfilePageHeaderComponent implements OnInit {
     if(this.user != null){
       this.database.follow_user(this.user.username);
       this.is_following = !this.is_following;
+    }
+  }
+
+  verify_user(){
+    if(this.user != null){
+      this.database.verify_user(this.user.username);
     }
   }
 

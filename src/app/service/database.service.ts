@@ -186,4 +186,21 @@ export class DatabaseService {
       }
     );
   }
+
+
+  verify_user(user_to_verify: string) {
+    if (this.user != null) {
+      this.http
+        .post<string>(this.API_BASE_URL + '/actions/verify', {
+          user: this.user,
+          uid: this.auth.uid_value,
+          user_token: this.auth.user_token_value,
+          user_to_verify: user_to_verify,
+        })
+        .subscribe((response) => {
+          alert(response);
+          window.location.reload();
+        });
+    }
+  }
 }

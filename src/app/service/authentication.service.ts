@@ -55,6 +55,7 @@ export class AuthenticationService {
                 (backend_login_data) => {
                   this.user_token.next(user_token_response);
                   this.logged_in_user.next(backend_login_data);
+                  
                 }
               )
             }

@@ -16,8 +16,8 @@ const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const routes: Routes = [
   {path : 'feed' , title:'Feed', canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin} ,component : FeedComponent},
   {path : 'onboarding' , title:'Onboarding', canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin},  component : OnboardingComponent},
-  {path : 'login' , title:'Login', canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin}, component : LoginComponent},
-  {path: 'settings', title: 'Settings', component: SettingsComponent},
+  {path : 'login' , title:'Login', component : LoginComponent},
+  {path: 'settings', title: 'Settings', canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin},component: SettingsComponent},
   {path : 'profile/:username/about' , component : ProfilePageComponent },
   {path : 'profile/:username/followers' , component : ProfilePageComponent },
   {path : 'profile/:username/following' , component : ProfilePageComponent },
