@@ -16,6 +16,7 @@ export class ProfilePageComponent implements OnInit {
   user: string = '';
   tab_name = '';
   profile_loaded = false;
+  private_account = false;
   constructor(
     public database: DatabaseService,
     public activatedRoute: ActivatedRoute,
@@ -23,7 +24,7 @@ export class ProfilePageComponent implements OnInit {
     public sitedata: SitedataService,
     public title: Title,
     public auth: AuthenticationService
-  ) {}
+  ) { }
   ngOnInit(): void {
     this.activatedRoute.url.subscribe(
       (current_url) => {
@@ -41,7 +42,7 @@ export class ProfilePageComponent implements OnInit {
             .get_user_details(this.user)
             .subscribe((new_user_profile) => {
               this.auth.user_token.subscribe((token) => {
-                // if (token) {
+                if (new_user_profile.private_account==false) {
                   this.database
                     .get_user_following(
                       new_user_profile.username,
@@ -101,17 +102,29 @@ export class ProfilePageComponent implements OnInit {
 
                               this.sitedata.posts_on_screen.next(all_posts);
                               this.setMetaTags(new_user_profile);
-
                               this.sitedata.update_user(new_user_profile);
                               this.profile_loaded = true;
+                              this.private_account = false;
                             });
                         });
                     });
-                // }
+                } else {
+                  this.setMetaTags(new_user_profile);
+                  this.sitedata.update_user(new_user_profile);
+                  this.private_account = new_user_profile.private_account;
+                  this.profile_loaded = true;
+                }
               });
             });
         } else {
           this.profile_loaded = true;
+          this.sitedata.user_on_screen.subscribe(
+            (user_) => {
+              console.log(user_);
+              if (user_)
+                this.private_account = user_.private_account;
+            }
+          )
         }
       },
       (error) => {

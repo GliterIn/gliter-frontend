@@ -56,6 +56,9 @@ export class DatabaseService {
     return this.http.post<UserProfile>(
       this.API_BASE_URL + '/users/get-user-details',
       {
+        user: this.user,
+        uid: this.auth.uid_value,
+        user_token: this.auth.user_token_value,
         username: username,
       }
     );
@@ -170,6 +173,7 @@ export class DatabaseService {
         user_settings.username = data['username'];
         user_settings.follower_visible = data['follower_visible'];
         user_settings.following_visible = data['following_visible'];
+        user_settings.private_account = data['private_account'];
         return user_settings;
       })
     );

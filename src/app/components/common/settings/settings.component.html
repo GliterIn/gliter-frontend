@@ -8,15 +8,17 @@
           </legend>
           <div class="row">
             <div class="col-md-6">
-              <div id="username" class="form-group">
+              <div id="follower_visible" class="form-group">
                 <mat-slide-toggle [(ngModel)]="user_settings.follower_visible">Hide followers</mat-slide-toggle>
               </div>
-              <div id="username" class="form-group">
-                <mat-slide-toggle [(ngModel)]="user_settings.following_visible">Hide following</mat-slide-toggle>
+              <div id="private_account" class="form-group">
+                <mat-slide-toggle [(ngModel)]="user_settings.private_account">Make Account Private</mat-slide-toggle>
               </div>
             </div>
             <div class="col-md-6">
-              
+              <div id="follower_visible" class="form-group">
+                <mat-slide-toggle [(ngModel)]="user_settings.follower_visible">Hide following</mat-slide-toggle>
+              </div>
             </div>
           </div>
         </fieldset>

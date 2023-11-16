@@ -15,4 +15,5 @@ export interface UserProfile {
     is_verified: boolean;
     is_admin: boolean;
     is_onboarded: boolean;
+    private_account: boolean;
 }

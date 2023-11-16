@@ -19,6 +19,7 @@ export class ProfilePageHeaderComponent implements OnInit {
   third_person = false;
   is_following=false;
   is_admin = false;
+  @Input('private_account') private_account=false;
   constructor(public database: DatabaseService,
     public util: UtilsService,
     public auth: AuthenticationService, public activatedRoute: ActivatedRoute,
