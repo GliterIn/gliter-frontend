@@ -94,14 +94,30 @@ export class ProfilePageComponent implements OnInit {
               // Get User Posts
               this.database.get_user_posts(username).subscribe(
                 (posts_) => {
-                  this.sitedata.user_on_screen.next(user_details_);
-                  this.sitedata.followers_on_screen.next(followers_);
-                  this.sitedata.following_on_screen.next(following_);
-                  this.sitedata.posts_on_screen.next(posts_);
-                  this.setMetaTags(user_details_);
-                  this.sitedata.update_user(user_details_);
-                  this.private_account = user_details_.private_account;
-                  this.profile_loaded = true;
+                  // Get Follower Count
+                  this.database.get_user_followers_count(username).subscribe(
+                    (followers_count_) => {
+                      // Get Following Count
+                      this.database.get_user_following_count(username).subscribe(
+                        (following_count_) => {
+                          this.sitedata.user_on_screen.next(user_details_);
+
+                          this.sitedata.followers_on_screen.next(followers_);
+                          this.sitedata.following_on_screen.next(following_);
+
+                          this.sitedata.followers_count_on_screen.next(+followers_count_);
+                          this.sitedata.following_count_on_screen.next(+following_count_);
+
+                          this.sitedata.posts_on_screen.next(posts_);
+
+                          this.setMetaTags(user_details_);
+                          this.sitedata.update_user(user_details_);
+                          this.private_account = user_details_.private_account;
+                          this.profile_loaded = true;
+                        }
+                      )
+                    }
+                  )
                 }
               )
             }

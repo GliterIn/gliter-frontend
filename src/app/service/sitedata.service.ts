@@ -12,6 +12,8 @@ export class SitedataService {
   user_on_screen = new BehaviorSubject<UserProfile | null>(null);
   followers_on_screen = new BehaviorSubject<UserList>(<UserList>{hidden:false, users: []});
   following_on_screen = new BehaviorSubject<UserList>(<UserList>{hidden:false, users: []});
+  followers_count_on_screen = new BehaviorSubject<number>(0);
+  following_count_on_screen = new BehaviorSubject<number>(0);
   posts_on_screen = new BehaviorSubject<Post[]>([]);
 
   logged_user_posts = new BehaviorSubject<Post[]>([]);

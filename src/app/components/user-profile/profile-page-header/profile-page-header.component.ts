@@ -39,9 +39,9 @@ export class ProfilePageHeaderComponent implements OnInit {
           }
         )
 
-        this.sitedata.followers_on_screen.subscribe(
-          (followers_) => {
-            this.followers_count = +followers_.users.length;
+        this.sitedata.followers_count_on_screen.subscribe(
+          (followers_count_) => {
+            this.followers_count = followers_count_;
           }
         )
         this.auth.get_request_base().subscribe(
