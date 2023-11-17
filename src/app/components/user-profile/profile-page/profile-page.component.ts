@@ -39,29 +39,24 @@ export class ProfilePageComponent implements OnInit {
         }
 
         // Check if we need to refetch data
-        this.sitedata.user_on_screen.subscribe(
-          (user_on_screen_) => {
-            console.log(user_on_screen_);
-            console.log(this.user_on_screen_username)
-            if (user_on_screen_ && this.user_on_screen_username == user_on_screen_.username) {
-              // User in sitedata cache is same as user on screen. 
-              console.log("User in sitedata cache is same as user on screen. ");
-              this.private_account = user_on_screen_.private_account;
-              this.profile_loaded = true;
-            } else {
-              // User in sitedata cache is different from user on screen.
-              console.log("User in sitedata cache is different from user on screen.");
-              this.profile_loaded = false;
-              this.auth.get_request_base().subscribe(
-                (_) => {
-                  this.reload_new_data(this.user_on_screen_username);
-                }
-              )
+        console.log(this.sitedata.user_on_screen_static);
+        console.log(this.user_on_screen_username)
 
+        if (this.sitedata.user_on_screen_static && this.user_on_screen_username == this.sitedata.user_on_screen_static.username) {
+          // User in sitedata cache is same as user on screen. 
+          console.log("User in sitedata cache is same as user on screen. ");
+          this.private_account = this.sitedata.user_on_screen_static.private_account;
+          this.profile_loaded = true;
+        } else {
+          // User in sitedata cache is different from user on screen.
+          console.log("User in sitedata cache is different from user on screen.");
+          this.profile_loaded = false;
+          this.auth.get_request_base().subscribe(
+            (_) => {
+              this.reload_new_data(this.user_on_screen_username);
             }
-
-          }
-        )
+          )
+        }
       },
       (error) => {
         console.log(error.error);
@@ -100,7 +95,7 @@ export class ProfilePageComponent implements OnInit {
                       // Get Following Count
                       this.database.get_user_following_count(username).subscribe(
                         (following_count_) => {
-                          this.sitedata.user_on_screen.next(user_details_);
+
 
                           this.sitedata.followers_on_screen.next(followers_);
                           this.sitedata.following_on_screen.next(following_);

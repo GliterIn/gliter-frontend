@@ -14,9 +14,10 @@ export class LoginComponent implements OnInit {
   constructor(public auth:AuthenticationService, public router: Router) {
     this.auth.get_request_base().subscribe(
       (request_base_) => {
-        if(request_base_){
+        if(request_base_ != null  ){
+          this.user = request_base_.user;
           if(request_base_.user.is_onboarded){
-            this.router.navigate(["/profile",this.user!['username']]);
+            this.router.navigate(["/profile",this.user['username']]);
           }
         }else{
           this.router.navigate(["/onboarding"]);

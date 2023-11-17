@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserProfile } from 'src/app/models/UserProfile.model';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { UtilsService } from 'src/app/service/utils.service';
@@ -209,10 +210,14 @@ export class OnboardingComponent implements OnInit {
     'Zimbabwe',
   ];
   url_regex = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*(\?.*)?$/;
-  constructor(public auth: AuthenticationService, public util:UtilsService) {
+  constructor(public auth: AuthenticationService, public util:UtilsService, private router: Router) {
     this.auth.get_request_base().subscribe((request_base_) => {
-      if(request_base_)
+      if(request_base_){
         this.user = request_base_.user;
+        if(request_base_.user.is_onboarded){
+          this.router.navigate(["/feed"]);
+        }
+      }
     });
   }
 

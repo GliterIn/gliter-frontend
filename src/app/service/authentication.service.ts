@@ -20,7 +20,7 @@ export class AuthenticationService {
   constructor(public http: HttpClient, public afAuth: AngularFireAuth) {
     this.afAuth.onAuthStateChanged((oauth_login_data) => {
       if (oauth_login_data != null) {
-        console.log('You have been successfully logged in!');
+        console.log('State Changed : You have been successfully logged in!');
         oauth_login_data?.getIdToken(true).then(
           (user_token_response) => {
             this.http.post<UserProfile>(this.API_BASE_URL + '/login', {
@@ -28,7 +28,7 @@ export class AuthenticationService {
               'email': oauth_login_data?.email
             }).subscribe(
               (backend_login_data) => {
-                if (backend_login_data && oauth_login_data) {
+                if (backend_login_data!=null && oauth_login_data != null) {
                   var request_base_ = <RequestBase>{};
                   request_base_.uid = oauth_login_data.uid;
                   request_base_.user_token = user_token_response;
@@ -56,12 +56,15 @@ export class AuthenticationService {
                 'uid': oauth_login_data.user?.uid
               }).subscribe(
                 (backend_login_data) => {
-                  var request_base_ = <RequestBase>{};
-                  request_base_.uid = oauth_login_data.user!.uid;
-                  request_base_.user_token = user_token_response;
-                  request_base_.user = backend_login_data;
-                  this.request_base.next(request_base_);
-                  this.request_base_value = request_base_;
+                  if (backend_login_data != null && oauth_login_data != null && oauth_login_data.user != null) {
+                    console.log(backend_login_data);
+                    var request_base_ = <RequestBase>{};
+                    request_base_.uid = oauth_login_data.user.uid;
+                    request_base_.user_token = user_token_response;
+                    request_base_.user = backend_login_data;
+                    this.request_base.next(request_base_);
+                    this.request_base_value = request_base_;
+                  }
                 }
               )
             }

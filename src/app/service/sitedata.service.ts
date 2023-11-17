@@ -10,6 +10,7 @@ import { UserList } from '../models/API.model';
 export class SitedataService {
   
   user_on_screen = new BehaviorSubject<UserProfile | null>(null);
+  user_on_screen_static: UserProfile|null = null;
   followers_on_screen = new BehaviorSubject<UserList>(<UserList>{hidden:false, users: []});
   following_on_screen = new BehaviorSubject<UserList>(<UserList>{hidden:false, users: []});
   followers_count_on_screen = new BehaviorSubject<number>(0);
@@ -23,5 +24,6 @@ export class SitedataService {
   }
   update_user(user: UserProfile) {
     this.user_on_screen.next(user);
+    this.user_on_screen_static = user;
   }
 }

@@ -1,6 +1,6 @@
 <main id="main">
   <section id="about" class="page-content" style="background-color: white">
-    <div class="container" *ngIf="user != null">
+    <div class="container" *ngIf="user != null && user.is_onboarded == false">
       <br />
       <fieldset class="form-group">
         <legend class="border-bottom mb-4">
