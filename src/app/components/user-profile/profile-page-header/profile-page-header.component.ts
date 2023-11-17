@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { UserList } from 'src/app/models/API.model';
 import { UserProfile } from 'src/app/models/UserProfile.model';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { DatabaseService } from 'src/app/service/database.service';
@@ -13,18 +14,21 @@ import { UtilsService } from 'src/app/service/utils.service';
 })
 export class ProfilePageHeaderComponent implements OnInit {
 
-  user: UserProfile | null;
+  user_on_screen: UserProfile | null = null;
+  
   total_posts: number = 0;
-  total_followers: number = 0;
+  followers_count = 0;
+  
   third_person = false;
   is_following=false;
+  follows_you = false;
   is_admin = false;
   @Input('private_account') private_account=false;
+
   constructor(public database: DatabaseService,
     public util: UtilsService,
     public auth: AuthenticationService, public activatedRoute: ActivatedRoute,
     public sitedata:SitedataService) {
-    this.user = null;
     
     this.activatedRoute.url.subscribe(
       (current_url) => {
@@ -34,33 +38,46 @@ export class ProfilePageHeaderComponent implements OnInit {
             this.total_posts = posts.length;
           }
         )
-        this.sitedata.followers_count_on_screen.subscribe(
-          (followers) => {
-            this.total_followers = followers;
+
+        this.sitedata.followers_on_screen.subscribe(
+          (followers_) => {
+            this.followers_count = +followers_.users.length;
           }
         )
-        this.auth.get_current_user().subscribe(
-          (logged_in_user) => {
-            if(logged_in_user)
-              this.is_admin = logged_in_user.is_admin;
-            this.sitedata.followers_on_screen.subscribe(
-              (followers) => {
-                for(let follower of followers){
-                  if(follower.username == logged_in_user?.username){
+        this.auth.get_request_base().subscribe(
+          (request_base_) => {
+            if(request_base_){
+              this.is_admin = request_base_.user.is_admin;
+            }
+              
+            this.sitedata.logged_user_following.subscribe(
+              (logged_user_following_) => {
+                for(let follower of logged_user_following_){
+                  if(follower.username == current_username){
                     this.is_following = true;
                   }
                 }
               }
             )
-            if (logged_in_user == null || logged_in_user.username != current_username) {
+
+            this.sitedata.logged_user_followers.subscribe(
+              (logged_user_followers_) => {
+                for(let follower of logged_user_followers_){
+                  if(follower.username == current_username){
+                    this.follows_you = true;
+                  }
+                }
+              }
+            )
+            if (request_base_ == null || request_base_.user.username != current_username) {
               this.third_person = true;
               this.sitedata.user_on_screen.subscribe(
                 (current_user) => {
-                  this.user = current_user;
+                  this.user_on_screen = current_user;
                 }
               )
             } else {
-              this.user = logged_in_user;
+              this.user_on_screen = request_base_.user;
               this.third_person = false;
             }
           }
@@ -73,15 +90,15 @@ export class ProfilePageHeaderComponent implements OnInit {
   }
 
   toggle_follow(){
-    if(this.user != null){
-      this.database.follow_user(this.user.username);
+    if(this.user_on_screen != null){
+      this.database.follow_user(this.user_on_screen.username);
       this.is_following = !this.is_following;
     }
   }
 
   verify_user(){
-    if(this.user != null){
-      this.database.verify_user(this.user.username);
+    if(this.user_on_screen != null){
+      this.database.verify_user(this.user_on_screen.username);
     }
   }
 

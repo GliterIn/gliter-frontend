@@ -10,23 +10,22 @@ import { SitedataService } from 'src/app/service/sitedata.service';
 })
 export class ProfilePageAboutComponent implements OnInit {
 
-  user: UserProfile|null;
-  logged_in_user: UserProfile|null;
+  user_on_screen: UserProfile|null = null;
+  logged_in_user: UserProfile|null = null;
   is_editing=false;
   constructor(public sitedata:SitedataService, public auth:AuthenticationService) {
-    this.user = null;
-    this.logged_in_user=null;
   }
 
   ngOnInit(): void {
-    this.auth.get_current_user().subscribe(
-      (logged_in_user) => {
-        this.logged_in_user = logged_in_user;
+    this.auth.get_request_base().subscribe(
+      (request_base_) => {
+        if(request_base_)
+          this.logged_in_user = request_base_.user;
       }
     )
     this.sitedata.user_on_screen.subscribe(
-      (current_user) => {
-        this.user = current_user;
+      (user_on_screen_) => {
+        this.user_on_screen = user_on_screen_;
       }
     )
   }

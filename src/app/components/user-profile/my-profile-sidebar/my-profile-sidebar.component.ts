@@ -11,26 +11,30 @@ import { UtilsService } from 'src/app/service/utils.service';
 })
 export class MyProfileSidebarComponent implements OnInit {
 
-  user: UserProfile | null;
+  user: UserProfile | null = null;
   total_posts = 0;
   total_followers = 0;
   constructor(public database: DatabaseService,
     public util: UtilsService,
     public auth: AuthenticationService) {
-    this.user = null;
-    this.auth.get_current_user().subscribe(
-      (data) => {
-        this.user = data;
-        this.database.get_user_posts(data!.username).subscribe(
-          (posts) => {
-            this.total_posts = posts.length;
-          }
-        ),
-        this.database.get_user_followers_count(data!.username).subscribe(
-          (all_followers) => {
-            this.total_followers = +all_followers;
-          }
-        )
+    this.auth.get_request_base().subscribe(
+      (request_base_) => {
+        if(request_base_){
+          this.user = request_base_.user;
+          
+          this.database.get_user_posts(request_base_.user.username).subscribe(
+            (posts_) => {
+              this.total_posts = posts_.length;
+            }
+          )
+
+          this.database.get_user_followers_count(request_base_.user.username).subscribe(
+            (total_followers_) => {
+              this.total_followers = +total_followers_;
+            }
+          )
+        }
+        
       }
     )
   }

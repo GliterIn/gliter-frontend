@@ -12,23 +12,22 @@ import { UtilsService } from 'src/app/service/utils.service';
   styleUrls: ['./share-post.component.css']
 })
 export class SharePostComponent implements OnInit {
-  user: UserProfile | null;
   third_person = false;
   content = '';
+
   constructor(public database: DatabaseService,
     public util: UtilsService,
     public auth: AuthenticationService, public activatedRoute: ActivatedRoute) {
-    this.user = null;
+
     this.activatedRoute.url.subscribe(
       (current_url) => {
         if (current_url.length > 1) {
           var current_username = current_url[1].toString();
-          this.auth.get_current_user().subscribe(
-            (logged_in_user) => {
-              if (logged_in_user == null || logged_in_user.username != current_username) {
+          this.auth.get_request_base().subscribe(
+            (request_base_) => {
+              if (request_base_ == null || request_base_.user.username != current_username) {
                 this.third_person = true;
               } else {
-                this.user = logged_in_user;
                 this.third_person = false;
               }
             }

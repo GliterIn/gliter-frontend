@@ -10,7 +10,7 @@ import { UtilsService } from 'src/app/service/utils.service';
   styleUrls: ['./onboarding.component.css'],
 })
 export class OnboardingComponent implements OnInit {
-  user: UserProfile | null;
+  user: UserProfile | null = null;
   countries = [
     'Afghanistan',
     'Albania',
@@ -210,9 +210,9 @@ export class OnboardingComponent implements OnInit {
   ];
   url_regex = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*(\?.*)?$/;
   constructor(public auth: AuthenticationService, public util:UtilsService) {
-    this.user = null;
-    this.auth.get_current_user().subscribe((data) => {
-      this.user = data;
+    this.auth.get_request_base().subscribe((request_base_) => {
+      if(request_base_)
+        this.user = request_base_.user;
     });
   }
 

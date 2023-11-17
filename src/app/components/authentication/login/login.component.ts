@@ -10,19 +10,16 @@ import { AuthenticationService } from 'src/app/service/authentication.service';
 })
 export class LoginComponent implements OnInit {
   
-  user: UserProfile|null;
+  user: UserProfile|null = null;
   constructor(public auth:AuthenticationService, public router: Router) {
-    this.user = null;
-
-    this.auth.logged_in_user.subscribe(
-      (data) => {
-        this.user = data;
-        if(data != null){
-          if(data.is_onboarded){
+    this.auth.get_request_base().subscribe(
+      (request_base_) => {
+        if(request_base_){
+          if(request_base_.user.is_onboarded){
             this.router.navigate(["/profile",this.user!['username']]);
-          }else{
-            this.router.navigate(["/onboarding"]);
           }
+        }else{
+          this.router.navigate(["/onboarding"]);
         }
       }
     )

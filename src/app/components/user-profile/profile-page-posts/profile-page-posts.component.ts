@@ -14,14 +14,13 @@ import { UtilsService } from 'src/app/service/utils.service';
 })
 export class ProfilePagePostsComponent implements OnInit {
 
-  user: UserProfile | null;
+  user: UserProfile | null = null;
   third_person = false;
   viewing_feed=false;
   posts: Post[] = [];
   constructor(public database: DatabaseService,
     public util: UtilsService,
     public auth: AuthenticationService, public activatedRoute: ActivatedRoute, public sitedata: SitedataService) {
-    this.user = null;
     this.activatedRoute.url.subscribe(
       (current_url) => {
         if (current_url[0].toString() == "profile") {
@@ -40,9 +39,10 @@ export class ProfilePagePostsComponent implements OnInit {
 
   initialize_profile_page_posts(current_url: UrlSegment[]): void {
     var current_username = current_url[1].toString();
-    this.auth.get_current_user().subscribe(
-      (logged_in_user) => {
-        this.third_person = logged_in_user == null || logged_in_user.username != current_username;
+    this.auth.get_request_base().subscribe(
+      (request_base_) => {
+        this.third_person = (request_base_ == null || request_base_.user.username != current_username);
+
         if (this.third_person) {
           this.sitedata.user_on_screen.subscribe(
             (current_user) => {
@@ -55,25 +55,29 @@ export class ProfilePagePostsComponent implements OnInit {
             }
           )
         } else {
-          this.user = logged_in_user;
-          this.database.posts.subscribe(
-            (response_post) => {
-              this.posts = response_post;
-            }
-          )
+          if(request_base_){
+            this.user = request_base_.user;
+            this.sitedata.logged_user_posts.subscribe(
+              (logged_user_posts_) => {
+                this.posts = logged_user_posts_;
+              }
+            )
+          }
         }
       }
     )
   }
   initialize_feed_posts(current_url: UrlSegment[]): void {
-    this.auth.get_current_user().subscribe(
-      (logged_in_user) => {
-        this.user = logged_in_user;
-        this.database.get_user_feed().subscribe(
-          (response) => {
-            this.posts = JSON.parse(response);
-          }
-        )
+    this.auth.get_request_base().subscribe(
+      (request_base_) => {
+        if(request_base_){
+          this.user = request_base_.user;
+          this.database.get_user_feed().subscribe(
+            (posts_) => {
+              this.posts = posts_;
+            }
+          )
+        }
       }
     )
   }

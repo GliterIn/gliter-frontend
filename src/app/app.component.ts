@@ -7,19 +7,18 @@ import { AuthenticationService } from './service/authentication.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'Gliter';
-  is_logged_in = false;
-  constructor(public auth:AuthenticationService,private router: Router  ){
-    this.auth.logged_in_user.subscribe(
-      (data) => {
-        this.is_logged_in = true;
-        if(data == null && document.location.pathname.toString() == "/"){
+  constructor(public auth: AuthenticationService, private router: Router) {
+    this.auth.get_request_base().subscribe(
+      (request_base_) => {
+        if (request_base_ == null && document.location.pathname.toString() == "/") {
           this.router.navigate(["/login"]);
         }
       }
     )
   }
+
   public loadScript(location: string) {
     let body = <HTMLDivElement>document.body;
     let script = document.createElement('script');
@@ -29,7 +28,7 @@ export class AppComponent implements OnInit{
     script.defer = true;
     body.appendChild(script);
   }
-  ngOnInit(){
+  ngOnInit() {
     this.loadScript('assets/js/vendor/jquery-3.6.0.min.js');
     this.loadScript('assets/js/vendor/bootstrap.bundle.min.js');
     this.loadScript('assets/js/vendor/modernizr-3.6.0.min.js');

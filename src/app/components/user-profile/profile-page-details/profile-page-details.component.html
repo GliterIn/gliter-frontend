@@ -1,18 +1,18 @@
-<div class="widget widget-user-about">
+<div class="widget widget-user-about" *ngIf="user_on_screen != null">
     <div class="widget-heading">
         <h3 class="widget-title" *ngIf="!third_person">About Me</h3>
-        <h3 class="widget-title" *ngIf="third_person">About {{user?.name}}</h3>
+        <h3 class="widget-title" *ngIf="third_person">About {{user_on_screen.name}}</h3>
     </div>
     <div class="user-info">
-        <p>{{user?.bio}}</p>
+        <p>{{user_on_screen.bio}}</p>
         <ul class="info-list">
-            <li><span>Name:</span>{{user?.name}}</li>
-            <li><span>Joined:</span>{{util.parseTimestampShort(user!.joined_on)}}</li>
-            <li><span>Birthday:</span>{{util.parseTimestampShort(user!.birthday)}}</li>
-            <li><span>Location:</span>{{user!.location}}</li>
-            <li><span>Gender:</span>{{user!.gender}}</li>
-            <li><span>Occupation:</span> {{user!.occupation}}</li>
-            <li><span>Relationship:</span> {{user!.relationship}}</li>
+            <li><span>Name:</span>{{user_on_screen.name}}</li>
+            <li><span>Joined:</span>{{util.parseTimestampShort(user_on_screen.joined_on)}}</li>
+            <li><span>Birthday:</span>{{util.parseTimestampShort(user_on_screen.birthday)}}</li>
+            <li><span>Location:</span>{{user_on_screen.location}}</li>
+            <li><span>Gender:</span>{{user_on_screen.gender}}</li>
+            <li><span>Occupation:</span> {{user_on_screen.occupation}}</li>
+            <li><span>Relationship:</span> {{user_on_screen.relationship}}</li>
             <li class="social-share" *ngIf="false"><span>Social:</span>
                 <div class="social-icon">
                     <a><i class="fa fa-facebook"></i></a>

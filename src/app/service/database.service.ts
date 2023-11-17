@@ -6,6 +6,7 @@ import { UserProfile } from '../models/UserProfile.model';
 import { AuthenticationService } from './authentication.service';
 import { SitedataService } from './sitedata.service';
 import { UserSettings } from '../models/Settings.model';
+import { RequestBase, UserList } from '../models/API.model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,52 +14,60 @@ import { UserSettings } from '../models/Settings.model';
 export class DatabaseService {
   //API_BASE_URL = 'http://localhost:8000/api';
   API_BASE_URL = 'https://gliter-backend.siddharth27.repl.co/api';
+
   posts = new BehaviorSubject<Post[]>([]);
   feed_posts = new BehaviorSubject<Post[]>([]);
-  user: UserProfile | null;
+
+  request_base: RequestBase | null = null;
+
   constructor(
     public http: HttpClient,
     public auth: AuthenticationService,
     public sitedata: SitedataService
   ) {
-    this.user = null;
-    this.auth.logged_in_user.subscribe((user_response) => {
-      this.user = user_response;
-      if (user_response != null) {
-        this.get_user_posts(user_response.username).subscribe((user_posts) => {
-          this.posts.next(user_posts);
-        });
+    this.auth.get_request_base().subscribe((request_base_) => {
+      this.request_base = request_base_;
+      if (request_base_) {
+        this.get_user_following(request_base_.user.username).subscribe(
+          (following_) => {
+            this.sitedata.logged_user_following.next(following_.users);
+          });
+
+          this.get_user_followers(request_base_.user.username).subscribe(
+            (followers_) => {
+              this.sitedata.logged_user_followers.next(followers_.users);
+            });
+
+          this.get_user_posts(request_base_.user.username).subscribe(
+            (posts_) => {
+              this.sitedata.logged_user_posts.next(posts_);
+            }
+          )
       }
     });
   }
 
   create_post(post_content: string) {
-    if (this.user != null) {
-      this.http
-        .post<string>(this.API_BASE_URL + '/posts/create-post', {
-          user: this.user,
-          uid: this.auth.uid_value,
-          user_token: this.auth.user_token_value,
-          post: post_content,
-        })
-        .subscribe((_) => {
-          if (this.user != null) {
-            this.get_user_posts(this.user.username).subscribe((user_posts) => {
-              this.posts.next(user_posts);
-              this.sitedata.posts_on_screen.next(user_posts);
-            });
-          }
+    if (this.request_base == null) return;
+
+    this.http
+      .post<string>(this.API_BASE_URL + '/posts/create-post', {
+        request_base: this.request_base,
+        post: post_content,
+      })
+      .subscribe((_) => {
+        this.get_user_posts(this.request_base!.user.username).subscribe((user_posts) => {
+          this.sitedata.logged_user_posts.next(user_posts);
         });
-    }
+      });
   }
+
 
   get_user_details(username: string) {
     return this.http.post<UserProfile>(
       this.API_BASE_URL + '/users/get-user-details',
       {
-        user: this.user,
-        uid: this.auth.uid_value,
-        user_token: this.auth.user_token_value,
+        request_base: this.request_base,
         username: username,
       }
     );
@@ -75,28 +84,27 @@ export class DatabaseService {
 
   get_user_posts(username: string) {
     return this.http.post<Post[]>(this.API_BASE_URL + '/posts/get-posts', {
+      request_base: this.request_base,
       username: username,
     });
   }
 
-  get_user_followers(username: string, uid: string, user_token: string) {
-    return this.http.post<string>(
+  get_user_followers(username: string) {
+    return this.http.post<UserList>(
       this.API_BASE_URL + '/users/get-user-followers',
       {
+        request_base: this.request_base,
         username: username,
-        uid: uid,
-        user_token: user_token,
       }
     );
   }
 
-  get_user_following(username: string, uid: string, user_token: string) {
-    return this.http.post<string>(
+  get_user_following(username: string) {
+    return this.http.post<UserList>(
       this.API_BASE_URL + '/users/get-user-following',
       {
-        username: username,
-        uid: uid,
-        user_token: user_token,
+        request_base: this.request_base,
+        username: username
       }
     );
   }
@@ -105,6 +113,7 @@ export class DatabaseService {
     return this.http.post<string>(
       this.API_BASE_URL + '/users/get-user-followers-count',
       {
+        request_base: this.request_base,
         username: username,
       }
     );
@@ -114,68 +123,42 @@ export class DatabaseService {
     return this.http.post<string>(
       this.API_BASE_URL + '/users/get-user-following-count',
       {
+        request_base: this.request_base,
         username: username,
       }
     );
   }
 
   get_user_feed() {
-    return this.http.post<string>(this.API_BASE_URL + '/users/get-user-feed', {
-      user: this.user,
-      uid: this.auth.uid_value,
-      user_token: this.auth.user_token_value,
+    return this.http.post<Post[]>(this.API_BASE_URL + '/users/get-user-feed', {
+      request_base: this.request_base,
     });
   }
 
   follow_user(user_to_follow: string) {
-    if (this.user != null) {
-      this.http
-        .post<string>(this.API_BASE_URL + '/actions/follow', {
-          user: this.user,
-          uid: this.auth.uid_value,
-          user_token: this.auth.user_token_value,
-          user_to_follow: user_to_follow,
-        })
-        .subscribe((response) => {
-          this.auth.user_token.subscribe((token) => {
-            this.get_user_followers(
-              this.user!.username,
-              this.user!.uid,
-              token
-            ).subscribe((all_followers) => {
-              if (all_followers == "Hidden") {
-                this.sitedata.is_follower_hidden.next(true);
-                this.sitedata.followers_on_screen.next([]);
-              } else {
-                this.sitedata.followers_on_screen.next(JSON.parse(all_followers));
-                this.sitedata.is_follower_hidden.next(false);
-                this.sitedata.followers_count_on_screen.next(JSON.parse(all_followers).length)
-              }
-            });
-          });
+    if (this.request_base == null) return;
+    this.http
+      .post<string>(this.API_BASE_URL + '/actions/follow', {
+        request_base: this.request_base,
+        user_to_follow: user_to_follow,
+      })
+      .subscribe((response) => {
+        this.get_user_followers(
+          this.request_base!.user.username
+        ).subscribe((all_followers) => {
+          this.sitedata.followers_on_screen.next(all_followers);
         });
-    }
+      });
   }
 
 
+
   get_user_settings() {
-    return this.http.post<any>(
+    return this.http.post<UserSettings>(
       this.API_BASE_URL + '/users/get-user-settings',
       {
-        user: this.user,
-        uid: this.auth.uid_value,
-        user_token: this.auth.user_token_value,
+        request_base: this.request_base
       }
-    ).pipe(
-      map( (data_:string )=>{
-        var data = JSON.parse(data_);
-        var user_settings = <UserSettings>{};
-        user_settings.username = data['username'];
-        user_settings.follower_visible = data['follower_visible'];
-        user_settings.following_visible = data['following_visible'];
-        user_settings.private_account = data['private_account'];
-        return user_settings;
-      })
     );
   }
 
@@ -183,9 +166,7 @@ export class DatabaseService {
     return this.http.post<string>(
       this.API_BASE_URL + '/users/set-user-settings',
       {
-        user: this.user,
-        uid: this.auth.uid_value,
-        user_token: this.auth.user_token_value,
+        request_base: this.request_base,
         setting: user_settings,
       }
     );
@@ -193,18 +174,16 @@ export class DatabaseService {
 
 
   verify_user(user_to_verify: string) {
-    if (this.user != null) {
-      this.http
-        .post<string>(this.API_BASE_URL + '/actions/verify', {
-          user: this.user,
-          uid: this.auth.uid_value,
-          user_token: this.auth.user_token_value,
-          user_to_verify: user_to_verify,
-        })
-        .subscribe((response) => {
-          alert(response);
-          window.location.reload();
-        });
-    }
+    if (this.request_base == null) return;
+    this.http
+      .post<string>(this.API_BASE_URL + '/actions/verify', {
+        request_base: this.request_base,
+        user_to_verify: user_to_verify,
+      })
+      .subscribe((response) => {
+        alert(response);
+        window.location.reload();
+      });
   }
+
 }

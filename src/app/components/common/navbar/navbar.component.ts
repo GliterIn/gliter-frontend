@@ -12,23 +12,28 @@ import { UtilsService } from 'src/app/service/utils.service';
 })
 export class NavbarComponent implements OnInit {
 
-  user: UserProfile | null;
-  search_results: UserProfile[];
+  user: UserProfile | null = null;
+  
+  search_results: UserProfile[] = [];
   search_query: string = '';
+
   show_mobile_search = false;
+
   private searchSubject = new Subject<string>();
   isDropdownOpen = false;
+
+
   constructor(public database: DatabaseService,
     public util: UtilsService,
     public auth: AuthenticationService) {
-    this.user = null;
-    this.search_results = [];
-    this.auth.get_current_user().subscribe(
-      (data) => {
-        this.user = data;
+    this.auth.get_request_base().subscribe(
+      (request_base_) => {
+        if(request_base_)
+          this.user = request_base_.user;
       }
     )
   }
+
   triggerDropdown() {
     if (this.isDropdownOpen == false) {
       this.isDropdownOpen = true;

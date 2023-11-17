@@ -9,7 +9,7 @@ import { UtilsService } from 'src/app/service/utils.service';
   styleUrls: ['./edit-profile.component.css'],
 })
 export class EditProfileComponent implements OnInit {
-  user: UserProfile | null;
+  user: UserProfile | null = null;
   countries = [
     'Afghanistan',
     'Albania',
@@ -208,50 +208,52 @@ export class EditProfileComponent implements OnInit {
     'Zimbabwe',
   ];
   constructor(public auth: AuthenticationService, public util: UtilsService) {
-    this.user = null;
+    
   }
 
   ngOnInit(): void {
-    this.auth.get_current_user().subscribe((current_user) => {
-      this.user = current_user;
+    this.auth.get_request_base().subscribe((request_base_) => {
+      if(request_base_)
+        this.user = request_base_.user;
     });
   }
+
   save_data() {
     if (this.user != null) {
       this.auth.update_user(this.user);
     }
   }
 
-  upload_profile_picture(e: any) {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      this.util.downscaleImage(reader.result!.toString(), 500, 500)
-        .then((downscaledImage) => {
-          // Use the downscaled image
-          this.user!['profile_picture'] = downscaledImage;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    };
-  }
-  upload_cover_picture(e: any) {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      this.util.downscaleImage(reader.result!.toString(), 700, 700)
-        .then((downscaledImage) => {
-          // Use the downscaled image
-          this.user!['cover_picture'] = downscaledImage;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    };
-  }
+  // upload_profile_picture(e: any) {
+  //   const file = e.target.files[0];
+  //   const reader = new FileReader();
+  //   reader.readAsDataURL(file);
+  //   reader.onload = () => {
+  //     this.util.downscaleImage(reader.result!.toString(), 500, 500)
+  //       .then((downscaledImage) => {
+  //         // Use the downscaled image
+  //         this.user!['profile_picture'] = downscaledImage;
+  //       })
+  //       .catch((error) => {
+  //         console.error(error);
+  //       });
+  //   };
+  // }
+  // upload_cover_picture(e: any) {
+  //   const file = e.target.files[0];
+  //   const reader = new FileReader();
+  //   reader.readAsDataURL(file);
+  //   reader.onload = () => {
+  //     this.util.downscaleImage(reader.result!.toString(), 700, 700)
+  //       .then((downscaledImage) => {
+  //         // Use the downscaled image
+  //         this.user!['cover_picture'] = downscaledImage;
+  //       })
+  //       .catch((error) => {
+  //         console.error(error);
+  //       });
+  //   };
+  // }
 
   
 }

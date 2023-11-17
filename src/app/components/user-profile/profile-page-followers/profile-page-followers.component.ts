@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserList } from 'src/app/models/API.model';
 import { UserProfile } from 'src/app/models/UserProfile.model';
 import { DatabaseService } from 'src/app/service/database.service';
 import { SitedataService } from 'src/app/service/sitedata.service';
@@ -9,23 +10,19 @@ import { SitedataService } from 'src/app/service/sitedata.service';
   styleUrls: ['./profile-page-followers.component.css'],
 })
 export class ProfilePageFollowersComponent implements OnInit {
-  user: UserProfile | null;
-  followers: UserProfile[];
-  is_hidden = false;
+  user: UserProfile | null = null;
+  followers: UserList = <UserList>{};
+
   constructor(
     public database: DatabaseService,
     public sitedata: SitedataService
   ) {
-    this.user = null;
-    this.followers = [];
     this.sitedata.user_on_screen.subscribe((data) => {
       if (data != null) {
         this.user = data;
-        this.sitedata.is_follower_hidden.subscribe((hidden) => {
-          this.is_hidden = hidden;
-          this.sitedata.followers_on_screen.subscribe((all_followers) => {
-            this.followers = all_followers;
-          });
+        this.sitedata.followers_on_screen.subscribe((followers_on_screen_) => {
+            this.followers = followers_on_screen_;
+            console.log(this.followers)
         });
       }
     });

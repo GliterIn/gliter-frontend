@@ -5,6 +5,7 @@ import { UserProfile } from '../models/UserProfile.model';
 import { GoogleAuthProvider } from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { UserCredential } from 'firebase/auth';
+import { RequestBase } from '../models/API.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,10 @@ import { UserCredential } from 'firebase/auth';
 export class AuthenticationService {
   //API_BASE_URL = 'http://localhost:8000/api';
   API_BASE_URL = 'https://gliter-backend.siddharth27.repl.co/api';
-  logged_in_user = new BehaviorSubject<UserProfile | null>(null);
-  user_token = new BehaviorSubject<string>("");
 
-  user_token_value = "";
-  uid_value = "";
 
+  private request_base = new BehaviorSubject<RequestBase | null>(null);
+  request_base_value: RequestBase | null = null;
   constructor(public http: HttpClient, public afAuth: AngularFireAuth) {
     this.afAuth.onAuthStateChanged((oauth_login_data) => {
       if (oauth_login_data != null) {
@@ -29,10 +28,14 @@ export class AuthenticationService {
               'email': oauth_login_data?.email
             }).subscribe(
               (backend_login_data) => {
-                this.user_token_value = user_token_response;
-                this.uid_value = oauth_login_data?.uid; 
-                this.user_token.next(user_token_response);
-                this.logged_in_user.next(backend_login_data);
+                if (backend_login_data && oauth_login_data) {
+                  var request_base_ = <RequestBase>{};
+                  request_base_.uid = oauth_login_data.uid;
+                  request_base_.user_token = user_token_response;
+                  request_base_.user = backend_login_data;
+                  this.request_base.next(request_base_);
+                  this.request_base_value = request_base_;
+                }
               }
             )
           }
@@ -53,9 +56,12 @@ export class AuthenticationService {
                 'uid': oauth_login_data.user?.uid
               }).subscribe(
                 (backend_login_data) => {
-                  this.user_token.next(user_token_response);
-                  this.logged_in_user.next(backend_login_data);
-                  
+                  var request_base_ = <RequestBase>{};
+                  request_base_.uid = oauth_login_data.user!.uid;
+                  request_base_.user_token = user_token_response;
+                  request_base_.user = backend_login_data;
+                  this.request_base.next(request_base_);
+                  this.request_base_value = request_base_;
                 }
               )
             }
@@ -73,12 +79,11 @@ export class AuthenticationService {
 
   onboard_user(user: UserProfile) {
     this.http.post<UserProfile>(this.API_BASE_URL + '/onboarding', {
-      'user': user,
-      'uid': this.uid_value,
-      'user_token': this.user_token_value
+      request_base: user
     }).subscribe(
-      (backend_login_data) => {
-        this.logged_in_user.next(backend_login_data);
+      (user_) => {
+        this.request_base_value!.user = user_;
+        this.request_base.next(this.request_base_value);
         window.location.href = '/feed';
       },
       (error) => {
@@ -89,19 +94,18 @@ export class AuthenticationService {
 
   update_user(user: UserProfile) {
     this.http.post<UserProfile>(this.API_BASE_URL + '/update-user', {
-      'user': user,
-      'uid': this.uid_value,
-      'user_token': this.user_token_value
+      request_base: user
     }).subscribe(
-      (backend_login_data) => {
-        this.logged_in_user.next(backend_login_data);
+      (user_) => {
+        this.request_base_value!.user = user_;
+        this.request_base.next(this.request_base_value);
         alert('Your changes were saved.')
       }
     )
   }
 
-  get_current_user(): BehaviorSubject<UserProfile | null> {
-    return this.logged_in_user;
+  get_request_base(): BehaviorSubject<RequestBase | null> {
+    return this.request_base;
   }
 
   login_user() {
@@ -112,7 +116,8 @@ export class AuthenticationService {
     this.afAuth.signOut().then(
       (data) => {
         console.log("You have been logged out !");
-        this.logged_in_user.next(null);
+        this.request_base.next(null);
+        this.request_base_value = null;
       }
     ).catch(
       (error) => {
