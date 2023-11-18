@@ -39,6 +39,7 @@ import { ProfilePageFollowingComponent } from './components/user-profile/profile
 import { VerifiedTickComponent } from './components/common/verified-tick/verified-tick.component';
 import { SettingsComponent } from './components/common/settings/settings.component';
 import { MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { ProfilePageFollowRequestsComponent } from './components/user-profile/profile-page-follow-requests/profile-page-follow-requests.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { MatSlideToggleModule} from '@angular/material/slide-toggle';
     FooterComponent,
     ProfilePageFollowingComponent,
     VerifiedTickComponent,
-    SettingsComponent
+    SettingsComponent,
+    ProfilePageFollowRequestsComponent
   ],
   imports: [
     BrowserModule,

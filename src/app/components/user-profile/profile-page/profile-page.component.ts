@@ -17,6 +17,7 @@ export class ProfilePageComponent implements OnInit {
   tab_name = '';
   profile_loaded = false;
   private_account = false;
+  pending_requests = 0;
 
   constructor(
     public database: DatabaseService,
@@ -31,28 +32,49 @@ export class ProfilePageComponent implements OnInit {
     this.activatedRoute.url.subscribe(
       (current_url) => {
         this.user_on_screen_username = current_url[1].toString();
-        console.log(this.user_on_screen_username);
+
         // Get Tab Name
         if (current_url.length >= 3) {
           var current_tab = current_url[2].toString();
           this.tab_name = current_tab;
         }
 
-        // Check if we need to refetch data
-        console.log(this.sitedata.user_on_screen_static);
-        console.log(this.user_on_screen_username)
+        this.sitedata.logged_user_follow_requests.subscribe(
+          (follow_requests_) => {
+            this.pending_requests = follow_requests_.length;
+          }
+        )
 
+        // Check if we need to refetch data
         if (this.sitedata.user_on_screen_static && this.user_on_screen_username == this.sitedata.user_on_screen_static.username) {
           // User in sitedata cache is same as user on screen. 
           console.log("User in sitedata cache is same as user on screen. ");
           this.private_account = this.sitedata.user_on_screen_static.private_account;
           this.profile_loaded = true;
+          this.sitedata.logged_user_follow_requests.subscribe(
+            (follow_requests_) => {
+              this.pending_requests = follow_requests_.length;
+            }
+          )
         } else {
           // User in sitedata cache is different from user on screen.
           console.log("User in sitedata cache is different from user on screen.");
           this.profile_loaded = false;
           this.auth.get_request_base().subscribe(
-            (_) => {
+            (request_base_) => {
+              if (request_base_) {
+                if (request_base_.user.username != this.user_on_screen_username) {
+                  this.third_person = true;
+                } else {
+                  this.third_person = false;
+                  this.database.get_user_follow_requests().subscribe(
+                    (follow_requests_) => {
+                      this.sitedata.logged_user_follow_requests.next(follow_requests_.users);
+                      this.pending_requests = follow_requests_.users.length;
+                    }
+                  )
+                }
+              }
               this.reload_new_data(this.user_on_screen_username);
             }
           )
@@ -74,6 +96,8 @@ export class ProfilePageComponent implements OnInit {
       this.title.setTitle(user.name + "'s Followers");
     } else if (this.tab_name == 'following') {
       this.title.setTitle(user.name + "'s Following");
+    } else if (this.tab_name == 'requests') {
+      this.title.setTitle("Pending Requests");
     }
   }
 

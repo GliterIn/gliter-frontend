@@ -1,14 +1,15 @@
 <div class="row">
-    <div class="col-lg-12" *ngIf="tab_name == 'followers' || tab_name == 'following'">
+    <div class="col-lg-12" *ngIf="tab_name == 'followers' || tab_name == 'following' || tab_name == 'requests'">
         <app-profile-page-followers *ngIf="tab_name == 'followers'"></app-profile-page-followers>
         <app-profile-page-following *ngIf="tab_name == 'following'"></app-profile-page-following>
+        <app-profile-page-follow-requests *ngIf="tab_name == 'requests'"></app-profile-page-follow-requests>
     </div>
     <div class="col-lg-8" *ngIf="tab_name != 'followers' && tab_name != 'following'">
         <app-share-post *ngIf="tab_name == ''"></app-share-post>
         <app-profile-page-posts  *ngIf="tab_name == ''"></app-profile-page-posts>
         <app-profile-page-about *ngIf="tab_name == 'about'"></app-profile-page-about>
     </div>
-    <div class="col-lg-4 widget-block widget-break-lg d-none d-md-block" *ngIf="tab_name != 'followers' && tab_name != 'following'">
+    <div class="col-lg-4 widget-block widget-break-lg d-none d-md-block" *ngIf="tab_name != 'followers' && tab_name != 'following' && tab_name != 'requests'">
         <app-profile-page-details  *ngIf="tab_name == ''"></app-profile-page-details>
         <br *ngIf="tab_name == ''">
         <app-people-you-may-know></app-people-you-may-know>

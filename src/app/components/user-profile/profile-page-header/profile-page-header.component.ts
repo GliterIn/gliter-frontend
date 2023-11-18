@@ -15,21 +15,22 @@ import { UtilsService } from 'src/app/service/utils.service';
 export class ProfilePageHeaderComponent implements OnInit {
 
   user_on_screen: UserProfile | null = null;
-  
+
   total_posts: number = 0;
   followers_count = 0;
-  
+
   third_person = false;
-  is_following=false;
+  is_following = false;
   follows_you = false;
   is_admin = false;
-  @Input('private_account') private_account=false;
+  follow_status = '';
+  @Input('private_account') private_account = false;
 
   constructor(public database: DatabaseService,
     public util: UtilsService,
     public auth: AuthenticationService, public activatedRoute: ActivatedRoute,
-    public sitedata:SitedataService) {
-    
+    public sitedata: SitedataService) {
+
     this.activatedRoute.url.subscribe(
       (current_url) => {
         var current_username = current_url[1].toString();
@@ -46,14 +47,21 @@ export class ProfilePageHeaderComponent implements OnInit {
         )
         this.auth.get_request_base().subscribe(
           (request_base_) => {
-            if(request_base_){
+            if (request_base_) {
               this.is_admin = request_base_.user.is_admin;
+              if (request_base_.user.username != current_username) {
+                this.database.get_follow_status(current_username).subscribe(
+                  (follow_status_) => {
+                    this.follow_status = follow_status_['status'];
+                  }
+                )
+              }
             }
-              
+
             this.sitedata.logged_user_following.subscribe(
               (logged_user_following_) => {
-                for(let follower of logged_user_following_){
-                  if(follower.username == current_username){
+                for (let follower of logged_user_following_) {
+                  if (follower.username == current_username) {
                     this.is_following = true;
                   }
                 }
@@ -62,8 +70,8 @@ export class ProfilePageHeaderComponent implements OnInit {
 
             this.sitedata.logged_user_followers.subscribe(
               (logged_user_followers_) => {
-                for(let follower of logged_user_followers_){
-                  if(follower.username == current_username){
+                for (let follower of logged_user_followers_) {
+                  if (follower.username == current_username) {
                     this.follows_you = true;
                   }
                 }
@@ -89,15 +97,37 @@ export class ProfilePageHeaderComponent implements OnInit {
 
   }
 
-  toggle_follow(){
-    if(this.user_on_screen != null){
+  toggle_follow() {
+    if (this.user_on_screen != null) {
       this.database.follow_user(this.user_on_screen.username);
       this.is_following = !this.is_following;
     }
   }
 
-  verify_user(){
-    if(this.user_on_screen != null){
+  send_follow_request() {
+    this.auth.get_request_base().subscribe(
+      (request_base_) => {
+        if (request_base_ && this.user_on_screen) {
+          this.database.send_follow_request(this.user_on_screen.username).subscribe(
+            (_) => {
+              alert("Request Sent.");
+
+              // Update the Status
+              if (this.user_on_screen) {
+                this.database.get_follow_status(this.user_on_screen.username).subscribe(
+                  (follow_status_) => {
+                    this.follow_status = follow_status_['status'];
+                  }
+                )
+              }
+            }
+          );
+        }
+      }
+    )
+  }
+  verify_user() {
+    if (this.user_on_screen != null) {
       this.database.verify_user(this.user_on_screen.username);
     }
   }

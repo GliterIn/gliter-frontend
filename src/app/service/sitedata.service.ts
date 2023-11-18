@@ -20,6 +20,7 @@ export class SitedataService {
   logged_user_posts = new BehaviorSubject<Post[]>([]);
   logged_user_following = new BehaviorSubject<UserProfile[]>([]);
   logged_user_followers = new BehaviorSubject<UserProfile[]>([]);
+  logged_user_follow_requests = new BehaviorSubject<UserProfile[]>([]);
   constructor() {
   }
   update_user(user: UserProfile) {

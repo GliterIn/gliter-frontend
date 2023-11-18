@@ -3,6 +3,7 @@ import { Subject, debounceTime } from 'rxjs';
 import { UserProfile } from 'src/app/models/UserProfile.model';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { DatabaseService } from 'src/app/service/database.service';
+import { SitedataService } from 'src/app/service/sitedata.service';
 import { UtilsService } from 'src/app/service/utils.service';
 
 @Component({
@@ -19,17 +20,25 @@ export class NavbarComponent implements OnInit {
 
   show_mobile_search = false;
 
+
+  request_count = 0;
+  follow_requests: UserProfile[] = [];
   private searchSubject = new Subject<string>();
   isDropdownOpen = false;
 
 
   constructor(public database: DatabaseService,
     public util: UtilsService,
-    public auth: AuthenticationService) {
+    public auth: AuthenticationService, public sitedata: SitedataService) {
     this.auth.get_request_base().subscribe(
       (request_base_) => {
         if(request_base_)
           this.user = request_base_.user;
+      }
+    )
+    this.sitedata.logged_user_follow_requests.subscribe(
+      (follow_requests_) => {
+        this.follow_requests = follow_requests_;
       }
     )
   }
@@ -74,4 +83,18 @@ export class NavbarComponent implements OnInit {
     this.searchSubject.next(searchQuery);
   }
 
+
+  approve_user(username:string){
+    this.database.approve_follow(username).subscribe(
+      (data) => {
+        if(data == "OK"){
+          this.database.get_user_follow_requests().subscribe(
+            (follow_request_) => {
+              this.sitedata.logged_user_follow_requests.next(follow_request_.users);
+            }
+          )
+        }
+      }
+    )
+  }
 }

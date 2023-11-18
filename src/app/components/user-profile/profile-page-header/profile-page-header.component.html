@@ -14,6 +14,8 @@
                     <div class="item-subtitle">{{user_on_screen.location}}</div>
                     <ul class="item-social" *ngIf="third_person">
                         <button class="btn btn-info" (click)="toggle_follow()" *ngIf="!is_following && !private_account">Follow</button>
+                        <button class="btn btn-info" (click)="send_follow_request()" *ngIf="!is_following && private_account && follow_status=='Not Following'">Follow Request</button>
+                        <button class="btn btn-warning"  *ngIf="!is_following && private_account && follow_status=='Pending'">Request Pending</button>
                         <button class="btn btn-info" (click)="toggle_follow()" *ngIf="is_following">Unfollow</button>
                         <button class="btn btn-success ml-2" (click)="verify_user()" *ngIf="is_admin">{{user_on_screen!.is_verified ? 'UnVerify':'Verify'}}</button>
                     </ul>

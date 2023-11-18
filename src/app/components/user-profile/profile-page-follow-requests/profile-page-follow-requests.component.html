@@ -1,0 +1,40 @@
+<div class="widget widget-memebers" *ngIf="followers.length == 0">
+  <h3 class="text-center lead">No Pending Requests</h3>
+</div>
+<div class="widget widget-memebers" *ngIf="followers.length != 0">
+  <div id="user-view" class="user-grid-view">
+    <div class="row gutters-20">
+      <div class="col-xl-3 col-lg-4 col-md-6" *ngFor="let follower of followers">
+        <div class="widget-author">
+          <div class="author-heading">
+            <div class="cover-img">
+              <img [src]="follower.cover_picture" alt="cover" />
+            </div>
+            <div class="profile-img">
+              <a routerLink="/profile/{{ follower.username }}">
+                <img [src]="follower.profile_picture" style="width: 115px; height: 115px; object-fit: cover"
+                  alt="author" />
+              </a>
+            </div>
+            <div class="profile-name">
+              <h4 class="author-name">
+                <a routerLink="/profile/{{ follower.username }}">{{ follower.name }}
+                  <app-verified-tick class="mr-2" [condition]="follower.is_verified"
+                    [is_admin]="follower.is_admin"></app-verified-tick>
+                </a>
+              </h4>
+              <div class="author-location">@{{ follower.username }}</div>
+              <button class="btn btn-success" (click)="approve_user(follower.username)">Accept</button>
+            </div>
+          </div>
+          <ul class="author-badge">
+            <!-- <li><a href="#" class="bg-salmon-gradient"><i class="icofont-star"></i></a></li>
+                          <li><a href="#" class="bg-amethyst-gradient"><i class="icofont-ui-play"></i></a></li>
+                          <li><a href="#" class="bg-sun-gradient"><i class="icofont-squirrel"></i></a></li>
+                          <li><a href="#" class="bg-jungle-gradient"><i class="icofont-rocket-alt-1"></i></a></li> -->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

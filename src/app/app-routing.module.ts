@@ -21,6 +21,7 @@ const routes: Routes = [
   {path : 'profile/:username/about' , component : ProfilePageComponent },
   {path : 'profile/:username/followers' , component : ProfilePageComponent },
   {path : 'profile/:username/following' , component : ProfilePageComponent },
+  {path : 'profile/:username/requests' , component : ProfilePageComponent },
   {path : 'logout' , title:'Logged Out', component : LogoutComponent},
   {path : 'brb' , title:'Be right back !', component : BeRightBackComponent},
   {path : 'investors' , title:'Investors', component : InvestorsComponent},

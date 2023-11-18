@@ -1,17 +1,13 @@
 <div class="page-content">
-  <div
-    class="container text-center"
-    *ngIf="!profile_loaded"
-    style="height: 100vh"
-  >
+  <div class="container text-center" *ngIf="!profile_loaded" style="height: 100vh">
     <div class="spinner-border spinner-border-lg text-primary" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>
   </div>
   <div class="container" *ngIf="profile_loaded">
     <app-profile-page-header [private_account]="private_account"></app-profile-page-header>
-    
-    <div class="block-box user-top-header"  *ngIf="private_account">
+
+    <div class="block-box user-top-header" *ngIf="profile_loaded && private_account">
       <ul style="border-bottom: 3px solid #d8e1ef; border-radius: 0 0 8px 8px;">
         <li class="text-center m-4">
           <a>This account is private</a>
@@ -19,7 +15,7 @@
       </ul>
     </div>
 
-    <div class="block-box user-top-header"  *ngIf="profile_loaded && private_account==false">
+    <div class="block-box user-top-header" *ngIf="profile_loaded && private_account==false">
       <ul class="menu-list">
         <li [ngClass]="{ active: tab_name == '' }">
           <a routerLink="/profile/{{ user_on_screen_username }}">Timeline </a>
@@ -33,12 +29,15 @@
         <li [ngClass]="{ active: tab_name == 'following' }">
           <a routerLink="/profile/{{ user_on_screen_username }}/following">Following</a>
         </li>
+        <li [ngClass]="{ active: tab_name == 'requests' }" *ngIf="!third_person">
+          <a routerLink="/profile/{{ user_on_screen_username }}/requests"> <span style="color: red;font-weight: bolder;">{{pending_requests}}</span> Requests </a>
+        </li>
         <!-- <li><a>Gallery</a></li>
                 <li><a>Badges</a></li>
                 <li><a>Blogs</a></li> -->
       </ul>
     </div>
-    <app-profile-page-content [tab_name]="tab_name"  *ngIf="private_account==false"></app-profile-page-content>
+    <app-profile-page-content [tab_name]="tab_name" *ngIf="private_account==false"></app-profile-page-content>
   </div>
   <app-footer></app-footer>
 </div>

@@ -35,43 +35,44 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="inline-item d-flex align-items-center" *ngIf="user != null && user.is_onboarded">
                     <div class="dropdown dropdown-friend">
                         <a class="dropdown-toggle" routerLink="/feed" data-toggle="dropdown" aria-expanded="false">
                             <i class="fa fa-rss"></i>
                         </a>
                     </div>
-                    <div class="dropdown dropdown-friend" *ngIf="false">
+                    <div class="dropdown dropdown-friend" >
                         <button class="dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
                             <i class="fa fa-users"></i>
+                            <span class="notify-count">{{this.follow_requests.length}}</span>
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
                             <div class="item-heading">
-                                <h6 class="heading-title">Friend Requests</h6>
+                                <h6 class="heading-title">Follow Requests</h6>
                                 <div class="heading-btn">
-                                    <a>Settings</a>
-                                    <a>Mark all as Read</a>
+                                    <a [routerLink]="'profile/' + user.username + '/requests'">Requests</a>
                                 </div>
                             </div>
-                            <div class="item-body">
+                            <div class="item-body" *ngFor="let follower of follow_requests ">
                                 <div class="media">
                                     <div class="item-img">
-                                        <img src="https://avatars.githubusercontent.com/u/68241942?v=4" alt="Notify"
+                                        <img [src]="follower.profile_picture" alt="Notify"
                                             style="width: 50px; height: 50px; object-fit: cover;">
                                         <span class="chat-status offline"></span>
                                     </div>
                                     <div class="media-body">
-                                        <h6 class="item-title"><a>Siddharth Singh</a></h6>
-                                        <p>4 in mutual friends</p>
+                                        <h6 class="item-title"><a>{{follower.name}}</a></h6>
+                                        <p>@{{follower.username}}</p>
                                         <div class="btn-area">
-                                            <a class="item-btn"><i class="fa fa-plus"></i></a>
-                                            <a hr ef="#" class="item-btn"><i class="fa fa-minus"></i></a>
+                                            <button class="btn btn-success" (click)="approve_user(follower.username)"><i class="fa fa-check"></i></button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="item-footer">
-                                <a class="view-btn">View All Friend Request</a>
+                                <a class="view-btn" [routerLink]="'profile/' + user.username + '/requests'" *ngIf="this.follow_requests.length != 0">View All Follow Request</a>
+                                <a class="view-btn" *ngIf="this.follow_requests.length == 0">No Requests</a>
                             </div>
                         </div>
                     </div>

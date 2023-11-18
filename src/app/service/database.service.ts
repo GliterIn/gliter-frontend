@@ -33,16 +33,16 @@ export class DatabaseService {
             this.sitedata.logged_user_following.next(following_.users);
           });
 
-          this.get_user_followers(request_base_.user.username).subscribe(
-            (followers_) => {
-              this.sitedata.logged_user_followers.next(followers_.users);
-            });
+        this.get_user_followers(request_base_.user.username).subscribe(
+          (followers_) => {
+            this.sitedata.logged_user_followers.next(followers_.users);
+          });
 
-          this.get_user_posts(request_base_.user.username).subscribe(
-            (posts_) => {
-              this.sitedata.logged_user_posts.next(posts_);
-            }
-          )
+        this.get_user_posts(request_base_.user.username).subscribe(
+          (posts_) => {
+            this.sitedata.logged_user_posts.next(posts_);
+          }
+        )
       }
     });
   }
@@ -95,6 +95,15 @@ export class DatabaseService {
       {
         request_base: this.request_base,
         username: username,
+      }
+    );
+  }
+
+  get_user_follow_requests() {
+    return this.http.post<UserList>(
+      this.API_BASE_URL + '/users/get-user-follow-request',
+      {
+        request_base: this.request_base,
       }
     );
   }
@@ -186,4 +195,26 @@ export class DatabaseService {
       });
   }
 
+  get_follow_status(user_to_follow: string) {
+    return this.http
+      .post<{ status: string }>(this.API_BASE_URL + '/actions/check_follow_status', {
+        request_base: this.request_base,
+        user_to_follow: user_to_follow,
+      });
+  }
+
+  send_follow_request(user_to_follow: string) {
+    return this.http
+      .post<string>(this.API_BASE_URL + '/actions/request_follow', {
+        request_base: this.request_base,
+        user_to_follow: user_to_follow,
+      });
+  }
+  approve_follow(user_to_approve: string){
+    return this.http
+    .post<string>(this.API_BASE_URL + '/actions/approve_follow', {
+      request_base: this.request_base,
+      user_to_approve: user_to_approve,
+    });
+  }
 }
