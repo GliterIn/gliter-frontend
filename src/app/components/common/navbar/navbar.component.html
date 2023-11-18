@@ -45,7 +45,7 @@
                     <div class="dropdown dropdown-friend" >
                         <button class="dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
                             <i class="fa fa-users"></i>
-                            <span class="notify-count">{{this.follow_requests.length}}</span>
+                            <span class="notify-count" *ngIf="this.follow_requests.length != 0">{{this.follow_requests.length}}</span>
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
                             <div class="item-heading">
