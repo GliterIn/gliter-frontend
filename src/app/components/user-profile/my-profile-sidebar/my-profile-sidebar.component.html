@@ -9,8 +9,8 @@
             </a>
         </div>
         <div class="profile-name">
-            <h4 class="author-name"><a routerLink="/profile/{{user.username}}">{{user.name}}
-                <app-verified-tick class="mr-2" [condition]="user!.is_verified"  [is_admin]="user!.is_admin"></app-verified-tick>
+            <h4 class="author-name"><a routerLink="/profile/{{user.username}}" style="margin-left: 10%">{{user.name}}
+                <app-verified-tick [condition]="user!.is_verified"  [is_admin]="user!.is_admin"></app-verified-tick>
                 </a></h4>
             <div class="author-location">{{user.location}}</div>
         </div>
