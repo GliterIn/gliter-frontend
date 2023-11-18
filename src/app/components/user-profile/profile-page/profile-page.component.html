@@ -30,7 +30,7 @@
           <a routerLink="/profile/{{ user_on_screen_username }}/following">Following</a>
         </li>
         <li [ngClass]="{ active: tab_name == 'requests' }" *ngIf="!third_person">
-          <a routerLink="/profile/{{ user_on_screen_username }}/requests"> <span style="color: red;font-weight: bolder;">{{pending_requests}}</span> Requests </a>
+          <a routerLink="/profile/{{ user_on_screen_username }}/requests"> <span style="color: red;font-weight: bolder;" *ngIf="pending_requests != 0">{{pending_requests}}</span> Requests </a>
         </li>
         <!-- <li><a>Gallery</a></li>
                 <li><a>Badges</a></li>

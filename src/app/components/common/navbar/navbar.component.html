@@ -62,7 +62,7 @@
                                         <span class="chat-status offline"></span>
                                     </div>
                                     <div class="media-body">
-                                        <h6 class="item-title"><a>{{follower.name}}</a></h6>
+                                        <h6 class="item-title"><a>{{follower.name}} <app-verified-tick class="mr-2" [condition]="follower.is_verified" [is_admin]="follower.is_admin" [size]="'25px'"></app-verified-tick></a></h6>
                                         <p>@{{follower.username}}</p>
                                         <div class="btn-area">
                                             <button class="btn btn-success" (click)="approve_user(follower.username)"><i class="fa fa-check"></i></button>

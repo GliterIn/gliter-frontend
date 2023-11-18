@@ -56,6 +56,17 @@ export class ProfilePageComponent implements OnInit {
               this.pending_requests = follow_requests_.length;
             }
           )
+          this.auth.get_request_base().subscribe(
+            (request_base_) => {
+              if(request_base_){
+                if (request_base_.user.username != this.user_on_screen_username) {
+                  this.third_person = true;
+                } else {
+                  this.third_person = false;
+                }
+              }
+            }
+          )
         } else {
           // User in sitedata cache is different from user on screen.
           console.log("User in sitedata cache is different from user on screen.");
