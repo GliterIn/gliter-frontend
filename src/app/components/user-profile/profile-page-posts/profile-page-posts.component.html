@@ -1,17 +1,20 @@
-<div class="block-box post-view"  *ngFor="let post of posts">
+<div class="block-box post-view" *ngFor="let post of posts">
     <div class="post-header">
         <div class="media">
             <div class="user-img">
-                <img *ngIf="viewing_feed" src="{{post.user['profile_picture']}}" style="width: 50px; height: 50px; object-fit: cover;">
-                <img *ngIf="!viewing_feed" src="{{user!.profile_picture}}" style="width: 50px; height: 50px; object-fit: cover;">
+                <img *ngIf="viewing_feed" src="{{post.user['profile_picture']}}"
+                    style="width: 50px; height: 50px; object-fit: cover;">
+                <img *ngIf="!viewing_feed" src="{{user!.profile_picture}}"
+                    style="width: 50px; height: 50px; object-fit: cover;">
             </div>
             <div class="media-body">
                 <div class="user-title">
                     <a *ngIf="viewing_feed" routerLink="/profile/{{post.user['username']}}">{{post.user['name']}}</a>
                     <a *ngIf="!viewing_feed" routerLink="/profile/{{user!.username}}">{{user!.name}}</a>
-                    <app-verified-tick [is_admin]="post.user['is_admin']"  [condition]="viewing_feed && post.user['is_verified']"></app-verified-tick>
-                    <app-verified-tick [is_admin]="user!.is_admin" [condition]="!viewing_feed && user!.is_verified"></app-verified-tick>
-                    
+                    <app-verified-tick [is_admin]="post.user['is_admin']"
+                        [condition]="viewing_feed && post.user['is_verified']"></app-verified-tick>
+                    <app-verified-tick [is_admin]="user!.is_admin"
+                        [condition]="!viewing_feed && user!.is_verified"></app-verified-tick>
                 </div>
                 <ul class="entry-meta">
                     <li class="meta-time">{{util.parseTimestamp(post.timestamp)}}</li>
@@ -23,39 +26,55 @@
         <div class="post-no-thumbnail">
             <p [innerHTML]="post.content"></p>
         </div>
-        <div class="post-meta-wrap"  *ngIf="false">
+        <div class="post-meta-wrap" *ngIf="get_total_reaction_count(post)">
             <div class="post-meta">
                 <div class="post-reaction">
                     <div class="reaction-icon">
-                        <img src="https://radiustheme.com/demo/html/cirkle/media/figure/reaction_1.png" alt="icon">
-                        <img src="https://radiustheme.com/demo/html/cirkle/media/figure/reaction_2.png" alt="icon">
-                        <img src="https://radiustheme.com/demo/html/cirkle/media/figure/reaction_3.png" alt="icon">
+                        <img [src]="get_reaction_url(x.key)" alt="" *ngFor="let x of post.reactions | keyvalue">
                     </div>
-                    <div class="meta-text">25</div>
+                    <div class="meta-text" [title]="get_list_of_reactees(post)">{{get_total_reaction_count(post)}}</div>
                 </div>
             </div>
             <div class="post-meta">
-                <div class="meta-text">2 Comments</div>
-                <div class="meta-text">05 Share</div>
+                <div class="meta-text" *ngIf="false">2 Comments</div>
+                <div class="meta-text" *ngIf="false">05 Share</div>
             </div>
         </div>
     </div>
-    <div class="post-footer"  *ngIf="false">
+    <div class="post-footer" *ngIf="logged_in_user">
         <ul>
             <li class="post-react">
-                <a ><i class="fa fa-thumbs-up"></i>React!</a>
+                <a>
+                    <img [src]="get_reaction_url(get_my_reaction(post).reaction_type)"
+                        *ngIf="get_my_reaction(post).show_icon" class="pr-2">
+                    <i class="fa fa-thumbs-up" *ngIf="!get_my_reaction(post).show_icon"></i>
+                    {{capitalize_first_letter(get_my_reaction(post).reaction_type)}}</a>
                 <ul class="react-list">
-                    <li><a><img src="https://radiustheme.com/demo/html/cirkle/media/figure/reaction_1.png" alt="Like"></a></li>
-                    <li><a><img src="https://radiustheme.com/demo/html/cirkle/media/figure/reaction_3.png" alt="Like"></a></li>
-                    <li><a><img src="https://radiustheme.com/demo/html/cirkle/media/figure/reaction_4.png" alt="Like"></a></li>
-                    <li><a><img src="https://radiustheme.com/demo/html/cirkle/media/figure/reaction_2.png" alt="Like"></a></li>
-                    <li><a><img src="https://radiustheme.com/demo/html/cirkle/media/figure/reaction_7.png" alt="Like"></a></li>
-                    <li><a><img src="https://radiustheme.com/demo/html/cirkle/media/figure/reaction_6.png" alt="Like"></a></li>
-                    <li><a><img src="https://radiustheme.com/demo/html/cirkle/media/figure/reaction_5.png" alt="Like"></a></li>
+                    <li><a (click)="add_reaction(post.id,'LIKE')"><img
+                                src="https://radiustheme.com/demo/html/cirkle/media/figure/reaction_1.png"
+                                alt="Like"></a></li>
+                    <li><a (click)="add_reaction(post.id,'LOVE')"><img
+                                src="https://radiustheme.com/demo/html/cirkle/media/figure/reaction_3.png"
+                                alt="Like"></a></li>
+                    <li><a (click)="add_reaction(post.id,'CARE')"><img
+                                src="https://radiustheme.com/demo/html/cirkle/media/figure/reaction_4.png"
+                                alt="Like"></a></li>
+                    <li><a (click)="add_reaction(post.id,'HAHA')"><img
+                                src="https://radiustheme.com/demo/html/cirkle/media/figure/reaction_2.png"
+                                alt="Like"></a></li>
+                    <li><a (click)="add_reaction(post.id,'WOW')"><img
+                                src="https://radiustheme.com/demo/html/cirkle/media/figure/reaction_7.png"
+                                alt="Like"></a></li>
+                    <li><a (click)="add_reaction(post.id,'SAD')"><img
+                                src="https://radiustheme.com/demo/html/cirkle/media/figure/reaction_6.png"
+                                alt="Like"></a></li>
+                    <li><a (click)="add_reaction(post.id,'ANGRY')"><img
+                                src="https://radiustheme.com/demo/html/cirkle/media/figure/reaction_5.png"
+                                alt="Like"></a></li>
                 </ul>
             </li>
-            <li><a><i class="fa fa-comment"></i>Comment</a></li>
-            <li class="post-share">
+            <li *ngIf="false"><a><i class="fa fa-comment"></i>Comment</a></li>
+            <li class="post-share" *ngIf="false">
                 <a href="javascript:void(0);" class="share-btn"><i class="fa fa-share"></i>Share</a>
                 <ul class="share-list">
                     <li><a class="color-fb"><i class="fa fa-facebook"></i></a></li>
@@ -278,5 +297,5 @@
     </div>
 </div>
 <div class="block-box load-more-btn" *ngIf="false">
-    <a  class="item-btn"><i class="icofont-refresh"></i>Load More Posts</a>
+    <a class="item-btn"><i class="icofont-refresh"></i>Load More Posts</a>
 </div>

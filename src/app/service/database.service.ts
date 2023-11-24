@@ -47,6 +47,17 @@ export class DatabaseService {
     });
   }
 
+  create_reaction(post_id: number, reaction_type: string) {
+    if (this.request_base == null) return;
+    this.http.post<string>(this.API_BASE_URL + '/posts/create-reaction', {
+      request_base: this.request_base,
+      post_id: post_id, reaction_type: reaction_type
+    })
+      .subscribe((response) => {
+        console.log(response);
+      });
+  }
+
   create_post(post_content: string) {
     if (this.request_base == null) return;
 
@@ -210,11 +221,11 @@ export class DatabaseService {
         user_to_follow: user_to_follow,
       });
   }
-  approve_follow(user_to_approve: string){
+  approve_follow(user_to_approve: string) {
     return this.http
-    .post<string>(this.API_BASE_URL + '/actions/approve_follow', {
-      request_base: this.request_base,
-      user_to_approve: user_to_approve,
-    });
+      .post<string>(this.API_BASE_URL + '/actions/approve_follow', {
+        request_base: this.request_base,
+        user_to_approve: user_to_approve,
+      });
   }
 }

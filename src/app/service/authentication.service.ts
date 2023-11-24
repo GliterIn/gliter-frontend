@@ -4,7 +4,6 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { UserProfile } from '../models/UserProfile.model';
 import { GoogleAuthProvider } from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { UserCredential } from 'firebase/auth';
 import { RequestBase } from '../models/API.model';
 
 @Injectable({

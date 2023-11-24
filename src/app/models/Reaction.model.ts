@@ -1,12 +1,9 @@
+import { Post } from "./Post.model";
+import { UserProfile } from "./UserProfile.model";
 
-export enum ReactionTypes {
-    Like,
-    Comment,
-}
 export interface Reaction {
-    type: ReactionTypes;
-    username: string;
-    content: string;
-    post_id: number;
-
+    reaction_type: string;
+    user: UserProfile;
+    post: Post;
+    timestamp: Date;
 }
