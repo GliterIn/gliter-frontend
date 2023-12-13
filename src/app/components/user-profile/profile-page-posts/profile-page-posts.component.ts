@@ -7,8 +7,8 @@ import { DatabaseService } from 'src/app/service/database.service';
 import { SitedataService } from 'src/app/service/sitedata.service';
 import { UtilsService } from 'src/app/service/utils.service';
 
-interface MyReaction{
-  reaction_type:string;
+interface MyReaction {
+  reaction_type: string;
   show_icon: boolean;
 };
 
@@ -20,7 +20,7 @@ interface MyReaction{
 export class ProfilePagePostsComponent implements OnInit {
 
   user: UserProfile | null = null;
-  logged_in_user : UserProfile | null = null;
+  logged_in_user: UserProfile | null = null;
   third_person = false;
   viewing_feed = false;
   posts: Post[] = [];
@@ -49,7 +49,7 @@ export class ProfilePagePostsComponent implements OnInit {
       (request_base_) => {
         this.third_person = (request_base_ == null || request_base_.user.username != current_username);
 
-        if(request_base_){
+        if (request_base_) {
           this.logged_in_user = request_base_.user;
         }
         if (this.third_person) {
@@ -93,7 +93,48 @@ export class ProfilePagePostsComponent implements OnInit {
   }
 
   add_reaction(post_id: number, reaction_type: string) {
-    this.database.create_reaction(post_id, reaction_type);
+    if (this.logged_in_user) {
+
+      // Remove old reaction
+      for (let i = 0; i < this.posts.length; i++) {
+        if (this.posts[i].id != post_id) continue;
+        if (!this.posts[i].reactions) continue;
+
+        for (let current_type in this.posts[i].reactions) {
+          if (!this.posts[i].reactions[current_type]) continue;
+
+          var index = -1;
+
+          for (let j = 0; j < this.posts[i].reactions[current_type].length; j++) {
+            if (this.posts[i].reactions[current_type][j] == this.logged_in_user.username) {
+              index = j;
+              break;
+            }
+          }
+
+          if (index != -1) {
+            this.posts[i].reactions[current_type].splice(index, 1);
+            if(this.posts[i].reactions[current_type].length == 0){
+              delete this.posts[i].reactions[current_type]
+            }
+          }
+        }
+      }
+    }
+     this.database.create_reaction(post_id, reaction_type);
+    
+    if (this.logged_in_user) {
+      
+      // Add new reaction
+      for (let i = 0; i < this.posts.length; i++) {
+        if (this.posts[i].id == post_id) {
+          if (this.posts[i].reactions[reaction_type])
+            this.posts[i].reactions[reaction_type].push(this.logged_in_user.username);
+          else
+            this.posts[i].reactions[reaction_type] = [this.logged_in_user.username];
+        }
+      }
+    }
   }
 
 
@@ -124,28 +165,28 @@ export class ProfilePagePostsComponent implements OnInit {
     return "Unknown Reaction Type";
   }
 
-  get_my_reaction(post: Post):MyReaction {
+  get_my_reaction(post: Post): MyReaction {
     if (this.logged_in_user != null) {
       for (let reaction_type in post.reactions) {
-        for (let i=0;i < post.reactions[reaction_type].length; i++) {
+        for (let i = 0; i < post.reactions[reaction_type].length; i++) {
           if (this.logged_in_user.username == post.reactions[reaction_type][i]) {
-            return <MyReaction>{reaction_type : reaction_type, show_icon : true};
+            return <MyReaction>{ reaction_type: reaction_type, show_icon: true };
           }
         }
       }
     }
-    return <MyReaction>{reaction_type : "React !", show_icon : false};
+    return <MyReaction>{ reaction_type: "React !", show_icon: false };
   }
 
   capitalize_first_letter(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   }
 
-  get_list_of_reactees(post:Post){
+  get_list_of_reactees(post: Post) {
     var users = [];
-    for (let reaction_type in post.reactions){
-      for (let i=0;i < post.reactions[reaction_type].length; i++) {
-        users.push('@'+post.reactions[reaction_type][i]);
+    for (let reaction_type in post.reactions) {
+      for (let i = 0; i < post.reactions[reaction_type].length; i++) {
+        users.push('@' + post.reactions[reaction_type][i]);
       }
     }
     return users.toString();
