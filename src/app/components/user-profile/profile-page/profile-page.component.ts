@@ -85,6 +85,8 @@ export class ProfilePageComponent implements OnInit {
                     }
                   )
                 }
+              }else{
+                this.third_person = true;
               }
               this.reload_new_data(this.user_on_screen_username);
             }
