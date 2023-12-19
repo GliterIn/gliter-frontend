@@ -22,12 +22,12 @@ export class AuthenticationService {
         console.log('State Changed : You have been successfully logged in!');
         oauth_login_data?.getIdToken(true).then(
           (user_token_response) => {
-            this.http.post<UserProfile>(this.API_BASE_URL + '/login', {
+            this.http.post<UserProfile>(this.API_BASE_URL + '/auth/login', {
               'uid': oauth_login_data?.uid,
               'email': oauth_login_data?.email
             }).subscribe(
               (backend_login_data) => {
-                if (backend_login_data!=null && oauth_login_data != null) {
+                if (backend_login_data != null && oauth_login_data != null) {
                   var request_base_ = <RequestBase>{};
                   request_base_.uid = oauth_login_data.uid;
                   request_base_.user_token = user_token_response;
@@ -80,8 +80,9 @@ export class AuthenticationService {
   }
 
   onboard_user(user: UserProfile) {
-    this.http.post<UserProfile>(this.API_BASE_URL + '/onboarding', {
-      request_base: user
+    this.http.post<UserProfile>(this.API_BASE_URL + '/auth/onboarding', {
+      request_base: this.request_base_value,
+      user: user
     }).subscribe(
       (user_) => {
         this.request_base_value!.user = user_;
@@ -92,11 +93,13 @@ export class AuthenticationService {
         alert(error.error);
       }
     )
+
   }
 
   update_user(user: UserProfile) {
-    this.http.post<UserProfile>(this.API_BASE_URL + '/update-user', {
-      request_base: user
+    this.http.post<UserProfile>(this.API_BASE_URL + '/auth/update-user', {
+      request_base: this.request_base_value,
+      user: user
     }).subscribe(
       (user_) => {
         this.request_base_value!.user = user_;
