@@ -12,7 +12,7 @@ import { SitedataService } from 'src/app/service/sitedata.service';
   styleUrls: ['./profile-page.component.css'],
 })
 export class ProfilePageComponent implements OnInit {
-  third_person = false;
+  third_person = true;
   user_on_screen_username: string = '';
   tab_name = '';
   profile_loaded = false;
