@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, UrlSegment } from '@angular/router';
 import { Post } from 'src/app/models/Post.model';
+import { Comment } from 'src/app/models/Comment.model';
 import { UserProfile } from 'src/app/models/UserProfile.model';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { DatabaseService } from 'src/app/service/database.service';
@@ -22,8 +23,12 @@ export class ProfilePagePostsComponent implements OnInit {
   user: UserProfile | null = null;
   logged_in_user: UserProfile | null = null;
   third_person = false;
-  viewing_feed = false;
+  viewing_feed = false; 
+  
   posts: Post[] = [];
+  comments : {[id:number]:string} = {};
+  writing_comment: {[id:number]:boolean} = {};
+  comment_list: {[id:number]:Comment[]} = {};
   constructor(public database: DatabaseService,
     public util: UtilsService,
     public auth: AuthenticationService, public activatedRoute: ActivatedRoute, public sitedata: SitedataService) {
@@ -190,5 +195,31 @@ export class ProfilePagePostsComponent implements OnInit {
       }
     }
     return users.toString();
+  }
+
+  write_comment(id:number){
+    if(this.database.request_base == null) return;
+    this.database.create_comment(id, this.comments[id]).subscribe(
+      (_) => {
+        this.comments[id] = '';
+        this.get_comments(id);
+      }
+    );
+  }
+
+  get_comments(id:number){
+    this.database.get_comments(id).subscribe(
+      (comments_) => {
+        this.comment_list[id] = comments_;
+      }
+    )
+    return true;
+  }
+  delete_comment(post_id:number,comment_id:number){
+    this.database.delete_comment(post_id,comment_id).subscribe(
+      (_) => {
+        this.get_comments(post_id);
+      }
+    )
   }
 }

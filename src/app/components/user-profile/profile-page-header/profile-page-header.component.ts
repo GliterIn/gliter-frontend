@@ -24,6 +24,8 @@ export class ProfilePageHeaderComponent implements OnInit {
   follows_you = false;
   is_admin = false;
   follow_status = '';
+
+  is_logged_in = false;
   @Input('private_account') private_account = false;
 
   constructor(public database: DatabaseService,
@@ -48,6 +50,7 @@ export class ProfilePageHeaderComponent implements OnInit {
         this.auth.get_request_base().subscribe(
           (request_base_) => {
             if (request_base_) {
+              this.is_logged_in = true;
               this.is_admin = request_base_.user.is_admin;
               if (request_base_.user.username != current_username) {
                 this.database.get_follow_status(current_username).subscribe(
@@ -56,6 +59,8 @@ export class ProfilePageHeaderComponent implements OnInit {
                   }
                 )
               }
+            }else{
+              this.is_logged_in = false;
             }
 
             this.sitedata.logged_user_following.subscribe(

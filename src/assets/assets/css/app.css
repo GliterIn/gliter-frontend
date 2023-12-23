@@ -8299,7 +8299,7 @@ nav.template-main-menu > ul > li:hover ul.mega-menu {
 }
 
 .post-view .post-comment .main-comments {
-    border-bottom: 1px solid #e6e9ec;
+    border-bottom: 1px solid #d1d1d1;
 }
 
 .post-view .post-comment .main-comments:last-child {

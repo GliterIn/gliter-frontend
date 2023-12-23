@@ -12,7 +12,7 @@
                         <app-verified-tick class="mr-2" [condition]="user_on_screen!.is_verified" [is_admin]="user_on_screen!.is_admin" [size]="'25px'"></app-verified-tick>
                     </h3>
                     <div class="item-subtitle">{{user_on_screen.location}}</div>
-                    <ul class="item-social" *ngIf="third_person">
+                    <ul class="item-social" *ngIf="third_person && is_logged_in">
                         <button class="btn btn-info" (click)="toggle_follow()" *ngIf="!is_following && !private_account">Follow</button>
                         <button class="btn btn-info" (click)="send_follow_request()" *ngIf="!is_following && private_account && follow_status=='Not Following'">Follow Request</button>
                         <button class="btn btn-warning"  *ngIf="!is_following && private_account && follow_status=='Pending'">Request Pending</button>

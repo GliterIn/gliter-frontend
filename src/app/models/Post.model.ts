@@ -7,4 +7,5 @@ export interface Post {
     is_visible: boolean;
     user: UserProfile;
     reactions: {[reaction_type:string]:string[]};
+    comments: Comment[];
 }

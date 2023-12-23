@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
 import { Post } from '../models/Post.model';
+import { Comment } from '../models/Comment.model';
 import { UserProfile } from '../models/UserProfile.model';
 import { AuthenticationService } from './authentication.service';
 import { SitedataService } from './sitedata.service';
@@ -97,6 +98,21 @@ export class DatabaseService {
     return this.http.post<Post[]>(this.API_BASE_URL + '/posts/get-posts', {
       request_base: this.request_base,
       username: username,
+    });
+  }
+
+  get_comments(id: number) {
+    return this.http.post<Comment[]>(this.API_BASE_URL + '/posts/get-comments', {
+      request_base: this.request_base,
+      post_id: id,
+    });
+  }
+
+  delete_comment(post_id: number,comment_id:number) {
+    return this.http.post<string>(this.API_BASE_URL + '/posts/delete-comment', {
+      request_base: this.request_base,
+      post_id: post_id,
+      comment_id: comment_id
     });
   }
 
@@ -221,11 +237,22 @@ export class DatabaseService {
         user_to_follow: user_to_follow,
       });
   }
+
+
   approve_follow(user_to_approve: string) {
     return this.http
       .post<string>(this.API_BASE_URL + '/actions/approve_follow', {
         request_base: this.request_base,
         user_to_approve: user_to_approve,
+      });
+  }
+
+  create_comment(post_id:number, comment_content: string) {
+    return this.http
+      .post<string>(this.API_BASE_URL + '/posts/create-comment', {
+        request_base: this.request_base,
+        comment_content: comment_content,
+        post_id : post_id
       });
   }
 }

@@ -36,7 +36,9 @@
                 </div>
             </div>
             <div class="post-meta">
-                <div class="meta-text" *ngIf="false">2 Comments</div>
+                <div class="meta-text" *ngIf="!logged_in_user"
+                    (click)="writing_comment[post.id] = !writing_comment[post.id] && get_comments(post.id)"><i
+                        class="fa fa-comments"></i></div>
                 <div class="meta-text" *ngIf="false">05 Share</div>
             </div>
         </div>
@@ -73,7 +75,9 @@
                                 alt="Like"></a></li>
                 </ul>
             </li>
-            <li *ngIf="false"><a><i class="fa fa-comment"></i>Comment</a></li>
+            <li *ngIf="logged_in_user"><a
+                    (click)="writing_comment[post.id] = !writing_comment[post.id] && get_comments(post.id)"><i
+                        class="fa fa-comment"></i>Comment</a></li>
             <li class="post-share" *ngIf="false">
                 <a href="javascript:void(0);" class="share-btn"><i class="fa fa-share"></i>Share</a>
                 <ul class="share-list">
@@ -83,33 +87,47 @@
             </li>
         </ul>
     </div>
-    <div class="post-comment" *ngIf="false">
+    <div class="post-comment" *ngIf="writing_comment[post.id]">
         <ul class="comment-list">
-            <li class="main-comments">
+            <li class="main-comments" *ngFor="let comment of this.comment_list[post.id]">
                 <div class="each-comment">
                     <div class="post-header">
                         <div class="media">
-                            <div class="user-img">
-                                <img src="https://radiustheme.com/demo/html/cirkle/media/figure/chat_8.jpg" alt="Aahat">
+                            <div class="user-img" routerLink="/profile/{{comment.user['username']}}">
+                                <img [src]="comment.user['profile_picture']" [alt]="comment.user['username']"
+                                    style="width: 50px; height: 50px; object-fit: cover;">
                             </div>
                             <div class="media-body">
-                                <div class="user-title"><a href="user-timeline.html">Random User</a></div>
+                                <div class="user-title">
+                                    <a routerLink="/profile/{{comment.user['username']}}">{{comment.user['name']}}</a>
+                                    <app-verified-tick [is_admin]="comment.user['is_admin']"
+                                        [condition]="comment.user['is_verified']"></app-verified-tick>
+                                </div>
                                 <ul class="entry-meta">
-                                    <li class="meta-time">5 mins ago</li>
+                                    <li class="meta-time">{{util.parseTimestamp(comment.timestamp)}}</li>
                                 </ul>
+                            </div>
+                        </div>
+                        <div class="dropdown" *ngIf="logged_in_user">
+                            <button class="dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                                ...
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" (click)="delete_comment(post.id, comment.id)">Delete</a>
                             </div>
                         </div>
                     </div>
                     <div class="post-body">
-                        <p>testing a comment..</p>
+                        <p>{{comment.content}}</p>
                     </div>
-                    <!-- <div class="post-footer">
+                    <div class="post-footer">
+                        
                         <ul>
-                            <li class="react-icon">
+                            <li class="react-icon" *ngIf="false">
                                 <img src="media/figure/reaction_1.png" alt="icon">
                                 <img src="media/figure/reaction_2.png" alt="icon">
                             </li>
-                            <li class="post-react">
+                            <li class="post-react" *ngIf="false">
                                 <a href="#"><i class="icofont-thumbs-up"></i>React!</a>
                                 <ul class="react-list">
                                     <li><a href="#"><img src="media/figure/reaction_1.png" alt="Like"></a></li>
@@ -121,9 +139,10 @@
                                     <li><a href="#"><img src="media/figure/reaction_5.png" alt="Like"></a></li>
                                 </ul>
                             </li>
-                            <li><a href="#"><i class="icofont-reply"></i>Reply</a></li>
+                            <br>
+                            <li><a href="#" *ngIf="false"><i class="fa fa-reply"></i>Reply</a></li>
                         </ul>
-                    </div> -->
+                    </div>
                 </div>
                 <!-- <ul class="children">
                     <li class="main-comments">
@@ -283,16 +302,19 @@
                 </div>
             </li> -->
         </ul>
-        <div class="load-more-btn">
+        <div class="load-more-btn" *ngIf="false">
             <a class="item-btn">Load More Comments <span>4+</span></a>
         </div>
-        <div class="comment-reply">
+        <div class="comment-reply" *ngIf="writing_comment[post.id] && logged_in_user">
             <div class="user-img">
                 <img src="{{user!.profile_picture}}" style="max-width: 30px;">
             </div>
             <div class="input-box">
-                <input type="text" name="comment" class="form-control" placeholder="Your Reply....">
+                <input type="text" name="comment" class="form-control" placeholder="Your Reply...."
+                    [(ngModel)]="this.comments[post.id]">
             </div>
+            <button class="btn btn-info mr-1 ml-1" (click)="write_comment(post.id)"><i class="fa fa-send"></i></button>
+            <button class="btn btn-danger" (click)="writing_comment[post.id]=false"><i class="fa fa-times"></i></button>
         </div>
     </div>
 </div>
