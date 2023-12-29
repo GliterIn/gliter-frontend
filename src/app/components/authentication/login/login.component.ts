@@ -18,6 +18,8 @@ export class LoginComponent implements OnInit {
           this.user = request_base_.user;
           if(request_base_.user.is_onboarded){
             this.router.navigate(["/profile",this.user['username']]);
+          }else{
+            this.router.navigate(["/onboarding"]);
           }
         }else{
           this.router.navigate(["/onboarding"]);

@@ -11,7 +11,7 @@ import { RequestBase } from '../models/API.model';
 })
 export class AuthenticationService {
   //API_BASE_URL = 'http://localhost:8000/api';
-  API_BASE_URL = 'https://gliter-backend.siddharth27.repl.co/api';
+  API_BASE_URL = 'https://gliter-backend-ff2da4ac7d55.herokuapp.com/api';
 
 
   private request_base = new BehaviorSubject<RequestBase | null>(null);
