@@ -1006,6 +1006,17 @@ ul {
     padding: 0;
 }
 
+.post-no-thumbnail ul {
+    list-style: disc !important;
+    margin: 5px !important;
+    padding: 5px !important;
+}
+
+.angular-editor-textarea ul{
+    list-style: disc !important;
+    margin: 5px !important;
+    padding: 5px !important;
+}
 hr {
     margin: 0;
 }

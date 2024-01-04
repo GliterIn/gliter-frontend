@@ -40,6 +40,7 @@ import { VerifiedTickComponent } from './components/common/verified-tick/verifie
 import { SettingsComponent } from './components/common/settings/settings.component';
 import { MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { ProfilePageFollowRequestsComponent } from './components/user-profile/profile-page-follow-requests/profile-page-follow-requests.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import { ProfilePageFollowRequestsComponent } from './components/user-profile/pr
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    AngularEditorModule
   ],
   providers: [{ provide: PERSISTENCE, useValue: 'session' },],
   bootstrap: [AppComponent]

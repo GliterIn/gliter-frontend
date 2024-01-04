@@ -12,7 +12,7 @@
     </ul>
     <div class="tab-content">
         <div class="tab-pane fade show active" id="post-status" role="tabpanel">
-            <textarea name="status-input" id="status-input1" class="form-control textarea" placeholder="Share what are you thinking . . ." cols="30" rows="6" [(ngModel)]="content"></textarea>
+            <angular-editor [placeholder]="'Share what are you thinking . . .'" [config]="editor_config"  [(ngModel)]="content"></angular-editor>
         </div>
         <!-- <div class="tab-pane fade" id="post-media" role="tabpanel">
             <textarea name="status-input" id="status-input2" class="form-control textarea" placeholder="Share what are you thinking . . ." cols="30" rows="6" [(ngModel)]="content"></textarea>
