@@ -649,7 +649,7 @@ h6 {
 /*------------------- 4.2 Breadcrumb Banner -------------------*/
 .breadcrumbs-banner {
     margin-top: -97px;
-    padding: 185px 0 95px;
+    padding: 20% 0 95px;
     background-color: #615dfa;
     background-image: url("../../media/banner/hero_1.jpg");
     background-position: top;
@@ -662,16 +662,21 @@ h6 {
 
 @media only screen and (max-width: 1199px) {
     .breadcrumbs-banner {
-        padding: 165px 0 75px;
+        padding: 30% 0 75px;
     }
 }
 
-@media only screen and (max-width: 1199px) {
+@media only screen and (max-width: 600px) {
     .breadcrumbs-banner {
-        padding: 145px 0 55px;
+        padding: 40% 0 55px;
     }
 }
 
+@media only screen and (max-width: 400px) {
+    .breadcrumbs-banner {
+        padding: 60% 0 55px;
+    }
+}
 .breadcrumbs-banner .breadcrumb-animate-img {
     position: absolute;
     right: 9%;
