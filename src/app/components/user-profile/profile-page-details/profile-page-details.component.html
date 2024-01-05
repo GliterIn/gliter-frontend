@@ -1,24 +1,50 @@
 <div class="widget widget-user-about" *ngIf="user_on_screen != null">
     <div class="widget-heading">
         <h3 class="widget-title" *ngIf="!third_person">About Me</h3>
-        <h3 class="widget-title" *ngIf="third_person">About {{user_on_screen.name}}</h3>
+        <h3 class="widget-title" *ngIf="third_person">About {{user_on_screen.name}}</h3>        
     </div>
-    <div class="user-info">
-        <p>{{user_on_screen.bio}}</p>
-        <ul class="info-list">
-            <li><span>Name:</span>{{user_on_screen.name}}</li>
-            <li><span>Joined:</span>{{util.parseTimestampShort(user_on_screen.joined_on)}}</li>
-            <li><span>Birthday:</span>{{util.parseTimestampShort(user_on_screen.birthday)}}</li>
-            <li><span>Location:</span>{{user_on_screen.location}}</li>
-            <li><span>Gender:</span>{{user_on_screen.gender}}</li>
-            <li><span>Occupation:</span> {{user_on_screen.occupation}}</li>
-            <li><span>Relationship:</span> {{user_on_screen.relationship}}</li>
-            <li class="social-share" *ngIf="false"><span>Social:</span>
-                <div class="social-icon">
-                    <a><i class="fa fa-facebook"></i></a>
-                    <a><i class="fa fa-instagram"></i></a>
-                </div>
-            </li>
-        </ul>
-    </div>
+        <table style="border-collapse: collapse;border-spacing: 0;width: 100%;">
+            <tbody>
+                <tr style="border-bottom: 1px solid #e6ebf2;">
+                    <td style="width: 40%;border: none;text-align: left;">Name</td>
+                    <td style="font-size: 15px;border: none;text-align: left;"><p style="margin: 10px 0 15px 0;">{{user_on_screen.name}}</p></td>
+                </tr>
+
+                <tr style="border-bottom: 1px solid #e6ebf2;">
+                    <td style="width: 40%;border: none;text-align: left;">Bio</td>
+                    <td style="font-size: 15px;border: none;text-align: left;"><p style="margin: 10px 0 15px 0;">{{user_on_screen.bio}}</p></td>
+                </tr>
+
+
+                <tr style="border-bottom: 1px solid #e6ebf2;">
+                    <td style="width: 40%;border: none;text-align: left;">Occupation</td>
+                    <td style="font-size: 15px;border: none;text-align: left;"><p style="margin: 10px 0 15px 0;">{{user_on_screen.occupation}}</p></td>
+                </tr>
+
+                <tr style="border-bottom: 1px solid #e6ebf2;">
+                    <td style="width: 40%;border: none;text-align: left;">Relationship</td>
+                    <td style="font-size: 15px;border: none;text-align: left;"><p style="margin: 10px 0 15px 0;">{{user_on_screen.relationship}}</p></td>
+                </tr>
+
+                <tr style="border-bottom: 1px solid #e6ebf2;">
+                    <td style="width: 40%;border: none;text-align: left;">Gender</td>
+                    <td style="font-size: 15px;border: none;text-align: left;"><p style="margin: 10px 0 15px 0;">{{user_on_screen.gender}}</p></td>
+                </tr>
+
+                <tr style="border-bottom: 1px solid #e6ebf2;">
+                    <td style="width: 40%;border: none;text-align: left;">Location</td>
+                    <td style="font-size: 15px;border: none;text-align: left;"><p style="margin: 10px 0 15px 0;">{{user_on_screen.location}}</p></td>
+                </tr>
+
+                <tr style="border-bottom: 1px solid #e6ebf2;">
+                    <td style="width: 40%;border: none;text-align: left;">Birthday</td>
+                    <td style="font-size: 15px;border: none;text-align: left;"><p style="margin: 10px 0 15px 0;">{{util.parseTimestampShort(user_on_screen.birthday)}}</p></td>
+                </tr>
+
+                <tr style="border-bottom: 1px solid #e6ebf2;">
+                    <td style="width: 40%;border: none;text-align: left;">Joined On</td>
+                    <td style="font-size: 15px;border: none;text-align: left;"><p style="margin: 10px 0 15px 0;">{{util.parseTimestampShort(user_on_screen.joined_on)}}</p></td>
+                </tr>
+            </tbody>
+        </table>
 </div>

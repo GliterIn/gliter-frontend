@@ -17,7 +17,8 @@ export class LoginComponent implements OnInit {
         if(request_base_ != null  ){
           this.user = request_base_.user;
           if(request_base_.user.is_onboarded){
-            this.router.navigate(["/profile",this.user['username']]);
+            window.location.href = "/profile/"+this.user['username']
+            // this.router.navigate([]);
           }else{
             this.router.navigate(["/onboarding"]);
           }
